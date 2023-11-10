@@ -9,7 +9,10 @@ public final class OutputView {
     private OutputView() {
 
     }
-
+    public static void printResultStartMessage(int day){
+        printMessage("12월 "+day+"일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
+        printEmptyLine();
+    }
     public static void printMessage(String message) {
         System.out.println(message);
     }
