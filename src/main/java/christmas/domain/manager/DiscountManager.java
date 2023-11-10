@@ -2,6 +2,9 @@ package christmas.domain.manager;
 
 
 import christmas.domain.Day;
+import christmas.domain.MenuType;
+import christmas.domain.Order;
+import christmas.domain.OrderItem;
 
 public class DiscountManager {
 
@@ -10,7 +13,23 @@ public class DiscountManager {
             return calculateDDayDiscount(day);
         return 0;
     }
+
+    public static int weekDayDiscount(Day day,Order order){
+        if(DayManager.isWeekday(day))
+            return calculateWeekDayDiscount(day, order);
+        return 0;
+    }
     private static int calculateDDayDiscount(Day day){
         return 1000 + 100 * (day.getDay()-1);
+    }
+
+    private static int calculateWeekDayDiscount(Day day, Order order){
+        int discountTotal=0;
+        for (OrderItem orderItem : order.getOrderItems()) {
+            if(orderItem.getMenuItem().getType() == MenuType.DESSERT){
+                discountTotal += (2023 * orderItem.getQuantity());
+            }
+        }
+        return discountTotal;
     }
 }
