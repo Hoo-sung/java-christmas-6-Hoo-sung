@@ -16,6 +16,8 @@ public class OrderItem {
     public MenuItem getMenuItem() {
         return menuItem;
     }
+
+    public String getName(){ return menuItem.getName(); }
     public int getPrice(){
         return menuItem.getPrice();
     }
