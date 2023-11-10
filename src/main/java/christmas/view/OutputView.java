@@ -72,6 +72,13 @@ public final class OutputView {
         printEmptyLine();
     }
 
+    public static void printExpectedPayment(int expectedPayment){
+        printMessage("<할인 후 예상 결제 금액>");
+        printMessage(expectedPayment+"원");
+        printEmptyLine();
+    }
+
+
     public static void printMessage(String message) {
         System.out.println(message);
     }
