@@ -12,6 +12,8 @@ public class SettlementSystem {
 
     private final int originalTotalAmount;
 
+    private final int totalWithDiscount;
+
     private final PaymentCalculator paymentCalculator = new PaymentCalculator();
 
     public SettlementSystem(Day day, Order order) {
@@ -19,5 +21,6 @@ public class SettlementSystem {
         this.order = order;
         this.discountRecord = new DiscountRecord(day,order);
         this.originalTotalAmount = paymentCalculator.calculateOriginalTotal(order);
+        this.totalWithDiscount = paymentCalculator.calculateTotalWithDiscount(originalTotalAmount,discountRecord);
     }
 }

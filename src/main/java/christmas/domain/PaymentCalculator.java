@@ -13,4 +13,8 @@ public class PaymentCalculator {
     public int calculateTotalDiscountAmount(DiscountRecord discountRecord){
         return discountRecord.getTotalDiscountAmount();
     }
+
+    public int calculateTotalWithDiscount(int originalTotalAmount, DiscountRecord discountRecord){
+        return originalTotalAmount - discountRecord.getTotalDiscountAmount();
+    }
 }
