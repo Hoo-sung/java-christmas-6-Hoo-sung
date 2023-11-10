@@ -25,6 +25,12 @@ public class DiscountManager {
             return calculateWeekendDiscount(day,order);
         return 0;
     }
+
+    public static int starDayDiscount(Day day){
+        if(DayManager.hasStar(day))
+            return 1000;
+        return 0;
+    }
     private static int calculateDDayDiscount(Day day){
         return 1000 + 100 * (day.getDay()-1);
     }
