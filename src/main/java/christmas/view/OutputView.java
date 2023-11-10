@@ -1,6 +1,5 @@
 package christmas.view;
 
-import christmas.domain.Day;
 import christmas.domain.Order;
 import christmas.domain.OrderItem;
 
@@ -22,6 +21,13 @@ public final class OutputView {
         }
         printEmptyLine();
     }
+
+    public static void printOriginalTotalAmount(int originalTotalAmount){
+        printMessage("<할인 전 총주문 금액>");
+        printMessage(originalTotalAmount+"원");
+        printEmptyLine();
+    }
+
     public static void printMessage(String message) {
         System.out.println(message);
     }
