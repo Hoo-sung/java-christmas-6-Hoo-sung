@@ -1,10 +1,7 @@
 package christmas.domain.manager;
 
 
-import christmas.domain.Day;
-import christmas.domain.MenuType;
-import christmas.domain.Order;
-import christmas.domain.OrderItem;
+import christmas.domain.*;
 
 public class DiscountManager {
 
