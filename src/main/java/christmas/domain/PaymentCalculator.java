@@ -10,11 +10,9 @@ public class PaymentCalculator {
         return total;
     }
 
-    public int calculateTotalDiscountAmount(DiscountRecord discountRecord){
-        return discountRecord.getTotalDiscountAmount();
-    }
-
     public int calculateTotalWithDiscount(int originalTotalAmount, DiscountRecord discountRecord){
-        return originalTotalAmount - discountRecord.getTotalDiscountAmount();
+        int minusValue = discountRecord.getdDayDiscountAmount() + discountRecord.getWeekdayDiscountAmount()
+                + discountRecord.getWeekendDiscountAmount() + discountRecord.getStarDayDiscountAmount();
+        return originalTotalAmount - minusValue;
     }
 }
