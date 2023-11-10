@@ -34,4 +34,24 @@ public class DiscountRecord {
     public int getTotalDiscountAmount(){
         return dDayDiscountAmount + weekdayDiscountAmount + weekendDiscountAmount + starDayDiscountAmount + bonusEventDiscount;
     }
+
+    public int getdDayDiscountAmount() {
+        return dDayDiscountAmount;
+    }
+
+    public int getWeekendDiscountAmount() {
+        return weekendDiscountAmount;
+    }
+
+    public int getWeekdayDiscountAmount() {
+        return weekdayDiscountAmount;
+    }
+
+    public int getStarDayDiscountAmount() {
+        return starDayDiscountAmount;
+    }
+
+    public int getBonusEventDiscount() {
+        return bonusEventDiscount;
+    }
 }

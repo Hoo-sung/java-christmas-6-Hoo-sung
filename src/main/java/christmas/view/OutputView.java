@@ -1,9 +1,6 @@
 package christmas.view;
 
-import christmas.domain.BonusItem;
-import christmas.domain.BonusMenu;
-import christmas.domain.Order;
-import christmas.domain.OrderItem;
+import christmas.domain.*;
 import christmas.domain.manager.BonusEventManager;
 
 public final class OutputView {
@@ -41,6 +38,26 @@ public final class OutputView {
         for(BonusMenu bonusMenu : BonusMenu.values()){
             printMessage(bonusMenu.name()+" "+bonusMenu.getQuantity()+"개");
         }
+        printEmptyLine();
+    }
+
+    public static void printDiscountRecord(DiscountRecord discountRecord){
+        printMessage("<혜택 내역>");
+        if(discountRecord.getTotalDiscountAmount()==0){
+            printMessage("없음");
+            printEmptyLine();
+            return;
+        }
+        if(discountRecord.getdDayDiscountAmount() !=0 )
+            printMessage("크리크마스 디데이 할인: -"+discountRecord.getdDayDiscountAmount()+"원");
+        if(discountRecord.getWeekdayDiscountAmount()!=0)
+            printMessage("평일 할인: -"+discountRecord.getWeekdayDiscountAmount()+"원");
+        if(discountRecord.getWeekendDiscountAmount()!=0)
+            printMessage("주말 할인: -"+discountRecord.getWeekendDiscountAmount()+"원");
+        if(discountRecord.getStarDayDiscountAmount()!=0)
+            printMessage("특별 할인: -"+discountRecord.getStarDayDiscountAmount()+"원");
+        if(discountRecord.getBonusEventDiscount()!=0)
+            printMessage("증정 이벤트: -"+discountRecord.getBonusEventDiscount()+"원");
         printEmptyLine();
     }
 
