@@ -18,4 +18,8 @@ public class DiscountRecord {
         this.weekendDiscountAmount = DiscountManager.weekendDiscount(day,order);
         this.starDayDiscountAmount = DiscountManager.starDayDiscount(day);
     }
+
+    public int getTotalDiscountAmount(){
+        return dDayDiscountAmount + weekdayDiscountAmount + weekendDiscountAmount + starDayDiscountAmount;
+    }
 }
