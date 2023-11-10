@@ -27,4 +27,13 @@ public enum Menu {
     public MenuItem getMenuItem() {
         return menuItem;
     }
+
+    public static MenuItem getMenuItemByName(String menuName) {
+        for (Menu menu : Menu.values()) {
+            if (menu.getMenuItem().getName().equals(menuName)) {
+                return menu.getMenuItem();
+            }
+        }
+        return null;
+    }
 }
