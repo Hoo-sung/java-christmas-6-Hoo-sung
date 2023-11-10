@@ -8,6 +8,10 @@ public class Day {
         this.day = day;
     }
 
+    public int getDay(){
+        return day;
+    }
+
     public static boolean isFriday(Day day) {
         if (day.day % 7 == 1)
             return true;

@@ -24,4 +24,10 @@ public class DayManager {
         return false;
     }
 
+    public static boolean isChristmasSeason(Day day){
+        if (day.getDay() >=1 && day.getDay() <=25)
+            return true;
+        return false;
+    }
+
 }
