@@ -78,6 +78,14 @@ public final class OutputView {
         printEmptyLine();
     }
 
+    public static void printEventBadge(EventBadge badge){
+        printMessage("<"+MONTH+"월 이벤트 배지>");
+        if(badge == null){
+            printMessage("없음");
+            return;
+        }
+        printMessage(badge.getName());
+    }
 
     public static void printMessage(String message) {
         System.out.println(message);
