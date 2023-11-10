@@ -1,6 +1,6 @@
 package christmas.domain.manager;
 
-import christmas.domain.Menu;
+import christmas.domain.BonusMenu;
 
 public class BonusEventManager {
 
@@ -8,6 +8,14 @@ public class BonusEventManager {
     public static int makeBonusEventDiscount(int originalTotalAmount){
         if(originalTotalAmount < BONUS_MINIMUM_THRESHOLD)
             return 0;
-        return Menu.CHAMPAGNE.getMenuItem().getPrice();
+        return calculateTotalBonusMenuPrice();
+    }
+
+    private static int calculateTotalBonusMenuPrice(){
+        int total = 0;
+        for(BonusMenu bonusMenu : BonusMenu.values()){
+            total += bonusMenu.getBonusMenuItem().getPrice();
+        }
+        return total;
     }
 }
