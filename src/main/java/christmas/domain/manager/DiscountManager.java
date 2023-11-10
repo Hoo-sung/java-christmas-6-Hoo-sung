@@ -19,6 +19,12 @@ public class DiscountManager {
             return calculateWeekDayDiscount(day, order);
         return 0;
     }
+
+    public static int weekendDiscount(Day day, Order order){
+        if(DayManager.isWeekend(day))
+            return calculateWeekendDiscount(day,order);
+        return 0;
+    }
     private static int calculateDDayDiscount(Day day){
         return 1000 + 100 * (day.getDay()-1);
     }
@@ -32,4 +38,15 @@ public class DiscountManager {
         }
         return discountTotal;
     }
+
+    private static int calculateWeekendDiscount(Day day, Order order){
+        int discountTotal=0;
+        for (OrderItem orderItem : order.getOrderItems()) {
+            if(orderItem.getMenuType() == MenuType.MAIN){
+                discountTotal += (2023 * orderItem.getQuantity());
+            }
+        }
+        return discountTotal;
+    }
+
 }
