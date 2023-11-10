@@ -2,6 +2,7 @@ package christmas.controller;
 
 import christmas.domain.Day;
 import christmas.domain.Order;
+import christmas.view.InputView;
 
 public class PlannerSystem {
 
@@ -10,10 +11,12 @@ public class PlannerSystem {
 
     public void run(){
         initialize();
+        SettlementSystem settlementSystem = new SettlementSystem(day,order);
 
     }
 
     private void initialize(){
-
+        day = InputView.readDay();
+        order = InputView.readOrder();
     }
 }
