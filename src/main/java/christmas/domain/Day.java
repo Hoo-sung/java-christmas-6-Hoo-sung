@@ -9,12 +9,24 @@ public class Day {
     }
 
     public static boolean checkWeekend(Day day){
-        if(day.day % 7 ==1 || day.day % 7 == 2)
+        if(isFriday(day) || isSaturday(day))
             return true;
         return false;
     }
     public static boolean checkWeekday(Day day){
-        if(!checkWeekend(day))
+        if( ! (isFriday(day) || isSaturday(day)))
+            return true;
+        return false;
+    }
+
+    private static boolean isFriday(Day day){
+        if(day.day % 7 == 1)
+            return true;
+        return false;
+    }
+
+    private static boolean isSaturday(Day day){
+        if(day.day % 7 == 2)
             return true;
         return false;
     }
