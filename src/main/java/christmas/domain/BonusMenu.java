@@ -1,15 +1,23 @@
 package christmas.domain;
 
 public enum BonusMenu {
-    CHAMPAGNE(new MenuItem("샴페인", 25000, MenuType.BEVERAGE));
+    CHAMPAGNE(new BonusItem("샴페인", 25000, 1));
 
-    private final MenuItem bonusMenuItem;
+    private final BonusItem bonusMenuItem;
 
-    BonusMenu(MenuItem bonusMenuItem) {
+    BonusMenu(BonusItem bonusMenuItem) {
         this.bonusMenuItem = bonusMenuItem;
     }
 
-    public MenuItem getBonusMenuItem() {
+    public BonusItem getBonusMenuItem() {
         return bonusMenuItem;
+    }
+
+    public int getPrice(){
+        return bonusMenuItem.getPrice();
+    }
+
+    public int getQuantity(){
+        return bonusMenuItem.getQuantity();
     }
 }

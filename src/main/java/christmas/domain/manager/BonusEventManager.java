@@ -14,7 +14,7 @@ public class BonusEventManager {
     private static int calculateTotalBonusMenuPrice(){
         int total = 0;
         for(BonusMenu bonusMenu : BonusMenu.values()){
-            total += bonusMenu.getBonusMenuItem().getPrice();
+            total += (bonusMenu.getPrice() * bonusMenu.getQuantity());
         }
         return total;
     }
