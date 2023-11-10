@@ -12,7 +12,7 @@ public class PlannerSystem {
     public void run(){
         initialize();
         SettlementSystem settlementSystem = new SettlementSystem(day,order);
-
+        settlementSystem.renderResult();
     }
 
     private void initialize(){

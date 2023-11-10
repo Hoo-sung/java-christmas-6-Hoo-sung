@@ -1,6 +1,7 @@
 package christmas.controller;
 
 import christmas.domain.*;
+import christmas.view.OutputView;
 
 public class SettlementSystem {
 
@@ -25,5 +26,16 @@ public class SettlementSystem {
         this.discountRecord = new DiscountRecord(day,order,originalTotalAmount);
         this.totalWithDiscount = paymentCalculator.calculateTotalWithDiscount(originalTotalAmount,discountRecord);
         this.badge = EventBadgeGenerator.createBadge(discountRecord.getTotalDiscountAmount());
+    }
+
+    public void renderResult(){
+        OutputView.printResultStartMessage(day.getDay());
+        OutputView.printOrderList(order);
+        OutputView.printOriginalTotalAmount(originalTotalAmount);
+        OutputView.printBonusMenu(originalTotalAmount);
+        OutputView.printDiscountRecord(discountRecord);
+        OutputView.printTotalDiscountAmount(discountRecord);
+        OutputView.printExpectedPayment(totalWithDiscount);
+        OutputView.printEventBadge(badge);
     }
 }
