@@ -20,6 +20,11 @@
 
 ---
 ### - 설계
+
+#### 1차 단계 (메세지 다이어그램 구성)
+
+<img src="image/Christmas_Promotion.drawio.png">
+
 #### 기능 명세
 
 - 입력
