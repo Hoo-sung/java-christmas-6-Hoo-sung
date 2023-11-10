@@ -36,7 +36,7 @@ public final class OutputView {
             return;
         }
         for(BonusMenu bonusMenu : BonusMenu.values()){
-            printMessage(bonusMenu.name()+" "+bonusMenu.getQuantity()+"개");
+            printMessage(bonusMenu.getName()+" "+bonusMenu.getQuantity()+"개");
         }
         printEmptyLine();
     }

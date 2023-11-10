@@ -13,6 +13,9 @@ public enum BonusMenu {
         return bonusMenuItem;
     }
 
+    public String getName(){
+        return bonusMenuItem.getName();
+    }
     public int getPrice(){
         return bonusMenuItem.getPrice();
     }
