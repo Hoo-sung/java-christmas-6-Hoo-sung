@@ -3,6 +3,7 @@ package christmas.view;
 import camp.nextstep.edu.missionutils.Console;
 import christmas.domain.Day;
 import christmas.domain.Order;
+import christmas.domain.util.Util;
 
 public final class InputView {
 
@@ -23,6 +24,19 @@ public final class InputView {
                 //검증 부분
                 return new Day(Integer.parseInt(input));
             } catch (IllegalArgumentException e) {
+
+            }
+        }
+    }
+
+    public static Order readOrder(){
+        while(true){
+            try{
+                System.out.println(ORDER_PROMPT_MESSAGE);
+                String input = Console.readLine();
+                //검증 부분
+                return Util.createOrderFromInput(input);
+            }catch (IllegalArgumentException e) {
 
             }
         }
