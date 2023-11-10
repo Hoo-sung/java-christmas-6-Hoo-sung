@@ -10,6 +10,9 @@ public class OrderItem {
         this.quantity = quantity;
     }
 
+    public MenuType getMenuType(){
+        return menuItem.getType();
+    }
     public MenuItem getMenuItem() {
         return menuItem;
     }

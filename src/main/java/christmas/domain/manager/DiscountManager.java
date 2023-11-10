@@ -26,7 +26,7 @@ public class DiscountManager {
     private static int calculateWeekDayDiscount(Day day, Order order){
         int discountTotal=0;
         for (OrderItem orderItem : order.getOrderItems()) {
-            if(orderItem.getMenuItem().getType() == MenuType.DESSERT){
+            if(orderItem.getMenuType() == MenuType.DESSERT){
                 discountTotal += (2023 * orderItem.getQuantity());
             }
         }
