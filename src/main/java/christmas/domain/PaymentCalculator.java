@@ -10,4 +10,7 @@ public class PaymentCalculator {
         return total;
     }
 
+    public int calculateTotalDiscountAmount(DiscountRecord discountRecord){
+        return discountRecord.getTotalDiscountAmount();
+    }
 }
