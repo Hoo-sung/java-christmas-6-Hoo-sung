@@ -61,6 +61,17 @@ public final class OutputView {
         printEmptyLine();
     }
 
+    public  static void printTotalDiscountAmount(DiscountRecord discountRecord){
+        printMessage("<총혜택 금액>");
+        if(discountRecord.getTotalDiscountAmount() == 0){
+            printMessage("0원");
+            printEmptyLine();
+            return;
+        }
+        printMessage("-"+discountRecord.getTotalDiscountAmount()+"원");
+        printEmptyLine();
+    }
+
     public static void printMessage(String message) {
         System.out.println(message);
     }
