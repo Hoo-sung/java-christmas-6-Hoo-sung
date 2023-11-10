@@ -12,7 +12,14 @@ public class DiscountRecord {
 
     private final int starDayDiscountAmount;
 
-    public DiscountRecord(Day day, Order order) {
+    public DiscountRecord(Day day, Order order, int originalTotalAmount) {
+        if(originalTotalAmount <10000){
+            this.dDayDiscountAmount = 0;
+            this.weekdayDiscountAmount = 0;
+            this.weekendDiscountAmount = 0;
+            this.starDayDiscountAmount =0 ;
+            return;
+        }
         this.dDayDiscountAmount = DiscountManager.DDayDiscount(day);
         this.weekdayDiscountAmount = DiscountManager.weekDayDiscount(day,order);
         this.weekendDiscountAmount = DiscountManager.weekendDiscount(day,order);
