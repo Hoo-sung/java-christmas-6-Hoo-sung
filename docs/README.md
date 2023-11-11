@@ -23,7 +23,7 @@
 
 #### 1차 단계 (메세지 다이어그램 구성)
 
-<img src="image/Christmas_Promotion.drawio.png">
+<img src="image/xmas_promo_2nd_msg.png">
 
 #### 기능 명세
 
