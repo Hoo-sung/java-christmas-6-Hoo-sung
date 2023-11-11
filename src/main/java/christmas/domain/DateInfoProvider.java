@@ -1,11 +1,11 @@
-package christmas.domain.manager;
+package christmas.domain;
 
 import christmas.domain.Day;
 
 import static christmas.domain.Day.*;
 
 
-public class DayManager {
+public class DateInfoProvider {
     public static boolean isWeekend(Day day) {
         if (isFriday(day) || isSaturday(day))
             return true;

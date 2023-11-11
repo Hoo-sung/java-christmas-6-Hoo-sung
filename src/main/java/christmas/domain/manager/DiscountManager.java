@@ -6,25 +6,25 @@ import christmas.domain.*;
 public class DiscountManager {
 
     public static int DDayDiscount(Day day){
-        if(DayManager.isChristmasSeason(day))
+        if(DateInfoProvider.isChristmasSeason(day))
             return calculateDDayDiscount(day);
         return 0;
     }
 
     public static int weekDayDiscount(Day day,Order order){
-        if(DayManager.isWeekday(day))
+        if(DateInfoProvider.isWeekday(day))
             return calculateWeekDayDiscount(day, order);
         return 0;
     }
 
     public static int weekendDiscount(Day day, Order order){
-        if(DayManager.isWeekend(day))
+        if(DateInfoProvider.isWeekend(day))
             return calculateWeekendDiscount(day,order);
         return 0;
     }
 
     public static int starDayDiscount(Day day){
-        if(DayManager.hasStar(day))
+        if(DateInfoProvider.hasStar(day))
             return 1000;
         return 0;
     }
