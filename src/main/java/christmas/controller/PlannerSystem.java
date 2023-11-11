@@ -7,19 +7,25 @@ import christmas.view.OutputView;
 
 public class PlannerSystem {
 
-    private Day day;
-    private Order order;
+    private final Day day;
+    private final Order order;
 
-    public void run(){
-        initialize();
-        renderPlannerResult();
-        SettlementSystem settlementSystem = new SettlementSystem(day,order);
-        settlementSystem.renderSettlementResult();
+    private final SettlementSystem settlementSystem;
+
+    public PlannerSystem() {
+        this.day = InputView.readDay();
+        this.order = InputView.readOrder();
+        this.settlementSystem = new SettlementSystem(day,order);
     }
 
-    private void initialize(){
-        day = InputView.readDay();
-        order = InputView.readOrder();
+    public void run(){
+        renderResult();
+    }
+
+    private void renderResult(){
+        renderPlannerResult();
+        settlementSystem.renderSettlementResult();
+
     }
     private void renderPlannerResult() {
         OutputView.printResultStartMessage(day.getDay());
