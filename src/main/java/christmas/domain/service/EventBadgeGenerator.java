@@ -1,4 +1,6 @@
-package christmas.domain;
+package christmas.domain.service;
+
+import christmas.domain.EventBadge;
 
 public final class EventBadgeGenerator {
 

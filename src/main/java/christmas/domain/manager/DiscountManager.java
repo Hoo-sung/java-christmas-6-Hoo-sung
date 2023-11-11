@@ -2,6 +2,7 @@ package christmas.domain.manager;
 
 
 import christmas.domain.*;
+import christmas.domain.service.DateInfoProvider;
 
 public class DiscountManager {
 

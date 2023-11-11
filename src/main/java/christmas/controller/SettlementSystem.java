@@ -1,6 +1,8 @@
 package christmas.controller;
 
 import christmas.domain.*;
+import christmas.domain.service.EventBadgeGenerator;
+import christmas.domain.service.PaymentCalculator;
 import christmas.view.OutputView;
 
 public class SettlementSystem {

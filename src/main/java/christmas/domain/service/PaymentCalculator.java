@@ -1,4 +1,8 @@
-package christmas.domain;
+package christmas.domain.service;
+
+import christmas.domain.DiscountRecord;
+import christmas.domain.Order;
+import christmas.domain.OrderItem;
 
 public class PaymentCalculator {
 
