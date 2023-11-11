@@ -12,13 +12,11 @@ public class SettlementSystem {
 
     private final int totalWithDiscount;
     private final EventBadge badge;
-    private final PaymentCalculator paymentCalculator = new PaymentCalculator();
-
 
     public SettlementSystem(Day day, Order order) {
-        this.originalTotalAmount = paymentCalculator.calculateOriginalTotal(order);
+        this.originalTotalAmount = PaymentCalculator.calculateOriginalTotal(order);
         this.discountRecord = DiscountRecord.create(day,order,originalTotalAmount);
-        this.totalWithDiscount = paymentCalculator.calculateTotalWithDiscount(originalTotalAmount,discountRecord);
+        this.totalWithDiscount = PaymentCalculator.calculateTotalWithDiscount(originalTotalAmount,discountRecord);
         this.badge = EventBadgeGenerator.createBadge(discountRecord.getTotalDiscountAmount());
     }
 

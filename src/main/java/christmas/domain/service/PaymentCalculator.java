@@ -6,7 +6,7 @@ import christmas.domain.OrderItem;
 
 public class PaymentCalculator {
 
-    public int calculateOriginalTotal(Order order){
+    public static int calculateOriginalTotal(Order order){
         int total =0;
         for (OrderItem orderItem : order.getOrderItems()) {
             total += (orderItem.getPrice() * orderItem.getQuantity());
@@ -14,7 +14,7 @@ public class PaymentCalculator {
         return total;
     }
 
-    public int calculateTotalWithDiscount(int originalTotalAmount, DiscountRecord discountRecord){
+    public static int calculateTotalWithDiscount(int originalTotalAmount, DiscountRecord discountRecord){
         int minusValue = discountRecord.getdDayDiscountAmount() + discountRecord.getWeekdayDiscountAmount()
                 + discountRecord.getWeekendDiscountAmount() + discountRecord.getStarDayDiscountAmount();
         return originalTotalAmount - minusValue;
