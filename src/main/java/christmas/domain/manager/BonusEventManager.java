@@ -2,6 +2,8 @@ package christmas.domain.manager;
 
 import christmas.domain.BonusMenu;
 
+import java.util.Arrays;
+
 import static christmas.system.Constant.BONUS_MINIMUM_THRESHOLD;
 import static christmas.system.Constant.ZERO;
 
@@ -17,10 +19,8 @@ public class BonusEventManager {
     }
 
     private int calculateTotalBonusMenuPrice() {
-        int total = ZERO;
-        for (BonusMenu bonusMenu : BonusMenu.values()) {
-            total += (bonusMenu.getPrice() * bonusMenu.getQuantity());
-        }
-        return total;
+        return Arrays.stream(BonusMenu.values())
+                .mapToInt(bonusMenu -> bonusMenu.getPrice() * bonusMenu.getQuantity())
+                .sum();
     }
 }
