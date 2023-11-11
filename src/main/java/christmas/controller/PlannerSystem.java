@@ -3,6 +3,7 @@ package christmas.controller;
 import christmas.domain.Day;
 import christmas.domain.Order;
 import christmas.view.InputView;
+import christmas.view.OutputView;
 
 public class PlannerSystem {
 
@@ -11,12 +12,17 @@ public class PlannerSystem {
 
     public void run(){
         initialize();
+        renderPlannerResult();
         SettlementSystem settlementSystem = new SettlementSystem(day,order);
-        settlementSystem.renderResult();
+        settlementSystem.renderSettlementResult();
     }
 
     private void initialize(){
         day = InputView.readDay();
         order = InputView.readOrder();
+    }
+    private void renderPlannerResult() {
+        OutputView.printResultStartMessage(day.getDay());
+        OutputView.printOrderList(order);
     }
 }
