@@ -3,11 +3,12 @@ package christmas.domain.service;
 import christmas.domain.DiscountRecord;
 import christmas.domain.Order;
 import christmas.domain.OrderItem;
+import christmas.system.Constant;
 
 public class PaymentCalculator {
 
     public static int calculateOriginalTotal(Order order){
-        int total =0;
+        int total = Constant.ZERO;
         for (OrderItem orderItem : order.getOrderItems()) {
             total += (orderItem.getPrice() * orderItem.getQuantity());
         }

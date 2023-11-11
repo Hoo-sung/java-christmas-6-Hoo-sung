@@ -2,21 +2,22 @@ package christmas.domain.manager;
 
 import christmas.domain.BonusMenu;
 
-public class BonusEventManager {
+import static christmas.system.Constant.BONUS_MINIMUM_THRESHOLD;
+import static christmas.system.Constant.ZERO;
 
-    public static final int BONUS_MINIMUM_THRESHOLD = 120000;
+public class BonusEventManager {
 
     public BonusEventManager() {
     }
 
     public int makeBonusEventDiscount(int originalTotalAmount) {
         if (originalTotalAmount < BONUS_MINIMUM_THRESHOLD)
-            return 0;
+            return ZERO;
         return calculateTotalBonusMenuPrice();
     }
 
     private int calculateTotalBonusMenuPrice() {
-        int total = 0;
+        int total = ZERO;
         for (BonusMenu bonusMenu : BonusMenu.values()) {
             total += (bonusMenu.getPrice() * bonusMenu.getQuantity());
         }

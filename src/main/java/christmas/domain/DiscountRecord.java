@@ -4,6 +4,8 @@ package christmas.domain;
 import christmas.domain.manager.BonusEventManager;
 import christmas.domain.manager.DiscountManager;
 
+import static christmas.system.Constant.*;
+
 public class DiscountRecord {
 
     private final int dDayDiscountAmount;
@@ -17,7 +19,7 @@ public class DiscountRecord {
 
     public static DiscountRecord create(Day day, Order order, int originalTotalAmount,
                                         DiscountManager discountManager, BonusEventManager bonusEventManager) {
-        if (originalTotalAmount < 10000)
+        if (originalTotalAmount < EVENT_THRESHOLD_AMOUNT)
             return emptyDiscountRecord();
         return new DiscountRecord(day, order, originalTotalAmount, discountManager, bonusEventManager);
     }
@@ -36,11 +38,11 @@ public class DiscountRecord {
     }
 
     private DiscountRecord() {
-        this.dDayDiscountAmount = 0;
-        this.weekdayDiscountAmount = 0;
-        this.weekendDiscountAmount = 0;
-        this.starDayDiscountAmount = 0;
-        this.bonusEventDiscount = 0;
+        this.dDayDiscountAmount = ZERO;
+        this.weekdayDiscountAmount = ZERO;
+        this.weekendDiscountAmount = ZERO;
+        this.starDayDiscountAmount = ZERO;
+        this.bonusEventDiscount = ZERO;
     }
 
     public int getTotalDiscountAmount() {

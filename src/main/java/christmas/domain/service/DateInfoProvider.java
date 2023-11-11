@@ -3,9 +3,12 @@ package christmas.domain.service;
 import christmas.domain.Day;
 
 import static christmas.domain.Day.*;
+import static christmas.system.Constant.CHRISTMAS;
 
 
 public class DateInfoProvider {
+
+    private static final int FIRSTDATE = 1;
     public static boolean isWeekend(Day day) {
         if (isFriday(day) || isSaturday(day))
             return true;
@@ -25,7 +28,7 @@ public class DateInfoProvider {
     }
 
     public static boolean isChristmasSeason(Day day){
-        if (day.getDay() >=1 && day.getDay() <=25)
+        if (day.getDay() >=FIRSTDATE && day.getDay() <=CHRISTMAS)
             return true;
         return false;
     }

@@ -15,7 +15,4 @@ public final class IOMessage {
     public static final String QUANTITY_UNIT = "개";
 
     public static final String MONEY_UNIT = "원";
-
-    public static final int ZERO = 0;
-
 }
