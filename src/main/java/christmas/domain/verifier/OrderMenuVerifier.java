@@ -2,6 +2,7 @@ package christmas.domain.verifier;
 
 
 import christmas.domain.Menu;
+import christmas.system.ExceptionMessage;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -26,7 +27,7 @@ public class OrderMenuVerifier implements Verifier {
         for (String order : orders) {
             Matcher matcher = pattern.matcher(order.trim());
             if (!matcher.matches()) {
-                throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문 형식입니다. 다시 입력해 주세요.");
+                throw new IllegalArgumentException(ExceptionMessage.INVALID_ORDER_MESSAGE);
             }
         }
     }
@@ -36,7 +37,7 @@ public class OrderMenuVerifier implements Verifier {
         for (String order : orders) {
             String[] orderInfo = order.split("-");
             if (Menu.getMenuItemByName(orderInfo[0]) == null)
-                throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+                throw new IllegalArgumentException(ExceptionMessage.INVALID_ORDER_MESSAGE);
         }
     }
 
@@ -46,7 +47,7 @@ public class OrderMenuVerifier implements Verifier {
         for (String order : orders) {
             String[] orderInfo = order.split("-");
             if (!uniqueMenuItems.add(orderInfo[0]))
-                throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+                throw new IllegalArgumentException(ExceptionMessage.INVALID_ORDER_MESSAGE);
         }
     }
 
@@ -56,7 +57,7 @@ public class OrderMenuVerifier implements Verifier {
             String[] orderInfo = order.split("-");
             int quantity = Integer.parseInt(orderInfo[1]);
             if (quantity < 1)
-                throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+                throw new IllegalArgumentException(ExceptionMessage.INVALID_ORDER_MESSAGE);
         }
     }
 
