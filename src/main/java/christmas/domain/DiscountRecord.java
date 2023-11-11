@@ -38,8 +38,8 @@ public class DiscountRecord {
         return new DiscountRecord();
     }
     private DiscountRecord() {
-        this.discountManager = new DiscountManager();
-        this.bonusEventManager = new BonusEventManager();
+        this.discountManager = null;
+        this.bonusEventManager = null;
         this.dDayDiscountAmount = 0;
         this.weekdayDiscountAmount = 0;
         this.weekendDiscountAmount = 0;
