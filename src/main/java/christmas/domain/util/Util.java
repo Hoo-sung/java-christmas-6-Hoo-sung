@@ -5,6 +5,8 @@ import christmas.domain.MenuItem;
 import christmas.domain.Order;
 import christmas.domain.OrderItem;
 
+import java.text.DecimalFormat;
+
 public final class Util {
 
     public static Order createOrderFromInput(String input){
@@ -18,6 +20,11 @@ public final class Util {
             order.addOrderItem(new OrderItem(Menu.getMenuItemByName(menu),quantity));
         }
         return order;
+    }
+
+    public static String createFormattedAmount(int target){
+        DecimalFormat formatter = new DecimalFormat("###,##0");
+        return formatter.format(target);
     }
 
 }
