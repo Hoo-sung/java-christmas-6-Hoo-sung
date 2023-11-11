@@ -8,6 +8,7 @@ public class OrderMenuVerifier implements Verifier{
     @Override
     public void check(String input) {
         checkMenuFormat(input);
+        checkMenuQuantity(input);
     }
 
     private void checkMenuFormat(String input){
@@ -17,6 +18,17 @@ public class OrderMenuVerifier implements Verifier{
 
         if(!matcher.matches()){
             throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        }
+    }
+
+    private void checkMenuQuantity(String input){
+        String[] orders = input.split(",");
+        for(String order : orders){
+            String[] orderInfo = order.split("-");
+            check(orderInfo[1]);
+            int quantity = Integer.parseInt(orderInfo[1]);
+            if(quantity < 1)
+                throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
     }
 
