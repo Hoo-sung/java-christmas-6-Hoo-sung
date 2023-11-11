@@ -1,6 +1,8 @@
 package christmas.controller;
 
 import christmas.domain.*;
+import christmas.domain.manager.BonusEventManager;
+import christmas.domain.manager.DiscountManager;
 import christmas.domain.service.EventBadgeGenerator;
 import christmas.domain.service.PaymentCalculator;
 import christmas.view.OutputView;
@@ -14,13 +16,15 @@ public class SettlementSystem {
     private final EventBadge badge;
 
     public SettlementSystem(Day day, Order order) {
+        DiscountManager discountManager = new DiscountManager();
+        BonusEventManager bonusEventManager = new BonusEventManager();
         this.originalTotalAmount = PaymentCalculator.calculateOriginalTotal(order);
-        this.discountRecord = DiscountRecord.create(day,order,originalTotalAmount);
-        this.totalWithDiscount = PaymentCalculator.calculateTotalWithDiscount(originalTotalAmount,discountRecord);
+        this.discountRecord = DiscountRecord.create(day, order, originalTotalAmount, discountManager, bonusEventManager);
+        this.totalWithDiscount = PaymentCalculator.calculateTotalWithDiscount(originalTotalAmount, discountRecord);
         this.badge = EventBadgeGenerator.createBadge(discountRecord.getTotalDiscountAmount());
     }
 
-    public void renderSettlementResult(){
+    public void renderSettlementResult() {
         OutputView.printOriginalTotalAmount(originalTotalAmount);
         OutputView.printBonusMenu(originalTotalAmount);
         OutputView.printDiscountRecord(discountRecord);
