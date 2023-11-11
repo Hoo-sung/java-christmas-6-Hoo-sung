@@ -17,13 +17,17 @@ public class OrderMenuVerifier implements Verifier{
         checkMenuExistence(input);
     }
 
-    private void checkMenuFormat(String input){
-        String format = "[가-힣]+-\\d+";
+    private void checkMenuFormat(String input) {
+        String format = "[가-힣]+-\\d+(,[가-힣]+-\\d+)*";
         Pattern pattern = Pattern.compile(format);
-        Matcher matcher = pattern.matcher(input);
 
-        if(!matcher.matches()){
-            throw new IllegalArgumentException("[ERROR]1 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        String[] orders = input.split(",");
+
+        for (String order : orders) {
+            Matcher matcher = pattern.matcher(order.trim());
+            if (!matcher.matches()) {
+                throw new IllegalArgumentException("[ERROR]1 유효하지 않은 주문 형식입니다. 다시 입력해 주세요.");
+            }
         }
     }
 
