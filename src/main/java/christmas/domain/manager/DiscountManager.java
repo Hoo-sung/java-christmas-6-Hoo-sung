@@ -14,13 +14,13 @@ public class DiscountManager {
 
     public static int weekDayDiscount(Day day,Order order){
         if(DateInfoProvider.isWeekday(day))
-            return calculateWeekDayDiscount(day, order);
+            return calculateWeekDayDiscount(order);
         return 0;
     }
 
     public static int weekendDiscount(Day day, Order order){
         if(DateInfoProvider.isWeekend(day))
-            return calculateWeekendDiscount(day,order);
+            return calculateWeekendDiscount(order);
         return 0;
     }
 
@@ -33,7 +33,7 @@ public class DiscountManager {
         return 1000 + 100 * (day.getDay()-1);
     }
 
-    private static int calculateWeekDayDiscount(Day day, Order order){
+    private static int calculateWeekDayDiscount(Order order){
         int discountTotal=0;
         for (OrderItem orderItem : order.getOrderItems()) {
             if(orderItem.getMenuType() == MenuType.DESSERT){
@@ -43,7 +43,7 @@ public class DiscountManager {
         return discountTotal;
     }
 
-    private static int calculateWeekendDiscount(Day day, Order order){
+    private static int calculateWeekendDiscount( Order order){
         int discountTotal=0;
         for (OrderItem orderItem : order.getOrderItems()) {
             if(orderItem.getMenuType() == MenuType.MAIN){
