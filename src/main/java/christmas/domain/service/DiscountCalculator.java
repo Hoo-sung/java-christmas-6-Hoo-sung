@@ -3,9 +3,6 @@ package christmas.domain.service;
 import christmas.domain.Day;
 import christmas.domain.MenuType;
 import christmas.domain.Order;
-import christmas.domain.OrderItem;
-
-import static christmas.system.Constant.*;
 
 public class DiscountCalculator {
 
@@ -18,22 +15,17 @@ public class DiscountCalculator {
     }
 
     public static int calculateWeekDayDiscount(Order order) {
-        int discountTotal = ZERO;
-        for (OrderItem orderItem : order.getOrderItems()) {
-            if (orderItem.getMenuType() == MenuType.DESSERT) {
-                discountTotal += (DISCOUNT_AMOUNT * orderItem.getQuantity());
-            }
-        }
-        return discountTotal;
+        return order.getOrderItems().stream()
+                .filter(orderItem -> orderItem.getMenuType() == MenuType.DESSERT)
+                .mapToInt(orderItem -> DISCOUNT_AMOUNT * orderItem.getQuantity())
+                .sum();
     }
 
     public static int calculateWeekendDiscount(Order order) {
-        int discountTotal = ZERO;
-        for (OrderItem orderItem : order.getOrderItems()) {
-            if (orderItem.getMenuType() == MenuType.MAIN) {
-                discountTotal += (DISCOUNT_AMOUNT * orderItem.getQuantity());
-            }
-        }
-        return discountTotal;
+        return order.getOrderItems().stream()
+                .filter(orderItem -> orderItem.getMenuType() == MenuType.MAIN)
+                .mapToInt(orderItem -> DISCOUNT_AMOUNT * orderItem.getQuantity())
+                .sum();
     }
+
 }
