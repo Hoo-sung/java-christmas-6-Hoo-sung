@@ -4,7 +4,8 @@ import christmas.system.ExceptionMessage;
 
 import java.math.BigInteger;
 
-public class VisitDateVerifier implements Verifier {
+public class VisitDateVerifier implements Verifier<String> {
+
     @Override
     public void check(String input) {
         checkNumeric(input);

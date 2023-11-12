@@ -13,8 +13,8 @@ import static christmas.system.IOMessage.VISIT_DATE_PROMPT_MESSAGE;
 
 public final class InputView {
 
-    private static final Verifier visitDateVerifier = new VisitDateVerifier();
-    private static final Verifier orderMenuVerifier = new OrderMenuVerifier();
+    private static final Verifier<String> visitDateVerifier = new VisitDateVerifier();
+    private static final Verifier<String> orderMenuVerifier = new OrderMenuVerifier();
 
 
     private InputView() {

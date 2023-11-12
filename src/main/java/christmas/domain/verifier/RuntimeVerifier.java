@@ -5,8 +5,9 @@ import christmas.domain.Order;
 import christmas.domain.OrderItem;
 import christmas.system.ExceptionMessage;
 
-public class RuntimeVerifier {
+public class RuntimeVerifier implements Verifier<Order>{
 
+    @Override
     public void check(Order order) {
         checkOrderQuantity(order);
         checkBeverageOnly(order);

@@ -3,6 +3,7 @@ package christmas.controller;
 import christmas.domain.Day;
 import christmas.domain.Order;
 import christmas.domain.verifier.RuntimeVerifier;
+import christmas.domain.verifier.Verifier;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
@@ -13,7 +14,7 @@ public class PlannerSystem {
 
     private final SettlementSystem settlementSystem;
 
-    private final RuntimeVerifier runtimeVerifier = new RuntimeVerifier();
+    private final Verifier<Order> runtimeVerifier = new RuntimeVerifier();
 
     public PlannerSystem() {
         this.day = InputView.readDay();

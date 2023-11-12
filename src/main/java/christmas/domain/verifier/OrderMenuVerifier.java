@@ -9,7 +9,8 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class OrderMenuVerifier implements Verifier {
+public class OrderMenuVerifier implements Verifier<String> {
+
     @Override
     public void check(String input) {
         checkMenuFormat(input);
