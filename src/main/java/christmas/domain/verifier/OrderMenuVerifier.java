@@ -11,6 +11,12 @@ import java.util.regex.Pattern;
 
 public class OrderMenuVerifier implements Verifier<String> {
 
+    private final Pattern pattern;
+
+    public OrderMenuVerifier() {
+        this.pattern = Pattern.compile("[가-힣]+-\\d+(,[가-힣]+-\\d+)*");
+    }
+
     @Override
     public void check(String input) {
         checkMenuFormat(input);
@@ -20,16 +26,9 @@ public class OrderMenuVerifier implements Verifier<String> {
     }
 
     private void checkMenuFormat(String input) {
-        String format = "[가-힣]+-\\d+(,[가-힣]+-\\d+)*";
-        Pattern pattern = Pattern.compile(format);
-
         String[] orders = input.split(",");
-
         for (String order : orders) {
-            Matcher matcher = pattern.matcher(order.trim());
-            if (!matcher.matches()) {
-                throw new IllegalArgumentException(ExceptionMessage.INVALID_ORDER_MESSAGE);
-            }
+            validateOrderFormat(order);
         }
     }
 
@@ -63,6 +62,12 @@ public class OrderMenuVerifier implements Verifier<String> {
             }catch(NumberFormatException e){
                 throw new IllegalArgumentException(ExceptionMessage.INVALID_ORDER_MESSAGE);
             }
+        }
+    }
+    private void validateOrderFormat(String order) {
+        Matcher matcher = pattern.matcher(order.trim());
+        if (!matcher.matches()) {
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_ORDER_MESSAGE);
         }
     }
 
