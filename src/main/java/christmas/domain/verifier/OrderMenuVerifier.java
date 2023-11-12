@@ -55,9 +55,13 @@ public class OrderMenuVerifier implements Verifier {
         String[] orders = input.split(",");
         for (String order : orders) {
             String[] orderInfo = order.split("-");
-            int quantity = Integer.parseInt(orderInfo[1]);
-            if (quantity < 1)
+            try {
+                int quantity = Integer.parseInt(orderInfo[1]);
+                if (quantity < 1)
+                    throw new IllegalArgumentException(ExceptionMessage.INVALID_ORDER_MESSAGE);
+            }catch(NumberFormatException e){
                 throw new IllegalArgumentException(ExceptionMessage.INVALID_ORDER_MESSAGE);
+            }
         }
     }
 
