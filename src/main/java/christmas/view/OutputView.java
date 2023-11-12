@@ -2,7 +2,6 @@ package christmas.view;
 
 import christmas.domain.*;
 
-import static christmas.domain.manager.BonusEventManager.*;
 import static christmas.domain.util.Util.*;
 import static christmas.system.Constant.BONUS_MINIMUM_THRESHOLD;
 import static christmas.system.Constant.ZERO;

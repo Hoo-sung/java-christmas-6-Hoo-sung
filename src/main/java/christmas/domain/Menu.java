@@ -2,7 +2,7 @@ package christmas.domain;
 
 public enum Menu {
 
-    MUSHROOM_SOUP(new MenuItem("양송이수프",6000,MenuType.APPETIZER)),
+    MUSHROOM_SOUP(new MenuItem("양송이수프", 6000, MenuType.APPETIZER)),
     TAPAS(new MenuItem("타파스", 5500, MenuType.APPETIZER)),
     CAESAR_SALAD(new MenuItem("시저샐러드", 8000, MenuType.APPETIZER)),
 
@@ -20,8 +20,9 @@ public enum Menu {
     CHAMPAGNE(new MenuItem("샴페인", 25000, MenuType.BEVERAGE));
 
     private final MenuItem menuItem;
+
     Menu(MenuItem menuItem) {
-        this. menuItem = menuItem;
+        this.menuItem = menuItem;
     }
 
     public MenuItem getMenuItem() {

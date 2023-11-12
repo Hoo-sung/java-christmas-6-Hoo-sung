@@ -7,6 +7,7 @@ public enum MenuType {
     BEVERAGE("음료");
 
     private final String menuType;
+
     MenuType(String menuType) {
         this.menuType = menuType;
     }

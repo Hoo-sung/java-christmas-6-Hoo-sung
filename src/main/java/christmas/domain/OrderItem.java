@@ -10,15 +10,19 @@ public class OrderItem {
         this.quantity = quantity;
     }
 
-    public MenuType getMenuType(){
+    public MenuType getMenuType() {
         return menuItem.getType();
     }
+
     public MenuItem getMenuItem() {
         return menuItem;
     }
 
-    public String getName(){ return menuItem.getName(); }
-    public int getPrice(){
+    public String getName() {
+        return menuItem.getName();
+    }
+
+    public int getPrice() {
         return menuItem.getPrice();
     }
 

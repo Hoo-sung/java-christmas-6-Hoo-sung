@@ -5,7 +5,9 @@ import christmas.domain.Order;
 import christmas.domain.verifier.RuntimeVerifier;
 import christmas.domain.verifier.Verifier;
 import christmas.view.InputView;
-import christmas.view.OutputView;
+
+import static christmas.view.InputView.*;
+import static christmas.view.OutputView.*;
 
 public class PlannerSystem {
 
@@ -17,23 +19,24 @@ public class PlannerSystem {
     private final Verifier<Order> runtimeVerifier = new RuntimeVerifier();
 
     public PlannerSystem() {
-        this.day = InputView.readDay();
+        this.day = readDay();
         this.order = readOrder();
-        this.settlementSystem = new SettlementSystem(day,order);
+        this.settlementSystem = new SettlementSystem(day, order);
     }
 
-    public void run(){
+    public void run() {
         renderResult();
     }
 
-    private void renderResult(){
+    private void renderResult() {
         renderPlannerResult();
         settlementSystem.renderSettlementResult();
 
     }
+
     private void renderPlannerResult() {
-        OutputView.printResultStartMessage(day.getDay());
-        OutputView.printOrderList(order);
+        printResultStartMessage(day.getDay());
+        printOrderList(order);
     }
 
     private Order readOrder() {
@@ -44,7 +47,7 @@ public class PlannerSystem {
                 runtimeVerifier.check(order);
                 return order;
             } catch (IllegalStateException e) {
-                OutputView.printMessage(e.getMessage());
+                printMessage(e.getMessage());
             }
         }
     }

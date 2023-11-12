@@ -13,14 +13,15 @@ public enum BonusMenu {
         return bonusMenuItem;
     }
 
-    public String getName(){
+    public String getName() {
         return bonusMenuItem.getName();
     }
-    public int getPrice(){
+
+    public int getPrice() {
         return bonusMenuItem.getPrice();
     }
 
-    public int getQuantity(){
+    public int getQuantity() {
         return bonusMenuItem.getQuantity();
     }
 }

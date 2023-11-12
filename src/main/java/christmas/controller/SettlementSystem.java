@@ -3,9 +3,10 @@ package christmas.controller;
 import christmas.domain.*;
 import christmas.domain.manager.BonusEventManager;
 import christmas.domain.manager.DiscountManager;
-import christmas.domain.service.EventBadgeGenerator;
-import christmas.domain.service.PaymentCalculator;
-import christmas.view.OutputView;
+
+import static christmas.domain.service.EventBadgeGenerator.*;
+import static christmas.domain.service.PaymentCalculator.*;
+import static christmas.view.OutputView.*;
 
 public class SettlementSystem {
 
@@ -18,18 +19,18 @@ public class SettlementSystem {
     public SettlementSystem(Day day, Order order) {
         DiscountManager discountManager = new DiscountManager();
         BonusEventManager bonusEventManager = new BonusEventManager();
-        this.originalTotalAmount = PaymentCalculator.calculateOriginalTotal(order);
+        this.originalTotalAmount = calculateOriginalTotal(order);
         this.discountRecord = DiscountRecord.create(day, order, originalTotalAmount, discountManager, bonusEventManager);
-        this.totalWithDiscount = PaymentCalculator.calculateTotalWithDiscount(originalTotalAmount, discountRecord);
-        this.badge = EventBadgeGenerator.createBadge(discountRecord.getTotalDiscountAmount());
+        this.totalWithDiscount = calculateTotalWithDiscount(originalTotalAmount, discountRecord);
+        this.badge = createBadge(discountRecord.getTotalDiscountAmount());
     }
 
     public void renderSettlementResult() {
-        OutputView.printOriginalTotalAmount(originalTotalAmount);
-        OutputView.printBonusMenu(originalTotalAmount);
-        OutputView.printDiscountRecord(discountRecord);
-        OutputView.printTotalDiscountAmount(discountRecord);
-        OutputView.printExpectedPayment(totalWithDiscount);
-        OutputView.printEventBadge(badge);
+        printOriginalTotalAmount(originalTotalAmount);
+        printBonusMenu(originalTotalAmount);
+        printDiscountRecord(discountRecord);
+        printTotalDiscountAmount(discountRecord);
+        printExpectedPayment(totalWithDiscount);
+        printEventBadge(badge);
     }
 }
