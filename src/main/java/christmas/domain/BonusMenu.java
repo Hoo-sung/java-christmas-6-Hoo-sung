@@ -9,10 +9,6 @@ public enum BonusMenu {
         this.bonusMenuItem = bonusMenuItem;
     }
 
-    public BonusItem getBonusMenuItem() {
-        return bonusMenuItem;
-    }
-
     public String getName() {
         return bonusMenuItem.getName();
     }

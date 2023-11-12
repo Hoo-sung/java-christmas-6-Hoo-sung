@@ -2,12 +2,13 @@ package christmas.domain.verifier;
 
 
 import christmas.domain.Menu;
-import christmas.system.ExceptionMessage;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static christmas.system.ExceptionMessage.*;
 
 public class OrderMenuVerifier implements Verifier<String> {
 
@@ -57,21 +58,21 @@ public class OrderMenuVerifier implements Verifier<String> {
     private void validateOrderFormat(String order) {
         Matcher matcher = pattern.matcher(order.trim());
         if (!matcher.matches()) {
-            throw new IllegalArgumentException(ExceptionMessage.INVALID_ORDER_MESSAGE);
+            throw new IllegalArgumentException(INVALID_ORDER_MESSAGE);
         }
     }
 
     private void validateOrderExistence(String order) {
         String[] orderInfo = order.split("-");
         if (Menu.getMenuItemByName(orderInfo[0]) == null) {
-            throw new IllegalArgumentException(ExceptionMessage.INVALID_ORDER_MESSAGE);
+            throw new IllegalArgumentException(INVALID_ORDER_MESSAGE);
         }
     }
 
     private void validateDistinctMenu(String order, Set<String> uniqueMenuItems) {
         String[] orderInfo = order.split("-");
         if (!uniqueMenuItems.add(orderInfo[0])) {
-            throw new IllegalArgumentException(ExceptionMessage.INVALID_ORDER_MESSAGE);
+            throw new IllegalArgumentException(INVALID_ORDER_MESSAGE);
         }
     }
 
@@ -80,10 +81,10 @@ public class OrderMenuVerifier implements Verifier<String> {
         try {
             int quantity = Integer.parseInt(orderInfo[1].trim());
             if (quantity < 1) {
-                throw new IllegalArgumentException(ExceptionMessage.INVALID_ORDER_MESSAGE);
+                throw new IllegalArgumentException(INVALID_ORDER_MESSAGE);
             }
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ExceptionMessage.INVALID_ORDER_MESSAGE);
+            throw new IllegalArgumentException(INVALID_ORDER_MESSAGE);
         }
     }
 

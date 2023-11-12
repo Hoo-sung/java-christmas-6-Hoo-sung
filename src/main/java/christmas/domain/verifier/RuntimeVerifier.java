@@ -3,7 +3,8 @@ package christmas.domain.verifier;
 import christmas.domain.MenuType;
 import christmas.domain.Order;
 import christmas.domain.OrderItem;
-import christmas.system.ExceptionMessage;
+
+import static christmas.system.ExceptionMessage.*;
 
 
 public class RuntimeVerifier implements Verifier<Order> {
@@ -19,7 +20,7 @@ public class RuntimeVerifier implements Verifier<Order> {
                 .mapToInt(OrderItem::getQuantity)
                 .sum();
         if (totalQuantity > 20)
-            throw new IllegalStateException(ExceptionMessage.MAX_ORDER_QUANTITY_EXCEEDED_MESSAGE);
+            throw new IllegalStateException(MAX_ORDER_QUANTITY_EXCEEDED_MESSAGE);
     }
 
     private void checkBeverageOnly(Order order) {
@@ -27,7 +28,7 @@ public class RuntimeVerifier implements Verifier<Order> {
             if (orderItem.getMenuType() != MenuType.BEVERAGE)
                 return;
         }
-        throw new IllegalStateException(ExceptionMessage.BEVERAGE_ONLY_ORDER_MESSAGE);
+        throw new IllegalStateException(BEVERAGE_ONLY_ORDER_MESSAGE);
     }
 
 
