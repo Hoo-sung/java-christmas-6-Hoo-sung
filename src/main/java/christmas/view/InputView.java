@@ -23,9 +23,9 @@ public final class InputView {
     }
 
     public static Day readDay() {
+        printMessage(VISIT_DATE_PROMPT_MESSAGE);
         while (true) {
             try {
-                printMessage(VISIT_DATE_PROMPT_MESSAGE);
                 String input = Console.readLine();
                 visitDateVerifier.check(input);
                 return new Day(Integer.parseInt(input));
@@ -36,9 +36,10 @@ public final class InputView {
     }
 
     public static Order readOrder(){
+        printEventNotice();
+        printMessage(ORDER_PROMPT_MESSAGE);
         while(true){
             try{
-                printMessage(ORDER_PROMPT_MESSAGE);
                 String input = Console.readLine();
                 orderMenuVerifier.check(input);
                 return createOrderFromInput(input);
