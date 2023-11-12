@@ -43,9 +43,7 @@ public class OrderMenuVerifier implements Verifier<String> {
         Set<String> uniqueMenuItems = new HashSet<>();
         String[] orders = input.split(",");
         for (String order : orders) {
-            String[] orderInfo = order.split("-");
-            if (!uniqueMenuItems.add(orderInfo[0]))
-                throw new IllegalArgumentException(ExceptionMessage.INVALID_ORDER_MESSAGE);
+            validateDistinctMenu(order,uniqueMenuItems);
         }
     }
 
@@ -72,6 +70,12 @@ public class OrderMenuVerifier implements Verifier<String> {
     private void validateOrderExistence(String order) {
         String[] orderInfo = order.split("-");
         if (Menu.getMenuItemByName(orderInfo[0]) == null) {
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_ORDER_MESSAGE);
+        }
+    }
+    private void validateDistinctMenu(String order, Set<String> uniqueMenuItems) {
+        String[] orderInfo = order.split("-");
+        if (!uniqueMenuItems.add(orderInfo[0])) {
             throw new IllegalArgumentException(ExceptionMessage.INVALID_ORDER_MESSAGE);
         }
     }
