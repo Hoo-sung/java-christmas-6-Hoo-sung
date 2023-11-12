@@ -35,9 +35,7 @@ public class OrderMenuVerifier implements Verifier<String> {
     private void checkMenuExistence(String input) {
         String[] orders = input.split(",");
         for (String order : orders) {
-            String[] orderInfo = order.split("-");
-            if (Menu.getMenuItemByName(orderInfo[0]) == null)
-                throw new IllegalArgumentException(ExceptionMessage.INVALID_ORDER_MESSAGE);
+            validateOrderExistence(order);
         }
     }
 
@@ -67,6 +65,13 @@ public class OrderMenuVerifier implements Verifier<String> {
     private void validateOrderFormat(String order) {
         Matcher matcher = pattern.matcher(order.trim());
         if (!matcher.matches()) {
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_ORDER_MESSAGE);
+        }
+    }
+
+    private void validateOrderExistence(String order) {
+        String[] orderInfo = order.split("-");
+        if (Menu.getMenuItemByName(orderInfo[0]) == null) {
             throw new IllegalArgumentException(ExceptionMessage.INVALID_ORDER_MESSAGE);
         }
     }
