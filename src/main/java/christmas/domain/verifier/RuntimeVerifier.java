@@ -5,7 +5,8 @@ import christmas.domain.Order;
 import christmas.domain.OrderItem;
 import christmas.system.ExceptionMessage;
 
-public class RuntimeVerifier implements Verifier<Order>{
+
+public class RuntimeVerifier implements Verifier<Order> {
 
     @Override
     public void check(Order order) {
@@ -14,12 +15,11 @@ public class RuntimeVerifier implements Verifier<Order>{
     }
 
     private void checkOrderQuantity(Order order) {
-        int total = 0;
-        for (OrderItem orderItem : order.getOrderItems()) {
-            total += orderItem.getQuantity();
-            if (total > 20)
-                throw new IllegalStateException(ExceptionMessage.MAX_ORDER_QUANTITY_EXCEEDED_MESSAGE);
-        }
+        int totalQuantity = order.getOrderItems().stream()
+                .mapToInt(OrderItem::getQuantity)
+                .sum();
+        if (totalQuantity > 20)
+            throw new IllegalStateException(ExceptionMessage.MAX_ORDER_QUANTITY_EXCEEDED_MESSAGE);
     }
 
     private void checkBeverageOnly(Order order) {
