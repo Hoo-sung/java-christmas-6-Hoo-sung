@@ -8,5 +8,6 @@ public class ExceptionMessage {
 
     public static final String BEVERAGE_ONLY_ORDER_MESSAGE = "[ERROR] 음료만 주문할 수 없습니다.";
 
+    public static final String MAX_ORDER_QUANTITY_EXCEEDED_MESSAGE = "[ERROR] 최대 주문 수량은 20개입니다.";
 
 }
