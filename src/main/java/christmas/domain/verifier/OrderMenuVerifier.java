@@ -50,16 +50,10 @@ public class OrderMenuVerifier implements Verifier<String> {
     private void checkMenuQuantity(String input) {
         String[] orders = input.split(",");
         for (String order : orders) {
-            String[] orderInfo = order.split("-");
-            try {
-                int quantity = Integer.parseInt(orderInfo[1]);
-                if (quantity < 1)
-                    throw new IllegalArgumentException(ExceptionMessage.INVALID_ORDER_MESSAGE);
-            }catch(NumberFormatException e){
-                throw new IllegalArgumentException(ExceptionMessage.INVALID_ORDER_MESSAGE);
-            }
+            validateOrderQuantity(order);
         }
     }
+
     private void validateOrderFormat(String order) {
         Matcher matcher = pattern.matcher(order.trim());
         if (!matcher.matches()) {
@@ -79,5 +73,23 @@ public class OrderMenuVerifier implements Verifier<String> {
             throw new IllegalArgumentException(ExceptionMessage.INVALID_ORDER_MESSAGE);
         }
     }
+
+    private void validateOrderQuantity(String order) {
+        String[] orderInfo = order.split("-");
+        try {
+            int quantity = Integer.parseInt(orderInfo[1].trim());
+            if (quantity < 1) {
+                throw new IllegalArgumentException(ExceptionMessage.INVALID_ORDER_MESSAGE);
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_ORDER_MESSAGE);
+        }
+    }
+
+
+
+
+
+
 
 }
