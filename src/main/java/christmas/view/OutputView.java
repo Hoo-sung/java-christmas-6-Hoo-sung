@@ -13,7 +13,7 @@ public final class OutputView {
 
     }
 
-    public static void printEventNotice(){
+    public static void printEventNotice() {
         printEmptyLine();
         printMessage("고객님께 안내드릴 이벤트 주의 사항!!!");
         printMessage("1. 총주문 금액 10,000원 이상부터 이벤트가 적용됩니다.");
@@ -22,77 +22,74 @@ public final class OutputView {
         printMessage("(e.g. 시저샐러드-1, 티본스테이크-1, 크리스마스파스타-1, 제로콜라-3, 아이스크림-1의 총개수는 7개 입니다.!)");
         printEmptyLine();
     }
-    public static void printResultStartMessage(int day){
-        printMessage("12월 "+day+"일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
+
+    public static void printResultStartMessage(int day) {
+        printMessage("12월 " + day + "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
         printEmptyLine();
     }
-    public static void printOrderList(Order order){
+
+    public static void printOrderList(Order order) {
         printMessage("<주문 메뉴>");
-        for(OrderItem orderItem: order.getOrderItems()){
-            printMessage(orderItem.getName()+" "+orderItem.getQuantity()+ QUANTITY_UNIT);
+        for (OrderItem orderItem : order.getOrderItems()) {
+            printMessage(orderItem.getName() + " " + orderItem.getQuantity() + QUANTITY_UNIT);
         }
         printEmptyLine();
     }
 
-    public static void printOriginalTotalAmount(int originalTotalAmount){
+    public static void printOriginalTotalAmount(int originalTotalAmount) {
         printMessage("<할인 전 총주문 금액>");
-        printMessage(createFormattedAmount(originalTotalAmount)+ MONEY_UNIT);
+        printMessage(createFormattedAmount(originalTotalAmount) + MONEY_UNIT);
         printEmptyLine();
     }
 
-    public static void printBonusMenu(int originalTotalAmount){
+    public static void printBonusMenu(int originalTotalAmount) {
         printMessage("<증정 메뉴>");
-        if(originalTotalAmount < BONUS_MINIMUM_THRESHOLD) {
+        if (originalTotalAmount < BONUS_MINIMUM_THRESHOLD) {
             printMessage(NONE);
             printEmptyLine();
             return;
         }
-        for(BonusMenu bonusMenu : BonusMenu.values()){
-            printMessage(bonusMenu.getName()+" "+ createFormattedAmount(bonusMenu.getQuantity())+ QUANTITY_UNIT);
+        for (BonusMenu bonusMenu : BonusMenu.values()) {
+            printMessage(bonusMenu.getName() + " " + createFormattedAmount(bonusMenu.getQuantity()) + QUANTITY_UNIT);
         }
         printEmptyLine();
     }
 
-    public static void printDiscountRecord(DiscountRecord discountRecord){
+    public static void printDiscountRecord(DiscountRecord discountRecord) {
         printMessage("<혜택 내역>");
-        if(discountRecord.getTotalDiscountAmount()== ZERO){
+        if (discountRecord.getTotalDiscountAmount() == ZERO) {
             printMessage(NONE);
             printEmptyLine();
             return;
         }
-        if(discountRecord.getdDayDiscountAmount() != ZERO )
-            printMessage("크리크마스 디데이 할인: -"+ createFormattedAmount(discountRecord.getdDayDiscountAmount())+ MONEY_UNIT);
-        if(discountRecord.getWeekdayDiscountAmount()!= ZERO)
-            printMessage("평일 할인: -"+ createFormattedAmount(discountRecord.getWeekdayDiscountAmount())+ MONEY_UNIT);
-        if(discountRecord.getWeekendDiscountAmount()!= ZERO)
-            printMessage("주말 할인: -"+ createFormattedAmount(discountRecord.getWeekendDiscountAmount())+ MONEY_UNIT);
-        if(discountRecord.getStarDayDiscountAmount()!= ZERO)
-            printMessage("특별 할인: -"+ createFormattedAmount(discountRecord.getStarDayDiscountAmount())+ MONEY_UNIT);
-        if(discountRecord.getBonusEventDiscount()!= ZERO)
-            printMessage("증정 이벤트: -"+ createFormattedAmount(discountRecord.getBonusEventDiscount())+ MONEY_UNIT);
+        printXmasDdayDiscount(discountRecord);
+        printWeekDayDiscount(discountRecord);
+        printWeekEndDiscount(discountRecord);
+        printSpecialDiscount(discountRecord);
+        printBonusEventDiscount(discountRecord);
         printEmptyLine();
     }
 
-    public  static void printTotalDiscountAmount(DiscountRecord discountRecord){
+    public static void printTotalDiscountAmount(DiscountRecord discountRecord) {
         printMessage("<총혜택 금액>");
-        if(discountRecord.getTotalDiscountAmount() == ZERO){
-            printMessage(ZERO+ MONEY_UNIT);
+        if (discountRecord.getTotalDiscountAmount() == ZERO) {
+            printMessage(ZERO + MONEY_UNIT);
             printEmptyLine();
             return;
         }
-        printMessage("-"+ createFormattedAmount(discountRecord.getTotalDiscountAmount())+ MONEY_UNIT);
+        printMessage("-" + createFormattedAmount(discountRecord.getTotalDiscountAmount()) + MONEY_UNIT);
         printEmptyLine();
     }
 
-    public static void printExpectedPayment(int expectedPayment){
+    public static void printExpectedPayment(int expectedPayment) {
         printMessage("<할인 후 예상 결제 금액>");
-        printMessage(createFormattedAmount(expectedPayment)+ MONEY_UNIT);
+        printMessage(createFormattedAmount(expectedPayment) + MONEY_UNIT);
         printEmptyLine();
     }
 
-    public static void printEventBadge(EventBadge badge){
+    public static void printEventBadge(EventBadge badge) {
         printMessage("<12월 이벤트 배지>");
-        if(badge == null){
+        if (badge == null) {
             printMessage(NONE);
             return;
         }
@@ -102,7 +99,33 @@ public final class OutputView {
     public static void printMessage(String message) {
         System.out.println(message);
     }
+
     public static void printEmptyLine() {
         System.out.println();
+    }
+
+    private static void printBonusEventDiscount(DiscountRecord discountRecord) {
+        if (discountRecord.getBonusEventDiscount() != ZERO)
+            printMessage("증정 이벤트: -" + createFormattedAmount(discountRecord.getBonusEventDiscount()) + MONEY_UNIT);
+    }
+
+    private static void printSpecialDiscount(DiscountRecord discountRecord) {
+        if (discountRecord.getStarDayDiscountAmount() != ZERO)
+            printMessage("특별 할인: -" + createFormattedAmount(discountRecord.getStarDayDiscountAmount()) + MONEY_UNIT);
+    }
+
+    private static void printWeekEndDiscount(DiscountRecord discountRecord) {
+        if (discountRecord.getWeekendDiscountAmount() != ZERO)
+            printMessage("주말 할인: -" + createFormattedAmount(discountRecord.getWeekendDiscountAmount()) + MONEY_UNIT);
+    }
+
+    private static void printWeekDayDiscount(DiscountRecord discountRecord) {
+        if (discountRecord.getWeekdayDiscountAmount() != ZERO)
+            printMessage("평일 할인: -" + createFormattedAmount(discountRecord.getWeekdayDiscountAmount()) + MONEY_UNIT);
+    }
+
+    private static void printXmasDdayDiscount(DiscountRecord discountRecord) {
+        if (discountRecord.getdDayDiscountAmount() != ZERO)
+            printMessage("크리크마스 디데이 할인: -" + createFormattedAmount(discountRecord.getdDayDiscountAmount()) + MONEY_UNIT);
     }
 }
