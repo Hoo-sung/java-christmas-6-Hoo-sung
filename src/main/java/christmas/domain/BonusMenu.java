@@ -1,7 +1,7 @@
 package christmas.domain;
 
 public enum BonusMenu {
-    CHAMPAGNE(new BonusItem("샴페인", 25000, 1));
+    CHAMPAGNE(new BonusItem("샴페인", 25_000, 1));
 
     private final BonusItem bonusMenuItem;
 
