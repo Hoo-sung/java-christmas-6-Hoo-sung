@@ -20,14 +20,14 @@ public class SettlementSystem {
         BonusEventManager bonusEventManager = new BonusEventManager();
         this.originalTotalAmount = order.getTotalOrderAmount();
         this.discountRecord = DiscountRecord.create(day, order, originalTotalAmount, discountManager, bonusEventManager);
-        this.totalWithDiscount = discountRecord.calculateTotalWithDiscount(originalTotalAmount);
-        this.badge = createBadge(discountRecord.getTotalDiscountAmount());
+        this.totalWithDiscount = discountRecord.getTotalWithDiscount(originalTotalAmount);
+        this.badge = createBadge(discountRecord.getTotalBenefitAmount());
     }
 
     public void renderSettlementResult() {
         printOriginalTotalAmount(originalTotalAmount);
         printBonusMenu(originalTotalAmount);
-        printDiscountRecord(discountRecord);
+        printDiscountRecord(originalTotalAmount,discountRecord);
         printTotalDiscountAmount(discountRecord);
         printExpectedPayment(totalWithDiscount);
         printEventBadge(badge);

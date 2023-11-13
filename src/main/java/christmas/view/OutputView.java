@@ -55,9 +55,9 @@ public final class OutputView {
         printEmptyLine();
     }
 
-    public static void printDiscountRecord(DiscountRecord discountRecord) {
+    public static void printDiscountRecord(int originalTotalAmount, DiscountRecord discountRecord) {
         printMessage("<혜택 내역>");
-        if (discountRecord.getTotalDiscountAmount() == ZERO) {
+        if (discountRecord.getTotalWithDiscount(originalTotalAmount) == ZERO) {
             printMessage(NONE);
             printEmptyLine();
             return;
@@ -72,12 +72,12 @@ public final class OutputView {
 
     public static void printTotalDiscountAmount(DiscountRecord discountRecord) {
         printMessage("<총혜택 금액>");
-        if (discountRecord.getTotalDiscountAmount() == ZERO) {
+        if (discountRecord.getTotalBenefitAmount() == ZERO) {
             printMessage(ZERO + MONEY_UNIT);
             printEmptyLine();
             return;
         }
-        printMessage("-" + createFormattedAmount(discountRecord.getTotalDiscountAmount()) + MONEY_UNIT);
+        printMessage("-" + createFormattedAmount(discountRecord.getTotalBenefitAmount()) + MONEY_UNIT);
         printEmptyLine();
     }
 
