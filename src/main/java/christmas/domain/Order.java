@@ -10,7 +10,7 @@ public class Order {
 
     public int getTotalOrderAmount() {
         return orderItems.stream()
-                .mapToInt(orderItem -> orderItem.getPrice() * orderItem.getQuantity())
+                .mapToInt(OrderItem::getTotalItemAmount)
                 .sum();
     }
 
