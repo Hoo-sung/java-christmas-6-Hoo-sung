@@ -1,9 +1,6 @@
 package christmas.domain.verifier;
 
-import christmas.domain.verifier.subclass.CheckDistinctMenuTest;
-import christmas.domain.verifier.subclass.CheckMenuExistenceTest;
-import christmas.domain.verifier.subclass.CheckMenuFormatTest;
-import christmas.domain.verifier.subclass.CheckMenuQuantityTest;
+import christmas.domain.verifier.subclass.*;
 import christmas.system.ExceptionMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,6 +9,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class OrderMenuVerifierTest {
+
+    private final OrderMenuVerifierSubTest orderMenuVerifierTest = new OrderMenuVerifierSubTest();
 
     @ParameterizedTest
     @DisplayName("checkMenuFormat 메소드 테스트")
@@ -22,8 +21,7 @@ class OrderMenuVerifierTest {
             "타파스-1,제로콜라-2 ",
     })
     void 메뉴형식에_맞는_입력이_아닌경우(String input) {
-        CheckMenuFormatTest checkMenuFormatTest = new CheckMenuFormatTest();
-        assertThatThrownBy(() -> checkMenuFormatTest.checkMenuFormat(input))
+        assertThatThrownBy(() -> orderMenuVerifierTest.checkMenuFormat(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ExceptionMessage.INVALID_ORDER_MESSAGE);
     }
@@ -37,8 +35,7 @@ class OrderMenuVerifierTest {
             "타빠스-1,제로콜라-2 "
     })
     void 메뉴판에_없는_입력인_경우(String input) {
-        CheckMenuExistenceTest checkMenuExistenceTest = new CheckMenuExistenceTest();
-        assertThatThrownBy(() -> checkMenuExistenceTest.checkMenuExistence(input))
+        assertThatThrownBy(() -> orderMenuVerifierTest.checkMenuExistence(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ExceptionMessage.INVALID_ORDER_MESSAGE);
     }
@@ -52,8 +49,7 @@ class OrderMenuVerifierTest {
             "레드와인-1,제로콜라-2,레드와인-4",
     })
     void 중복된_메뉴_입력이_주어진_경우(String input) {
-        CheckDistinctMenuTest checkDistinctMenuTest = new CheckDistinctMenuTest();
-        assertThatThrownBy(() -> checkDistinctMenuTest.checkDistinctMenu(input))
+        assertThatThrownBy(() -> orderMenuVerifierTest.checkDistinctMenu(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ExceptionMessage.INVALID_ORDER_MESSAGE);
     }
@@ -67,8 +63,7 @@ class OrderMenuVerifierTest {
             "레드와인-0,시저샐러드-2,초코케이크-4",
     })
     void 메뉴의_개수가_1이상의_숫자가_아닌경우(String input) {
-        CheckMenuQuantityTest checkMenuQuantityTest = new CheckMenuQuantityTest();
-        assertThatThrownBy(() -> checkMenuQuantityTest.checkMenuQuantity(input))
+        assertThatThrownBy(() -> orderMenuVerifierTest.checkMenuQuantity(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ExceptionMessage.INVALID_ORDER_MESSAGE);
     }
