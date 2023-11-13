@@ -3,37 +3,35 @@ package christmas.domain.manager;
 
 import christmas.domain.*;
 
-import static christmas.domain.service.DateInfoProvider.*;
 import static christmas.domain.service.DiscountCalculator.*;
 import static christmas.system.Constant.ZERO;
 
 public class DiscountManager {
 
-    private final static int STAR_DISCOUNT = 1000;
-
     public DiscountManager() {
     }
 
     public int DDayDiscount(Day day) {
-        if (isChristmasSeason(day))
+        if (day.isChristmasSeason())
             return calculateDDayDiscount(day);
         return ZERO;
     }
 
     public int weekDayDiscount(Day day, Order order) {
-        if (isWeekday(day))
+        if (day.isWeekday())
             return calculateWeekDayDiscount(order);
         return ZERO;
     }
 
     public int weekendDiscount(Day day, Order order) {
-        if (isWeekend(day))
+        if (day.isWeekend())
             return calculateWeekendDiscount(order);
         return ZERO;
     }
 
     public int starDayDiscount(Day day) {
-        if (hasStar(day))
+        int STAR_DISCOUNT = 1000;
+        if (day.hasStar())
             return STAR_DISCOUNT;
         return ZERO;
     }

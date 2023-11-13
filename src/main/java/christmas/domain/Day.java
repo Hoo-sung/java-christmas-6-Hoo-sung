@@ -2,9 +2,12 @@ package christmas.domain;
 
 import christmas.system.Constant;
 
+import static christmas.system.Constant.CHRISTMAS;
+
 public class Day {
 
-    private static final int WEEK_LENGTH = 7;
+    private final int WEEK_LENGTH = 7;
+    private final int FIRSTDATE = 1;
     private final int day;
 
     public Day(int day) {
@@ -15,26 +18,50 @@ public class Day {
         return day;
     }
 
-    public static boolean isFriday(Day day) {
-        if (day.day % WEEK_LENGTH == 1)
+    public boolean isChristmasSeason() {
+        if (day >= FIRSTDATE && day <= CHRISTMAS)
             return true;
         return false;
     }
 
-    public static boolean isSaturday(Day day) {
-        if (day.day % WEEK_LENGTH == 2)
+    public boolean isWeekday() {
+        if (!(isFriday() || isSaturday()))
             return true;
         return false;
     }
 
-    public static boolean isSunday(Day day) {
-        if (day.day % WEEK_LENGTH == 3)
+    public boolean isWeekend() {
+        if (isFriday() || isSaturday())
             return true;
         return false;
     }
 
-    public static boolean isChristmas(Day day) {
-        if (day.day == Constant.CHRISTMAS)
+    public boolean hasStar() {
+        if (isSunday() || isChristmas())
+            return true;
+        return false;
+    }
+
+    private boolean isFriday() {
+        if (day % WEEK_LENGTH == 1)
+            return true;
+        return false;
+    }
+
+    private boolean isSaturday() {
+        if (day % WEEK_LENGTH == 2)
+            return true;
+        return false;
+    }
+
+    private boolean isSunday() {
+        if (day % WEEK_LENGTH == 3)
+            return true;
+        return false;
+    }
+
+    private boolean isChristmas() {
+        if (day == Constant.CHRISTMAS)
             return true;
         return false;
     }
