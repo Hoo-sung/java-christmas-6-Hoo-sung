@@ -31,4 +31,15 @@ class DayTest {
         }
     }
 
+    @Nested
+    class IsWeekend {
+        @ParameterizedTest
+        @DisplayName("isWeekend 메소드 테스트")
+        @CsvSource(value = {"1:true", "7:false", "24:false", "25:false", "27:false","31:false"}, delimiter = ':')
+        void 주말_할인을_받는지_테스트(int dayNum, boolean expected) {
+            Day day = new Day(dayNum);
+            assertThat(day.isWeekend()).isEqualTo(expected);
+        }
+    }
+
 }
