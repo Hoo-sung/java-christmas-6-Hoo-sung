@@ -15,8 +15,8 @@ public class BonusItem {
         return name;
     }
 
-    public int getPrice() {
-        return price;
+    public int getTotalPrice(){
+        return price * quantity;
     }
 
     public int getQuantity() {
