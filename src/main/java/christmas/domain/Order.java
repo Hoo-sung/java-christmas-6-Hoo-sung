@@ -8,6 +8,12 @@ public class Order {
 
     private List<OrderItem> orderItems = new ArrayList<>();
 
+    public int getTotalOrderAmount() {
+        return orderItems.stream()
+                .mapToInt(orderItem -> orderItem.getPrice() * orderItem.getQuantity())
+                .sum();
+    }
+
     public void addOrderItem(OrderItem orderItem) {
         orderItems.add(orderItem);
     }

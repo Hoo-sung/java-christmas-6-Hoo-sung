@@ -19,7 +19,7 @@ public class SettlementSystem {
     public SettlementSystem(Day day, Order order) {
         DiscountManager discountManager = new DiscountManager();
         BonusEventManager bonusEventManager = new BonusEventManager();
-        this.originalTotalAmount = calculateOriginalTotal(order);
+        this.originalTotalAmount = order.getTotalOrderAmount();
         this.discountRecord = DiscountRecord.create(day, order, originalTotalAmount, discountManager, bonusEventManager);
         this.totalWithDiscount = calculateTotalWithDiscount(originalTotalAmount, discountRecord);
         this.badge = createBadge(discountRecord.getTotalDiscountAmount());
