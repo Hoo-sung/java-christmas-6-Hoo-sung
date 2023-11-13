@@ -37,4 +37,21 @@ class UtilTest {
         }
     }
 
+    @Nested
+    class CreateFormattedAmount {
+        @ParameterizedTest
+        @DisplayName("createFormattedAmount 메소드 테스트")
+        @CsvSource(value = {
+                "60000: 60,000",
+                "35000: 35,000",
+                "8000:8,000",
+                "654321:654,321",
+                "7654321:7,654,321"
+        }, delimiter = ':')
+        void 형식에_맞추어_포매팅한_금액_출력하는지_테스트(int target, String expected) {
+            assertThat(Util.createFormattedAmount(target)).isEqualTo(expected);
+        }
+    }
+
+
 }
