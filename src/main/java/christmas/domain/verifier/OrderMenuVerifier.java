@@ -56,7 +56,7 @@ public class OrderMenuVerifier implements Verifier<String> {
     }
 
     private void validateOrderFormat(String order) {
-        Matcher matcher = pattern.matcher(order.trim());
+        Matcher matcher = pattern.matcher(order);
         if (!matcher.matches()) {
             throw new IllegalArgumentException(INVALID_ORDER_MESSAGE);
         }
@@ -79,7 +79,7 @@ public class OrderMenuVerifier implements Verifier<String> {
     private void validateOrderQuantity(String order) {
         String[] orderInfo = order.split("-");
         try {
-            int quantity = Integer.parseInt(orderInfo[1].trim());
+            int quantity = Integer.parseInt(orderInfo[1]);
             if (quantity < 1) {
                 throw new IllegalArgumentException(INVALID_ORDER_MESSAGE);
             }
