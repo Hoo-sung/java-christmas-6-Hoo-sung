@@ -15,7 +15,7 @@ public final class EventBadgeGenerator {
             return EventBadge.TREE;
         else if (totalBenefitAmount >= STAR_THRESHOLD)
             return EventBadge.STAR;
-        return null;
+        return EventBadge.NONE;
     }
 
 }
