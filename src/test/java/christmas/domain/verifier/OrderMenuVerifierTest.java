@@ -3,17 +3,15 @@ package christmas.domain.verifier;
 import christmas.domain.verifier.subclass.CheckDistinctMenuTest;
 import christmas.domain.verifier.subclass.CheckMenuExistenceTest;
 import christmas.domain.verifier.subclass.CheckMenuFormatTest;
+import christmas.domain.verifier.subclass.CheckMenuQuantityTest;
 import christmas.system.ExceptionMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.assertj.core.api.Assertions.in;
 
 class OrderMenuVerifierTest {
-
-    private final OrderMenuVerifier orderMenuVerifier = new OrderMenuVerifier();
 
     @ParameterizedTest
     @DisplayName("checkMenuFormat 메소드 테스트")
@@ -69,7 +67,8 @@ class OrderMenuVerifierTest {
             "레드와인-0,시저샐러드-2,초코케이크-4",
     })
     void 메뉴의_개수가_1이상의_숫자가_아닌경우(String input) {
-        assertThatThrownBy(() -> orderMenuVerifier.check(input))
+        CheckMenuQuantityTest checkMenuQuantityTest = new CheckMenuQuantityTest();
+        assertThatThrownBy(() -> checkMenuQuantityTest.checkMenuQuantity(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ExceptionMessage.INVALID_ORDER_MESSAGE);
     }
