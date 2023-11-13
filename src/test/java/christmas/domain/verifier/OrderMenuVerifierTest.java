@@ -26,5 +26,18 @@ class OrderMenuVerifierTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ExceptionMessage.INVALID_ORDER_MESSAGE);
     }
+    @ParameterizedTest
+    @DisplayName("checkMenuExistence 메소드 테스트")
+    @ValueSource(strings = {
+            "양쏭이수프-1,제로콜라-2",
+            "치킨샐러드-3,바비큐립-7",
+            "콜라-1,레드와인-2",
+            "타빠스-1,제로콜라-2 ",
+    })
+    void 메뉴판에_없는_입력인_경우(String input) {
+        assertThatThrownBy(() -> orderMenuVerifier.check(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(ExceptionMessage.INVALID_ORDER_MESSAGE);
+    }
 
 }
