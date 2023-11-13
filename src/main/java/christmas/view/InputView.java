@@ -23,7 +23,6 @@ public final class InputView {
     }
 
     public static Day readDay() {
-        printMessage(VISIT_DATE_PROMPT_MESSAGE);
         while (true) {
             try {
                 String input = Console.readLine();
@@ -36,8 +35,6 @@ public final class InputView {
     }
 
     public static Order readOrder(){
-        printEventNotice();
-        printMessage(ORDER_PROMPT_MESSAGE);
         while(true){
             try{
                 String input = Console.readLine();

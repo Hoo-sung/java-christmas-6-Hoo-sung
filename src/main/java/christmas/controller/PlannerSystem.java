@@ -6,6 +6,8 @@ import christmas.domain.verifier.RuntimeVerifier;
 import christmas.domain.verifier.Verifier;
 import christmas.view.InputView;
 
+import static christmas.system.IOMessage.ORDER_PROMPT_MESSAGE;
+import static christmas.system.IOMessage.VISIT_DATE_PROMPT_MESSAGE;
 import static christmas.view.InputView.*;
 import static christmas.view.OutputView.*;
 
@@ -19,7 +21,10 @@ public class PlannerSystem {
     private final Verifier<Order> runtimeVerifier = new RuntimeVerifier();
 
     public PlannerSystem() {
+        printMessage(VISIT_DATE_PROMPT_MESSAGE);
         this.day = readDay();
+        printEventNotice();
+        printMessage(ORDER_PROMPT_MESSAGE);
         this.order = readOrder();
         this.settlementSystem = new SettlementSystem(day, order);
     }
