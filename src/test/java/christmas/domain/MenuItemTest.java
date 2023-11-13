@@ -24,5 +24,19 @@ class MenuItemTest {
         }
     }
 
+    @Nested
+    class GetPrice {
+        @ParameterizedTest
+        @DisplayName("getPrice 메소드 테스트")
+        @CsvSource(value = {
+                "샴페인, 25000, BEVERAGE, 25000",
+                "아이스크림, 5000, DESSERT, 5000",
+                "시저샐러드, 8000, APPETIZER, 8000",
+        })
+        void 메뉴아이템_가격을_잘_반환되는지_테스트(String name, int price, MenuType menuType, int expected) {
+            MenuItem menuItem = new MenuItem(name, price, menuType);
+            assertThat(menuItem.getPrice()).isEqualTo(expected);
+        }
+    }
 
 }
