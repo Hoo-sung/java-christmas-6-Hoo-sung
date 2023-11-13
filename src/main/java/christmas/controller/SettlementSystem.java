@@ -5,7 +5,6 @@ import christmas.domain.manager.BonusEventManager;
 import christmas.domain.manager.DiscountManager;
 
 import static christmas.domain.service.EventBadgeGenerator.*;
-import static christmas.domain.service.PaymentCalculator.*;
 import static christmas.view.OutputView.*;
 
 public class SettlementSystem {
@@ -21,7 +20,7 @@ public class SettlementSystem {
         BonusEventManager bonusEventManager = new BonusEventManager();
         this.originalTotalAmount = order.getTotalOrderAmount();
         this.discountRecord = DiscountRecord.create(day, order, originalTotalAmount, discountManager, bonusEventManager);
-        this.totalWithDiscount = calculateTotalWithDiscount(originalTotalAmount, discountRecord);
+        this.totalWithDiscount = discountRecord.calculateTotalWithDiscount(originalTotalAmount);
         this.badge = createBadge(discountRecord.getTotalDiscountAmount());
     }
 

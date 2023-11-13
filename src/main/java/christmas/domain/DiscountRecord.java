@@ -44,6 +44,12 @@ public class DiscountRecord {
         return new DiscountRecord();
     }
 
+    public  int calculateTotalWithDiscount(int originalTotalAmount) {
+        int discountTotal = dDayDiscountAmount + weekdayDiscountAmount
+                + weekendDiscountAmount + starDayDiscountAmount;
+        return originalTotalAmount - discountTotal;
+    }
+
     public int getTotalDiscountAmount() {
         return dDayDiscountAmount + weekdayDiscountAmount + weekendDiscountAmount + starDayDiscountAmount + bonusEventDiscount;
     }
