@@ -1,5 +1,6 @@
 package christmas.domain.verifier;
 
+import christmas.domain.verifier.subclass.CheckDistinctMenuTest;
 import christmas.domain.verifier.subclass.CheckMenuExistenceTest;
 import christmas.domain.verifier.subclass.CheckMenuFormatTest;
 import christmas.system.ExceptionMessage;
@@ -48,12 +49,13 @@ class OrderMenuVerifierTest {
     @DisplayName("checkDistinctMenu 메소드 테스트")
     @ValueSource(strings = {
             "양송이수프-1,양송이수프-2",
-            "티본스테이크-1,바비큐립-1,초코케이크-2,티본스테이크-1",
+            "티본스테이크-1,바비큐립-1,초코케이크-2,티본스테이크-2",
             "제로콜라-1,레드와인-2,제로콜라-3",
             "레드와인-1,제로콜라-2,레드와인-4",
     })
     void 중복된_메뉴_입력이_주어진_경우(String input) {
-        assertThatThrownBy(() -> orderMenuVerifier.check(input))
+        CheckDistinctMenuTest checkDistinctMenuTest = new CheckDistinctMenuTest();
+        assertThatThrownBy(() -> checkDistinctMenuTest.checkDistinctMenu(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ExceptionMessage.INVALID_ORDER_MESSAGE);
     }
