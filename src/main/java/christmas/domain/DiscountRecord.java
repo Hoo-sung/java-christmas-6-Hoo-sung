@@ -15,7 +15,7 @@ public class DiscountRecord {
 
     private final int starDayDiscountAmount;
 
-    private final int bonusEventDiscount;
+    private final int bonusEventBenefit;
 
     private DiscountRecord(Day day, Order order, int originalTotalAmount,
                            DiscountManager discountManager, BonusEventManager bonusEventManager) {
@@ -23,7 +23,7 @@ public class DiscountRecord {
         this.weekdayDiscountAmount = discountManager.getWeekDayDiscount(day, order);
         this.weekendDiscountAmount = discountManager.getWeekendDiscount(day, order);
         this.starDayDiscountAmount = discountManager.getStarDayDiscount(day);
-        this.bonusEventDiscount = bonusEventManager.makeBonusEventBenefit(originalTotalAmount);
+        this.bonusEventBenefit = bonusEventManager.makeBonusEventBenefit(originalTotalAmount);
     }
 
     private DiscountRecord() {
@@ -31,7 +31,7 @@ public class DiscountRecord {
         this.weekdayDiscountAmount = ZERO;
         this.weekendDiscountAmount = ZERO;
         this.starDayDiscountAmount = ZERO;
-        this.bonusEventDiscount = ZERO;
+        this.bonusEventBenefit = ZERO;
     }
 
     public static DiscountRecord create(Day day, Order order, int originalTotalAmount,
@@ -51,7 +51,7 @@ public class DiscountRecord {
     }
 
     public int getTotalBenefitAmount() {
-        return dDayDiscountAmount + weekdayDiscountAmount + weekendDiscountAmount + starDayDiscountAmount + bonusEventDiscount;
+        return dDayDiscountAmount + weekdayDiscountAmount + weekendDiscountAmount + starDayDiscountAmount + bonusEventBenefit;
     }
 
     public int getdDayDiscountAmount() {
@@ -70,7 +70,7 @@ public class DiscountRecord {
         return starDayDiscountAmount;
     }
 
-    public int getBonusEventDiscount() {
-        return bonusEventDiscount;
+    public int getBonusEventBenefit() {
+        return bonusEventBenefit;
     }
 }

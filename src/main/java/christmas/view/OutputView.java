@@ -66,7 +66,7 @@ public final class OutputView {
         printWeekDayDiscount(discountRecord);
         printWeekEndDiscount(discountRecord);
         printSpecialDiscount(discountRecord);
-        printBonusEventDiscount(discountRecord);
+        printBonusEventBenefit(discountRecord);
         printEmptyLine();
     }
 
@@ -104,9 +104,9 @@ public final class OutputView {
         System.out.println();
     }
 
-    private static void printBonusEventDiscount(DiscountRecord discountRecord) {
-        if (discountRecord.getBonusEventDiscount() != ZERO)
-            printMessage("증정 이벤트: -" + createFormattedAmount(discountRecord.getBonusEventDiscount()) + MONEY_UNIT);
+    private static void printBonusEventBenefit(DiscountRecord discountRecord) {
+        if (discountRecord.getBonusEventBenefit() != ZERO)
+            printMessage("증정 이벤트: -" + createFormattedAmount(discountRecord.getBonusEventBenefit()) + MONEY_UNIT);
     }
 
     private static void printSpecialDiscount(DiscountRecord discountRecord) {
