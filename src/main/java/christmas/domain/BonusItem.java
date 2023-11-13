@@ -15,11 +15,12 @@ public class BonusItem {
         return name;
     }
 
-    public int getTotalPrice(){
-        return price * quantity;
-    }
-
     public int getQuantity() {
         return quantity;
     }
+
+    public int getTotalPrice() {
+        return price * quantity;
+    }
+
 }
