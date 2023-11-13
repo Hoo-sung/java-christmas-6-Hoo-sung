@@ -17,13 +17,6 @@ public class DiscountRecord {
 
     private final int bonusEventDiscount;
 
-    public static DiscountRecord create(Day day, Order order, int originalTotalAmount,
-                                        DiscountManager discountManager, BonusEventManager bonusEventManager) {
-        if (originalTotalAmount < EVENT_THRESHOLD_AMOUNT)
-            return emptyDiscountRecord();
-        return new DiscountRecord(day, order, originalTotalAmount, discountManager, bonusEventManager);
-    }
-
     private DiscountRecord(Day day, Order order, int originalTotalAmount,
                            DiscountManager discountManager, BonusEventManager bonusEventManager) {
         this.dDayDiscountAmount = discountManager.DDayDiscount(day);
@@ -33,16 +26,22 @@ public class DiscountRecord {
         this.bonusEventDiscount = bonusEventManager.makeBonusEventDiscount(originalTotalAmount);
     }
 
-    private static DiscountRecord emptyDiscountRecord() {
-        return new DiscountRecord();
-    }
-
     private DiscountRecord() {
         this.dDayDiscountAmount = ZERO;
         this.weekdayDiscountAmount = ZERO;
         this.weekendDiscountAmount = ZERO;
         this.starDayDiscountAmount = ZERO;
         this.bonusEventDiscount = ZERO;
+    }
+
+    public static DiscountRecord create(Day day, Order order, int originalTotalAmount,
+                                        DiscountManager discountManager, BonusEventManager bonusEventManager) {
+        if (originalTotalAmount < EVENT_THRESHOLD_AMOUNT)
+            return emptyDiscountRecord();
+        return new DiscountRecord(day, order, originalTotalAmount, discountManager, bonusEventManager);
+    }
+    private static DiscountRecord emptyDiscountRecord() {
+        return new DiscountRecord();
     }
 
     public int getTotalDiscountAmount() {
