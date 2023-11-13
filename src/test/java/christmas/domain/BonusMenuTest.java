@@ -12,8 +12,15 @@ class BonusMenuTest {
     class GetTotalPriceForAllMenus {
 
         @Test
+        @DisplayName("getTotalPrice 메소드 테스트")
+        void 증정_메뉴_하나_항목의_총가격_테스트() {
+            int expected = BonusMenu.CHAMPAGNE.getTotalPrice();
+            assertThat(expected).isEqualTo(25000);
+        }
+
+        @Test
         @DisplayName("getTotalPriceForAllMenus 메소드 테스트")
-        void 증정_메뉴의_총_가격_테스트() {
+        void 증정_메뉴전체의_총_가격_테스트() {
             int expected = BonusMenu.CHAMPAGNE.getTotalPrice();
             assertThat(BonusMenu.getTotalPriceForAllMenus()).isEqualTo(expected);
         }
