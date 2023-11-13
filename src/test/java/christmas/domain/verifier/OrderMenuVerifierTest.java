@@ -1,5 +1,6 @@
 package christmas.domain.verifier;
 
+import christmas.domain.verifier.subclass.CheckMenuExistenceTest;
 import christmas.domain.verifier.subclass.CheckMenuFormatTest;
 import christmas.system.ExceptionMessage;
 import org.junit.jupiter.api.DisplayName;
@@ -7,6 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.in;
 
 class OrderMenuVerifierTest {
 
@@ -33,10 +35,11 @@ class OrderMenuVerifierTest {
             "양쏭이수프-1,제로콜라-2",
             "치킨샐러드-3,바비큐립-7",
             "콜라-1,레드와인-2",
-            "타빠스-1,제로콜라-2 ",
+            "타빠스-1,제로콜라-2 "
     })
     void 메뉴판에_없는_입력인_경우(String input) {
-        assertThatThrownBy(() -> orderMenuVerifier.check(input))
+        CheckMenuExistenceTest checkMenuExistenceTest = new CheckMenuExistenceTest();
+        assertThatThrownBy(() -> checkMenuExistenceTest.checkMenuExistence(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ExceptionMessage.INVALID_ORDER_MESSAGE);
     }
