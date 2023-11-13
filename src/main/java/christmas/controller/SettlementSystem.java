@@ -12,24 +12,19 @@ public class SettlementSystem {
     private final int originalTotalAmount;
     private final DiscountRecord discountRecord;
 
-    private final int totalWithDiscount;
-    private final EventBadge badge;
-
     public SettlementSystem(Day day, Order order) {
         DiscountManager discountManager = new DiscountManager();
         BonusEventManager bonusEventManager = new BonusEventManager();
         this.originalTotalAmount = order.getTotalOrderAmount();
         this.discountRecord = DiscountRecord.create(day, order, originalTotalAmount, discountManager, bonusEventManager);
-        this.totalWithDiscount = discountRecord.getTotalWithDiscount(originalTotalAmount);
-        this.badge = createBadge(discountRecord.getTotalBenefitAmount());
     }
 
     public void renderSettlementResult() {
         printOriginalTotalAmount(originalTotalAmount);
         printBonusMenu(originalTotalAmount);
         printDiscountRecord(discountRecord);
-        printTotalDiscountAmount(discountRecord);
-        printExpectedPayment(totalWithDiscount);
-        printEventBadge(badge);
+        printTotalDiscountAmount(discountRecord.getTotalBenefitAmount());
+        printExpectedPayment(discountRecord.getTotalWithDiscount(originalTotalAmount));
+        printEventBadge(createBadge(discountRecord.getTotalBenefitAmount()));
     }
 }

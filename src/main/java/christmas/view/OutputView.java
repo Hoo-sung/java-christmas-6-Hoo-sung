@@ -70,14 +70,14 @@ public final class OutputView {
         printEmptyLine();
     }
 
-    public static void printTotalDiscountAmount(DiscountRecord discountRecord) {
+    public static void printTotalDiscountAmount(int totalDiscountAmount) {
         printMessage("<총혜택 금액>");
-        if (discountRecord.getTotalBenefitAmount() == ZERO) {
+        if (totalDiscountAmount == ZERO) {
             printMessage(ZERO + MONEY_UNIT);
             printEmptyLine();
             return;
         }
-        printMessage("-" + createFormattedAmount(discountRecord.getTotalBenefitAmount()) + MONEY_UNIT);
+        printMessage("-" + createFormattedAmount(totalDiscountAmount) + MONEY_UNIT);
         printEmptyLine();
     }
 
