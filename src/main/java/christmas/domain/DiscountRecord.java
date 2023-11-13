@@ -19,10 +19,10 @@ public class DiscountRecord {
 
     private DiscountRecord(Day day, Order order, int originalTotalAmount,
                            DiscountManager discountManager, BonusEventManager bonusEventManager) {
-        this.dDayDiscountAmount = discountManager.DDayDiscount(day);
-        this.weekdayDiscountAmount = discountManager.weekDayDiscount(day, order);
-        this.weekendDiscountAmount = discountManager.weekendDiscount(day, order);
-        this.starDayDiscountAmount = discountManager.starDayDiscount(day);
+        this.dDayDiscountAmount = discountManager.getDDayDiscount(day);
+        this.weekdayDiscountAmount = discountManager.getWeekDayDiscount(day, order);
+        this.weekendDiscountAmount = discountManager.getWeekendDiscount(day, order);
+        this.starDayDiscountAmount = discountManager.getStarDayDiscount(day);
         this.bonusEventDiscount = bonusEventManager.makeBonusEventDiscount(originalTotalAmount);
     }
 

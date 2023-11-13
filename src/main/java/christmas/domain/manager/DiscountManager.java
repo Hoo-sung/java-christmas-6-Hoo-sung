@@ -14,25 +14,25 @@ public class DiscountManager {
     public DiscountManager() {
     }
 
-    public int DDayDiscount(Day day) {
+    public int getDDayDiscount(Day day) {
         if (day.isChristmasSeason())
             return calculateDDayDiscount(day);
         return ZERO;
     }
 
-    public int weekDayDiscount(Day day, Order order) {
+    public int getWeekDayDiscount(Day day, Order order) {
         if (day.isWeekday())
             return calculateWeekDayDiscount(order);
         return ZERO;
     }
 
-    public int weekendDiscount(Day day, Order order) {
+    public int getWeekendDiscount(Day day, Order order) {
         if (day.isWeekend())
             return calculateWeekendDiscount(order);
         return ZERO;
     }
 
-    public int starDayDiscount(Day day) {
+    public int getStarDayDiscount(Day day) {
         int STAR_DISCOUNT = 1000;
         if (day.hasStar())
             return STAR_DISCOUNT;
