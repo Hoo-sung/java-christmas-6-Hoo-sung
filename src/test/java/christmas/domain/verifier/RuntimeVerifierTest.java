@@ -28,4 +28,18 @@ class RuntimeVerifierTest {
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessageContaining(ExceptionMessage.MAX_ORDER_QUANTITY_EXCEEDED_MESSAGE);
     }
+
+    @ParameterizedTest
+    @DisplayName("checkBeverageOnly 메소드 테스트")
+    @ValueSource(strings = {
+            "제로콜라-2,레드와인-4,샴페인-3",
+            "레드와인-7,샴페인-1",
+            "제로콜라-3",
+    })
+    void 음료만_주문한_경우(String input) {
+        Order order = Util.createOrderFromInput(input);
+        assertThatThrownBy(() -> runtimeVerifierTest.checkBeverageOnly(order))
+                .isInstanceOf(IllegalStateException.class)
+                .hasMessageContaining(ExceptionMessage.BEVERAGE_ONLY_ORDER_MESSAGE);
+    }
 }
