@@ -14,8 +14,8 @@ class DayTest {
         @ParameterizedTest
         @DisplayName("isChristmasSeason 메소드 테스트")
         @CsvSource(value = {"1:true", "7:true", "24:true", "25:true", "27:false","31:false"}, delimiter = ':')
-        void 크리스마스_디데이_할인을_받는지_테스트(int dayNum, boolean expected) {
-            Day day = new Day(dayNum);
+        void 크리스마스_디데이_할인을_받는지_테스트(int input, boolean expected) {
+            Day day = new Day(input);
             assertThat(day.isChristmasSeason()).isEqualTo(expected);
         }
     }
@@ -25,8 +25,8 @@ class DayTest {
         @ParameterizedTest
         @DisplayName("isWeekday 메소드 테스트")
         @CsvSource(value = {"1:false", "7:true", "24:true", "25:true", "27:true","31:true"}, delimiter = ':')
-        void 평일_할인을_받는지_테스트(int dayNum, boolean expected) {
-            Day day = new Day(dayNum);
+        void 평일_할인을_받는지_테스트(int input, boolean expected) {
+            Day day = new Day(input);
             assertThat(day.isWeekday()).isEqualTo(expected);
         }
     }
@@ -36,9 +36,20 @@ class DayTest {
         @ParameterizedTest
         @DisplayName("isWeekend 메소드 테스트")
         @CsvSource(value = {"1:true", "7:false", "24:false", "25:false", "27:false","31:false"}, delimiter = ':')
-        void 주말_할인을_받는지_테스트(int dayNum, boolean expected) {
-            Day day = new Day(dayNum);
+        void 주말_할인을_받는지_테스트(int input, boolean expected) {
+            Day day = new Day(input);
             assertThat(day.isWeekend()).isEqualTo(expected);
+        }
+    }
+
+    @Nested
+    class IsSpecialDay {
+        @ParameterizedTest
+        @DisplayName("hasStar 메소드 테스트")
+        @CsvSource(value = {"1:false", "7:false", "24:true", "25:true", "27:false","31:true"}, delimiter = ':')
+        void 특별_할인을_받는지_테스트(int input, boolean expected) {
+            Day day = new Day(input);
+            assertThat(day.hasStar()).isEqualTo(expected);
         }
     }
 
