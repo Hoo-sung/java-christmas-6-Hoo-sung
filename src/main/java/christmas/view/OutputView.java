@@ -55,9 +55,9 @@ public final class OutputView {
         printEmptyLine();
     }
 
-    public static void printDiscountRecord(int originalTotalAmount, DiscountRecord discountRecord) {
+    public static void printDiscountRecord(DiscountRecord discountRecord) {
         printMessage("<혜택 내역>");
-        if (discountRecord.getTotalWithDiscount(originalTotalAmount) == ZERO) {
+        if (discountRecord.getTotalBenefitAmount() == ZERO) {
             printMessage(NONE);
             printEmptyLine();
             return;

@@ -27,7 +27,7 @@ public class SettlementSystem {
     public void renderSettlementResult() {
         printOriginalTotalAmount(originalTotalAmount);
         printBonusMenu(originalTotalAmount);
-        printDiscountRecord(originalTotalAmount,discountRecord);
+        printDiscountRecord(discountRecord);
         printTotalDiscountAmount(discountRecord);
         printExpectedPayment(totalWithDiscount);
         printEventBadge(badge);
