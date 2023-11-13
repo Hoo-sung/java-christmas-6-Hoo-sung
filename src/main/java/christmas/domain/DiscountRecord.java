@@ -23,7 +23,7 @@ public class DiscountRecord {
         this.weekdayDiscountAmount = discountManager.getWeekDayDiscount(day, order);
         this.weekendDiscountAmount = discountManager.getWeekendDiscount(day, order);
         this.starDayDiscountAmount = discountManager.getStarDayDiscount(day);
-        this.bonusEventDiscount = bonusEventManager.makeBonusEventDiscount(originalTotalAmount);
+        this.bonusEventDiscount = bonusEventManager.makeBonusEventBenefit(originalTotalAmount);
     }
 
     private DiscountRecord() {

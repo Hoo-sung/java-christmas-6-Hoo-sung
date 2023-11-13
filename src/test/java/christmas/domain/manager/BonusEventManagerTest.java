@@ -19,8 +19,8 @@ class BonusEventManagerTest {
             "11111:0"
     }, delimiter = ':')
     void 증정_이벤트_총_혜택금액_테스트(int originalTotalAmount, int expected) {
-        int bonusEventDiscount = bonusEventManager.makeBonusEventDiscount(originalTotalAmount);
-        assertThat(bonusEventManager.makeBonusEventDiscount(originalTotalAmount)).isEqualTo(expected);
+        int bonusEventBenefit = bonusEventManager.makeBonusEventBenefit(originalTotalAmount);
+        assertThat(bonusEventBenefit).isEqualTo(expected);
     }
 
 }
