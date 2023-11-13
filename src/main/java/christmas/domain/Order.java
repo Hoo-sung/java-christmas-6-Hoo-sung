@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Order {
 
-    private List<OrderItem> orderItems = new ArrayList<>();
+    private final List<OrderItem> orderItems = new ArrayList<>();
 
     public int getTotalOrderAmount() {
         return orderItems.stream()
