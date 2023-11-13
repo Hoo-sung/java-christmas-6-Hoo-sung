@@ -57,4 +57,20 @@ class OrderItemTest {
         }
     }
 
+    @Nested
+    class GetTotalItemAmount {
+        @ParameterizedTest
+        @DisplayName("getTotalItemAmount 메소드 테스트")
+        @CsvSource(value = {
+                "샴페인, 25000, BEVERAGE, 4, 100000",
+                "아이스크림, 5000, DESSERT, 3, 15000",
+                "시저샐러드, 8000, APPETIZER, 7, 56000",
+        })
+        void 주문한_메뉴의_총가격이_잘_반환되는지_테스트(String name, int price, MenuType menuType, int quantity, int expected) {
+            MenuItem menuItem = new MenuItem(name, price, menuType);
+            OrderItem orderItem = new OrderItem(menuItem, quantity);
+            assertThat(orderItem.getTotalItemAmount()).isEqualTo(expected);
+        }
+    }
+
 }
