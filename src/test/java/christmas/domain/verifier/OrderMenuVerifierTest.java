@@ -26,6 +26,7 @@ class OrderMenuVerifierTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ExceptionMessage.INVALID_ORDER_MESSAGE);
     }
+
     @ParameterizedTest
     @DisplayName("checkMenuExistence 메소드 테스트")
     @ValueSource(strings = {
@@ -49,6 +50,20 @@ class OrderMenuVerifierTest {
             "레드와인-1,제로콜라-2,레드와인-4",
     })
     void 중복된_메뉴_입력이_주어진_경우(String input) {
+        assertThatThrownBy(() -> orderMenuVerifier.check(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(ExceptionMessage.INVALID_ORDER_MESSAGE);
+    }
+
+    @ParameterizedTest
+    @DisplayName("checkMenuQuantity 메소드 테스트")
+    @ValueSource(strings = {
+            "타파스-1,제로콜라-3,레드와인-0",
+            "티본스테이크-1,바비큐립-1,초코케이크-0",
+            "제로콜라-1,레드와인-2,아이스크림-0",
+            "레드와인-0,시저샐러드-2,초코케이크-4",
+    })
+    void 메뉴의_개수가_1이상의_숫자가_아닌경우(String input) {
         assertThatThrownBy(() -> orderMenuVerifier.check(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ExceptionMessage.INVALID_ORDER_MESSAGE);
