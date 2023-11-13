@@ -36,7 +36,7 @@ public class Day {
         return false;
     }
 
-    public boolean hasStar() {
+    public boolean isSpecialDay() {
         if (isSunday() || isChristmas())
             return true;
         return false;

@@ -34,7 +34,7 @@ public class DiscountManager {
 
     public int getStarDayDiscount(Day day) {
         int STAR_DISCOUNT = 1000;
-        if (day.hasStar())
+        if (day.isSpecialDay())
             return STAR_DISCOUNT;
         return ZERO;
     }

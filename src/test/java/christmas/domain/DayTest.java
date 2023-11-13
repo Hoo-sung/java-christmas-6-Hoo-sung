@@ -45,11 +45,11 @@ class DayTest {
     @Nested
     class IsSpecialDay {
         @ParameterizedTest
-        @DisplayName("hasStar 메소드 테스트")
+        @DisplayName("isSpecialDay 메소드 테스트")
         @CsvSource(value = {"1:false", "7:false", "24:true", "25:true", "27:false","31:true"}, delimiter = ':')
         void 특별_할인을_받는지_테스트(int input, boolean expected) {
             Day day = new Day(input);
-            assertThat(day.hasStar()).isEqualTo(expected);
+            assertThat(day.isSpecialDay()).isEqualTo(expected);
         }
     }
 
