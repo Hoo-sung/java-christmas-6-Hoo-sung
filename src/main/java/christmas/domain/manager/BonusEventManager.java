@@ -1,6 +1,7 @@
 package christmas.domain.manager;
 
 import christmas.domain.BonusMenu;
+import christmas.domain.Order;
 
 
 import static christmas.system.Constant.BONUS_MINIMUM_THRESHOLD;
@@ -11,7 +12,8 @@ public class BonusEventManager {
     public BonusEventManager() {
     }
 
-    public int makeBonusEventBenefit(int originalTotalAmount) {
+    public int makeBonusEventBenefit(Order order) {
+        int originalTotalAmount = order.getTotalOrderAmount();
         if (originalTotalAmount < BONUS_MINIMUM_THRESHOLD)
             return ZERO;
         return BonusMenu.getTotalPriceForAllMenus();

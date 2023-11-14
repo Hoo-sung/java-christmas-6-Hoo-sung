@@ -1,5 +1,6 @@
 package christmas.domain.service;
 
+import christmas.domain.DiscountRecord;
 import christmas.domain.EventBadge;
 
 public final class EventBadgeGenerator {
@@ -8,7 +9,8 @@ public final class EventBadgeGenerator {
     private static final int TREE_THRESHOLD = 10000;
     private static final int STAR_THRESHOLD = 5000;
 
-    public static EventBadge createBadge(int totalBenefitAmount) {
+    public static EventBadge createBadge(DiscountRecord discountRecord) {
+        int totalBenefitAmount = discountRecord.getTotalBenefitAmount();
         if (totalBenefitAmount >= SANTA_THRESHOLD)
             return EventBadge.SANTA;
         else if (totalBenefitAmount >= TREE_THRESHOLD)

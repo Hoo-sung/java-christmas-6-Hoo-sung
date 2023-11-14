@@ -36,15 +36,15 @@ public final class OutputView {
         printEmptyLine();
     }
 
-    public static void printOriginalTotalAmount(int originalTotalAmount) {
+    public static void printOriginalTotalAmount(Order order) {
         printMessage("<할인 전 총주문 금액>");
-        printMessage(createFormattedAmount(originalTotalAmount) + MONEY_UNIT);
+        printMessage(createFormattedAmount(order.getTotalOrderAmount()) + MONEY_UNIT);
         printEmptyLine();
     }
 
-    public static void printBonusMenu(int originalTotalAmount) {
+    public static void printBonusMenu(Order order) {
         printMessage("<증정 메뉴>");
-        if (originalTotalAmount < BONUS_MINIMUM_THRESHOLD) {
+        if (order.getTotalOrderAmount() < BONUS_MINIMUM_THRESHOLD) {
             printMessage(NONE);
             printEmptyLine();
             return;
@@ -70,8 +70,9 @@ public final class OutputView {
         printEmptyLine();
     }
 
-    public static void printTotalDiscountAmount(int totalDiscountAmount) {
+    public static void printTotalDiscountAmount(DiscountRecord discountRecord) {
         printMessage("<총혜택 금액>");
+        int totalDiscountAmount = discountRecord.getTotalBenefitAmount();
         if (totalDiscountAmount == ZERO) {
             printMessage(ZERO + MONEY_UNIT);
             printEmptyLine();
@@ -81,7 +82,8 @@ public final class OutputView {
         printEmptyLine();
     }
 
-    public static void printExpectedPayment(int expectedPayment) {
+    public static void printExpectedPayment(Order order, DiscountRecord discountRecord ) {
+        int expectedPayment = discountRecord.getTotalWithDiscount(order);
         printMessage("<할인 후 예상 결제 금액>");
         printMessage(createFormattedAmount(expectedPayment) + MONEY_UNIT);
         printEmptyLine();

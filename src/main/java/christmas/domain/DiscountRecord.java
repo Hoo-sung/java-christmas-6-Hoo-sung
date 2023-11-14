@@ -17,13 +17,13 @@ public class DiscountRecord {
 
     private final int bonusEventBenefit;
 
-    private DiscountRecord(Day day, Order order, int originalTotalAmount,
+    private DiscountRecord(Day day, Order order,
                            DiscountManager discountManager, BonusEventManager bonusEventManager) {
         this.dDayDiscountAmount = discountManager.getDDayDiscount(day);
         this.weekdayDiscountAmount = discountManager.getWeekDayDiscount(day, order);
         this.weekendDiscountAmount = discountManager.getWeekendDiscount(day, order);
         this.specialDayDiscountAmount = discountManager.getStarDayDiscount(day);
-        this.bonusEventBenefit = bonusEventManager.makeBonusEventBenefit(originalTotalAmount);
+        this.bonusEventBenefit = bonusEventManager.makeBonusEventBenefit(order);
     }
 
     private DiscountRecord() {
@@ -34,20 +34,20 @@ public class DiscountRecord {
         this.bonusEventBenefit = ZERO;
     }
 
-    public static DiscountRecord create(Day day, Order order, int originalTotalAmount,
+    public static DiscountRecord create(Day day, Order order,
                                         DiscountManager discountManager, BonusEventManager bonusEventManager) {
-        if (originalTotalAmount < EVENT_THRESHOLD_AMOUNT)
+        if (order.getTotalOrderAmount() < EVENT_THRESHOLD_AMOUNT)
             return emptyDiscountRecord();
-        return new DiscountRecord(day, order, originalTotalAmount, discountManager, bonusEventManager);
+        return new DiscountRecord(day, order, discountManager, bonusEventManager);
     }
     private static DiscountRecord emptyDiscountRecord() {
         return new DiscountRecord();
     }
 
-    public  int getTotalWithDiscount(int originalTotalAmount) {
+    public  int getTotalWithDiscount(Order order) {
         int discountTotal = dDayDiscountAmount + weekdayDiscountAmount
                 + weekendDiscountAmount + specialDayDiscountAmount;
-        return originalTotalAmount - discountTotal;
+        return order.getTotalOrderAmount() - discountTotal;
     }
 
     public int getTotalBenefitAmount() {

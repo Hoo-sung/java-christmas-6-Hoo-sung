@@ -31,7 +31,7 @@ class DiscountRecordTest {
                                int expectedDDayDiscountAmount, int expectedWeekdayDiscountAmount, int expectedWeekendDiscountAmount, int expectedStarDayDiscountAmount,
                                int expectedBonusEventBenefit) {
 
-            DiscountRecord discountRecord = DiscountRecord.create(day, order, originalTotalAmount, discountManager, bonusEventManager);
+            DiscountRecord discountRecord = DiscountRecord.create(day, order, discountManager, bonusEventManager);
             assertAll(
                     () -> assertEquals(expectedDDayDiscountAmount, discountRecord.getdDayDiscountAmount()),
                     () -> assertEquals(expectedWeekdayDiscountAmount, discountRecord.getWeekdayDiscountAmount()),
@@ -58,7 +58,7 @@ class DiscountRecordTest {
         @MethodSource("getTestData")
         void 총혜택_금역을_잘_반환하는지_테스트(Day day, Order order, int originalTotalAmount, int expectedTotalBenefitAmount) {
 
-            DiscountRecord discountRecord = DiscountRecord.create(day, order, originalTotalAmount, discountManager, bonusEventManager);
+            DiscountRecord discountRecord = DiscountRecord.create(day, order, discountManager, bonusEventManager);
             Assertions.assertThat(discountRecord.getTotalBenefitAmount()).isEqualTo(expectedTotalBenefitAmount);
         }
 

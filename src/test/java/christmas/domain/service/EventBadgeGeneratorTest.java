@@ -8,7 +8,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class EventBadgeGeneratorTest {
 
-
     @ParameterizedTest
     @DisplayName("createBadge 메소드 테스트")
     @CsvSource(value = {
