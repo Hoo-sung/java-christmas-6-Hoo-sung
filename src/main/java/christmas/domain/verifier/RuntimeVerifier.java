@@ -4,6 +4,7 @@ import christmas.domain.MenuType;
 import christmas.domain.Order;
 import christmas.domain.OrderItem;
 
+import static christmas.domain.MenuType.*;
 import static christmas.system.ExceptionMessage.*;
 
 
@@ -25,7 +26,7 @@ public class RuntimeVerifier implements Verifier<Order> {
 
     private void checkBeverageOnly(Order order) {
         for (OrderItem orderItem : order.getOrderItems()) {
-            if (orderItem.getMenuType() != MenuType.BEVERAGE)
+            if (orderItem.getMenuType() != BEVERAGE)
                 return;
         }
         throw new IllegalStateException(BEVERAGE_ONLY_ORDER_MESSAGE);

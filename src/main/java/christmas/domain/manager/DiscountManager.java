@@ -3,6 +3,7 @@ package christmas.domain.manager;
 
 import christmas.domain.*;
 
+import static christmas.domain.MenuType.*;
 import static christmas.system.Constant.ZERO;
 
 public class DiscountManager {
@@ -45,14 +46,14 @@ public class DiscountManager {
 
     private int calculateWeekDayDiscount(Order order) {
         return order.getOrderItems().stream()
-                .filter(orderItem -> orderItem.getMenuType() == MenuType.DESSERT)
+                .filter(orderItem -> orderItem.getMenuType() == DESSERT)
                 .mapToInt(orderItem -> DISCOUNT_AMOUNT * orderItem.getQuantity())
                 .sum();
     }
 
     private int calculateWeekendDiscount(Order order) {
         return order.getOrderItems().stream()
-                .filter(orderItem -> orderItem.getMenuType() == MenuType.MAIN)
+                .filter(orderItem -> orderItem.getMenuType() == MAIN)
                 .mapToInt(orderItem -> DISCOUNT_AMOUNT * orderItem.getQuantity())
                 .sum();
     }

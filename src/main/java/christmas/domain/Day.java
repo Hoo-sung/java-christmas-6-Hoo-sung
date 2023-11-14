@@ -2,6 +2,7 @@ package christmas.domain;
 
 import christmas.system.Constant;
 
+import static christmas.system.Constant.*;
 import static christmas.system.Constant.CHRISTMAS;
 
 public class Day {
@@ -61,7 +62,7 @@ public class Day {
     }
 
     private boolean isChristmas() {
-        if (day == Constant.CHRISTMAS)
+        if (day == CHRISTMAS)
             return true;
         return false;
     }

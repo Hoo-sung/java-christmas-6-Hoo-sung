@@ -7,6 +7,8 @@ import christmas.domain.OrderItem;
 
 import java.text.DecimalFormat;
 
+import static christmas.domain.Menu.*;
+
 public final class Util {
 
     public static Order createOrderFromInput(String input){
@@ -17,7 +19,7 @@ public final class Util {
             String[] orderItemSpec = orderItem.split("-");
             String menu = orderItemSpec[0];
             int quantity = Integer.parseInt(orderItemSpec[1]);
-            order.addOrderItem(new OrderItem(Menu.getMenuItemByName(menu),quantity));
+            order.addOrderItem(new OrderItem(getMenuItemByName(menu),quantity));
         }
         return order;
     }
