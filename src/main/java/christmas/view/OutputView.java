@@ -23,8 +23,8 @@ public final class OutputView {
         printEmptyLine();
     }
 
-    public static void printResultStartMessage(int day) {
-        printMessage("12월 " + day + "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
+    public static void printResultStartMessage(Day day) {
+        printMessage("12월 " + day.getDay() + "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
         printEmptyLine();
     }
 

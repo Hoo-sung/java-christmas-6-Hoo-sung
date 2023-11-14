@@ -40,7 +40,7 @@ public class PlannerSystem {
     }
 
     private void renderPlannerResult() {
-        printResultStartMessage(day.getDay());
+        printResultStartMessage(day);
         printOrderList(order);
     }
 
