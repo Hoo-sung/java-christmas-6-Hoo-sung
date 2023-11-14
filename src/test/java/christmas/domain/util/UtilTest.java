@@ -25,7 +25,7 @@ class UtilTest {
                 "레드와인-7,샴페인-9,제로콜라-11:레드와인,샴페인,제로콜라",
                 "시저샐러드-7,바비큐립-8:시저샐러드,바비큐립"
         }, delimiter = ':')
-        void 입력한_주문정보를_바탕으로_주문객체를_반환하는지_테스트(String input, String menu) {
+        void 입력한_주문정보를_바탕으로_주문객체를_잘_반환하는지_테스트(String input, String menu) {
             String[] menuItems = menu.split(",");
 
             Order order = Util.createOrderFromInput(input);

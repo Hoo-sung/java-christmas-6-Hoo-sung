@@ -1,5 +1,6 @@
 package christmas.domain;
 
+import christmas.domain.util.Util;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -41,23 +42,17 @@ class OrderTest {
         @ParameterizedTest
         @DisplayName("getTotalOrderAmount 메소드 테스트")
         @MethodSource("getTestData")
-        void 총_주문_금액_합계를_잘_반환하는지_테스트(Order order, int totalOrderAmount) {
+        void 총_주문_금액_합계를_잘_반환하는지_테스트(String menuInput, int totalOrderAmount) {
+            Order order = Util.createOrderFromInput(menuInput);
             assertThat(order.getTotalOrderAmount()).isEqualTo(totalOrderAmount);
         }
 
         private static Stream<Arguments> getTestData() {
             return Stream.of(
-                    Arguments.of(createOrderWithItems("샴페인", 25000, MenuType.BEVERAGE, 4), 100000),
-                    Arguments.of(createOrderWithItems("아이스크림", 5000, MenuType.DESSERT, 3), 15000),
-                    Arguments.of(createOrderWithItems("시저샐러드", 8000, MenuType.APPETIZER, 7), 56000)
+                    Arguments.of("양송이수프-4,티본스테이크-1,제로콜라-3", 88000),
+                    Arguments.of("타파스-3,해산물파스타-2,아이스크림-1", 91500),
+                    Arguments.of("레드와인-2,시저샐러드-1,초코케이크-2", 158000)
             );
-        }
-        private static Order createOrderWithItems(String name, int price, MenuType menuType, int quantity) {
-            Order order = new Order();
-            MenuItem menuItem = new MenuItem(name, price, menuType);
-            OrderItem orderItem = new OrderItem(menuItem, quantity);
-            order.addOrderItem(orderItem);
-            return order;
         }
     }
 }
