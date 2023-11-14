@@ -1,5 +1,7 @@
 package christmas.domain;
 
+import java.util.Arrays;
+
 public enum BonusMenu {
     CHAMPAGNE(new BonusItem("샴페인", 25_000, 1));
 
@@ -10,12 +12,11 @@ public enum BonusMenu {
     }
 
     public static int getTotalPriceForAllMenus() {
-        int total = 0;
-        for (BonusMenu menu : BonusMenu.values()) {
-            total += menu.getTotalPrice();
-        }
-        return total;
+        return Arrays.stream(BonusMenu.values())
+                .mapToInt(BonusMenu::getTotalPrice)
+                .sum();
     }
+
     public String getName() {
         return bonusMenuItem.getName();
     }
@@ -23,6 +24,7 @@ public enum BonusMenu {
     public int getTotalPrice() {
         return bonusMenuItem.getTotalPrice();
     }
+
     public int getQuantity() {
         return bonusMenuItem.getQuantity();
     }
