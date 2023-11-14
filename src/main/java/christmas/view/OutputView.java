@@ -110,8 +110,8 @@ public final class OutputView {
     }
 
     private static void printSpecialDiscount(DiscountRecord discountRecord) {
-        if (discountRecord.getStarDayDiscountAmount() != ZERO)
-            printMessage("특별 할인: -" + createFormattedAmount(discountRecord.getStarDayDiscountAmount()) + MONEY_UNIT);
+        if (discountRecord.getSpecialDayDiscountAmount() != ZERO)
+            printMessage("특별 할인: -" + createFormattedAmount(discountRecord.getSpecialDayDiscountAmount()) + MONEY_UNIT);
     }
 
     private static void printWeekEndDiscount(DiscountRecord discountRecord) {

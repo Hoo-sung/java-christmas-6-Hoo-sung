@@ -36,7 +36,7 @@ class DiscountRecordTest {
                     () -> assertEquals(expectedDDayDiscountAmount, discountRecord.getdDayDiscountAmount()),
                     () -> assertEquals(expectedWeekdayDiscountAmount, discountRecord.getWeekdayDiscountAmount()),
                     () -> assertEquals(expectedWeekendDiscountAmount, discountRecord.getWeekendDiscountAmount()),
-                    () -> assertEquals(expectedStarDayDiscountAmount, discountRecord.getStarDayDiscountAmount()),
+                    () -> assertEquals(expectedStarDayDiscountAmount, discountRecord.getSpecialDayDiscountAmount()),
                     () -> assertEquals(expectedBonusEventBenefit, discountRecord.getBonusEventBenefit())
             );
         }

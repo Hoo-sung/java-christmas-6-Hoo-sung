@@ -13,7 +13,7 @@ public class DiscountRecord {
     private final int weekdayDiscountAmount;
     private final int weekendDiscountAmount;
 
-    private final int starDayDiscountAmount;
+    private final int specialDayDiscountAmount;
 
     private final int bonusEventBenefit;
 
@@ -22,7 +22,7 @@ public class DiscountRecord {
         this.dDayDiscountAmount = discountManager.getDDayDiscount(day);
         this.weekdayDiscountAmount = discountManager.getWeekDayDiscount(day, order);
         this.weekendDiscountAmount = discountManager.getWeekendDiscount(day, order);
-        this.starDayDiscountAmount = discountManager.getStarDayDiscount(day);
+        this.specialDayDiscountAmount = discountManager.getStarDayDiscount(day);
         this.bonusEventBenefit = bonusEventManager.makeBonusEventBenefit(originalTotalAmount);
     }
 
@@ -30,7 +30,7 @@ public class DiscountRecord {
         this.dDayDiscountAmount = ZERO;
         this.weekdayDiscountAmount = ZERO;
         this.weekendDiscountAmount = ZERO;
-        this.starDayDiscountAmount = ZERO;
+        this.specialDayDiscountAmount = ZERO;
         this.bonusEventBenefit = ZERO;
     }
 
@@ -46,12 +46,12 @@ public class DiscountRecord {
 
     public  int getTotalWithDiscount(int originalTotalAmount) {
         int discountTotal = dDayDiscountAmount + weekdayDiscountAmount
-                + weekendDiscountAmount + starDayDiscountAmount;
+                + weekendDiscountAmount + specialDayDiscountAmount;
         return originalTotalAmount - discountTotal;
     }
 
     public int getTotalBenefitAmount() {
-        return dDayDiscountAmount + weekdayDiscountAmount + weekendDiscountAmount + starDayDiscountAmount + bonusEventBenefit;
+        return dDayDiscountAmount + weekdayDiscountAmount + weekendDiscountAmount + specialDayDiscountAmount + bonusEventBenefit;
     }
 
     public int getdDayDiscountAmount() {
@@ -66,8 +66,8 @@ public class DiscountRecord {
         return weekdayDiscountAmount;
     }
 
-    public int getStarDayDiscountAmount() {
-        return starDayDiscountAmount;
+    public int getSpecialDayDiscountAmount() {
+        return specialDayDiscountAmount;
     }
 
     public int getBonusEventBenefit() {
