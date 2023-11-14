@@ -25,7 +25,7 @@ class DiscountRecordTest {
     class GetDiscountRecordFields {
 
         @ParameterizedTest
-        @DisplayName("혜택내역의 내용들 잘 반환되는지 메소드 테스트")
+        @DisplayName("혜택내역의 내용들 잘 반환하는지 메소드 테스트")
         @MethodSource("getTestData")
         void 혜택내역을_잘_반환하는지_테스트(Day day, Order order, int originalTotalAmount,
                                int expectedDDayDiscountAmount, int expectedWeekdayDiscountAmount, int expectedWeekendDiscountAmount, int expectedStarDayDiscountAmount,
@@ -43,21 +43,47 @@ class DiscountRecordTest {
 
         private static Stream<Arguments> getTestData() {
             return Stream.of(
-                    Arguments.of(createDay(5),createOrderWithItems("샴페인", 25000, MenuType.BEVERAGE, 4), 100000,1400, 0, 0, 0, 0),
-                    Arguments.of(createDay(7),createOrderWithItems("아이스크림", 5000, MenuType.DESSERT, 3), 15000, 1600, 6069, 0, 0, 0),
-                    Arguments.of(createDay(25),createOrderWithItems("티본스테이크", 55000, MenuType.MAIN, 5), 275000, 3400, 0, 0, 1000, 25000)
+                    Arguments.of(createDay(5), createOrderWithItems("아이스크림", 5000, MenuType.DESSERT, 1), 5000, 0, 0, 0, 0, 0),
+                    Arguments.of(createDay(5), createOrderWithItems("샴페인", 25000, MenuType.BEVERAGE, 4), 100000, 1400, 0, 0, 0, 0),
+                    Arguments.of(createDay(7), createOrderWithItems("아이스크림", 5000, MenuType.DESSERT, 3), 15000, 1600, 6069, 0, 0, 0),
+                    Arguments.of(createDay(25), createOrderWithItems("티본스테이크", 55000, MenuType.MAIN, 5), 275000, 3400, 0, 0, 1000, 25000)
             );
         }
-        private static Day createDay(int day){
-            return new Day(day);
-        }
-        private static Order createOrderWithItems(String name, int price, MenuType menuType, int quantity) {
-            Order order = new Order();
-            MenuItem menuItem = new MenuItem(name, price, menuType);
-            OrderItem orderItem = new OrderItem(menuItem, quantity);
-            order.addOrderItem(orderItem);
-            return order;
-        }
     }
+
+    @Nested
+    class GetTotalBenefitAmount {
+        @ParameterizedTest
+        @DisplayName("총 혜택금액을 잘 반환하는지 메소드 테스트")
+        @MethodSource("getTestData")
+        void 총혜택_금역을_잘_반환하는지_테스트(Day day, Order order, int originalTotalAmount, int expectedTotalBenefitAmount) {
+
+            DiscountRecord discountRecord = DiscountRecord.create(day, order, originalTotalAmount, discountManager, bonusEventManager);
+            Assertions.assertThat(discountRecord.getTotalBenefitAmount()).isEqualTo(expectedTotalBenefitAmount);
+        }
+
+        private static Stream<Arguments> getTestData() {
+            return Stream.of(
+                    Arguments.of(createDay(5), createOrderWithItems("아이스크림", 5000, MenuType.DESSERT, 1), 5000, 0),
+                    Arguments.of(createDay(5), createOrderWithItems("샴페인", 25000, MenuType.BEVERAGE, 4), 100000, 1400),
+                    Arguments.of(createDay(7), createOrderWithItems("아이스크림", 5000, MenuType.DESSERT, 3), 15000, 7669),
+                    Arguments.of(createDay(25), createOrderWithItems("티본스테이크", 55000, MenuType.MAIN, 5), 275000, 29400)
+            );
+        }
+
+    }
+
+    private static Day createDay(int day) {
+        return new Day(day);
+    }
+
+    private static Order createOrderWithItems(String name, int price, MenuType menuType, int quantity) {
+        Order order = new Order();
+        MenuItem menuItem = new MenuItem(name, price, menuType);
+        OrderItem orderItem = new OrderItem(menuItem, quantity);
+        order.addOrderItem(orderItem);
+        return order;
+    }
+
 
 }
