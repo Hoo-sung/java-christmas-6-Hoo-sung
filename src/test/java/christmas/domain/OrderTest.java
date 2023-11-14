@@ -42,8 +42,8 @@ class OrderTest {
         @ParameterizedTest
         @DisplayName("getTotalOrderAmount 메소드 테스트")
         @MethodSource("getTestData")
-        void 총_주문_금액_합계를_잘_반환하는지_테스트(String menuInput, int totalOrderAmount) {
-            Order order = Util.createOrderFromInput(menuInput);
+        void 총_주문_금액_합계를_잘_반환하는지_테스트(String orderInput, int totalOrderAmount) {
+            Order order = Util.createOrderFromInput(orderInput);
             assertThat(order.getTotalOrderAmount()).isEqualTo(totalOrderAmount);
         }
 
