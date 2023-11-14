@@ -3,6 +3,7 @@ package christmas.domain;
 import christmas.domain.manager.BonusEventManager;
 import christmas.domain.manager.DiscountManager;
 import christmas.domain.subclass.MockDiscountRecord;
+import christmas.domain.util.Util;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -31,7 +32,6 @@ class DiscountRecordTest {
         void 혜택내역을_잘_반환하는지_테스트(Day day, Order order,
                                int expectedDDayDiscountAmount, int expectedWeekdayDiscountAmount, int expectedWeekendDiscountAmount, int expectedStarDayDiscountAmount,
                                int expectedBonusEventBenefit) {
-
             MockDiscountRecord mockDiscountRecord = MockDiscountRecord.create(day, order, discountManager, bonusEventManager);
             assertAll(
                     () -> assertEquals(expectedDDayDiscountAmount, mockDiscountRecord.getdDayDiscountAmount()),
@@ -44,10 +44,10 @@ class DiscountRecordTest {
 
         private static Stream<Arguments> getTestData() {
             return Stream.of(
-                    Arguments.of(createDay(5), createOrderWithItems("아이스크림", 5000, MenuType.DESSERT, 1), 0, 0, 0, 0, 0),
-                    Arguments.of(createDay(5), createOrderWithItems("샴페인", 25000, MenuType.BEVERAGE, 4), 1400, 0, 0, 0, 0),
-                    Arguments.of(createDay(7), createOrderWithItems("아이스크림", 5000, MenuType.DESSERT, 3), 1600, 6069, 0, 0, 0),
-                    Arguments.of(createDay(25), createOrderWithItems("티본스테이크", 55000, MenuType.MAIN, 5), 3400, 0, 0, 1000, 25000)
+                    Arguments.of(createDay(3), createOrder("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1"), 1200, 4046, 0, 1000, 25000),
+                    Arguments.of(createDay(26), createOrder("타파스-1,제로콜라-1"), 0, 0, 0, 0, 0),
+                    Arguments.of(createDay(7), createOrder("양송이수프-2,바비큐립-1,아이스크림-2,초코케이크-1,제로콜라-1"), 1600, 6069, 0, 0, 0),
+                    Arguments.of(createDay(25), createOrder("티본스테이크-2,시저샐러드-1,초코케이크-1,레드와인-2"), 3400, 2023, 0, 1000, 25000)
             );
         }
     }
@@ -65,10 +65,10 @@ class DiscountRecordTest {
 
         private static Stream<Arguments> getTestData() {
             return Stream.of(
-                    Arguments.of(createDay(5), createOrderWithItems("아이스크림", 5000, MenuType.DESSERT, 1), 0),
-                    Arguments.of(createDay(5), createOrderWithItems("샴페인", 25000, MenuType.BEVERAGE, 4), 1400),
-                    Arguments.of(createDay(7), createOrderWithItems("아이스크림", 5000, MenuType.DESSERT, 3), 7669),
-                    Arguments.of(createDay(25), createOrderWithItems("티본스테이크", 55000, MenuType.MAIN, 5), 29400)
+                    Arguments.of(createDay(3), createOrder("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1"), 31246),
+                    Arguments.of(createDay(26), createOrder("타파스-1,제로콜라-1"), 0),
+                    Arguments.of(createDay(7), createOrder("양송이수프-2,바비큐립-1,아이스크림-2,초코케이크-1,제로콜라-1"), 7669),
+                    Arguments.of(createDay(25), createOrder("티본스테이크-2,시저샐러드-1,초코케이크-1,레드와인-2"), 31423)
             );
         }
 
@@ -77,14 +77,7 @@ class DiscountRecordTest {
     private static Day createDay(int day) {
         return new Day(day);
     }
-
-    private static Order createOrderWithItems(String name, int price, MenuType menuType, int quantity) {
-        Order order = new Order();
-        MenuItem menuItem = new MenuItem(name, price, menuType);
-        OrderItem orderItem = new OrderItem(menuItem, quantity);
-        order.addOrderItem(orderItem);
-        return order;
-    }
+    private static Order createOrder(String orderInput) { return Util.createOrderFromInput(orderInput);};
 
 
 }
