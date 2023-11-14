@@ -29,11 +29,7 @@ public final class OutputView {
     }
 
     public static void printOrderList(Order order) {
-        printMessage("<주문 메뉴>");
-        for (OrderItem orderItem : order.getOrderItems()) {
-            printMessage(orderItem.getName() + " " + orderItem.getQuantity() + QUANTITY_UNIT);
-        }
-        printEmptyLine();
+        printMessage(order.toString());
     }
 
     public static void printOriginalTotalAmount(Order order) {
@@ -43,31 +39,17 @@ public final class OutputView {
     }
 
     public static void printBonusMenu(Order order) {
-        printMessage("<증정 메뉴>");
         if (order.getTotalOrderAmount() < BONUS_MINIMUM_THRESHOLD) {
+            printMessage("<증정 메뉴>");
             printMessage(NONE);
             printEmptyLine();
             return;
         }
-        for (BonusMenu bonusMenu : BonusMenu.values()) {
-            printMessage(bonusMenu.getName() + " " + createFormattedAmount(bonusMenu.getQuantity()) + QUANTITY_UNIT);
-        }
-        printEmptyLine();
+        printMessage(BonusMenu.getAllMenuDetails());
     }
 
     public static void printDiscountRecord(DiscountRecord discountRecord) {
-        printMessage("<혜택 내역>");
-        if (discountRecord.getTotalBenefitAmount() == ZERO) {
-            printMessage(NONE);
-            printEmptyLine();
-            return;
-        }
-        printXmasDdayDiscount(discountRecord);
-        printWeekDayDiscount(discountRecord);
-        printWeekEndDiscount(discountRecord);
-        printSpecialDiscount(discountRecord);
-        printBonusEventBenefit(discountRecord);
-        printEmptyLine();
+        printMessage(discountRecord.toString());
     }
 
     public static void printTotalDiscountAmount(DiscountRecord discountRecord) {
@@ -82,7 +64,7 @@ public final class OutputView {
         printEmptyLine();
     }
 
-    public static void printExpectedPayment(Order order, DiscountRecord discountRecord ) {
+    public static void printExpectedPayment(Order order, DiscountRecord discountRecord) {
         int expectedPayment = discountRecord.getTotalWithDiscount(order);
         printMessage("<할인 후 예상 결제 금액>");
         printMessage(createFormattedAmount(expectedPayment) + MONEY_UNIT);
@@ -91,10 +73,6 @@ public final class OutputView {
 
     public static void printEventBadge(EventBadge badge) {
         printMessage("<12월 이벤트 배지>");
-        if (badge == null) {
-            printMessage(NONE);
-            return;
-        }
         printMessage(badge.getName());
     }
 
@@ -105,29 +83,5 @@ public final class OutputView {
     public static void printEmptyLine() {
         System.out.println();
     }
-
-    private static void printBonusEventBenefit(DiscountRecord discountRecord) {
-        if (discountRecord.getBonusEventBenefit() != ZERO)
-            printMessage("증정 이벤트: -" + createFormattedAmount(discountRecord.getBonusEventBenefit()) + MONEY_UNIT);
-    }
-
-    private static void printSpecialDiscount(DiscountRecord discountRecord) {
-        if (discountRecord.getSpecialDayDiscountAmount() != ZERO)
-            printMessage("특별 할인: -" + createFormattedAmount(discountRecord.getSpecialDayDiscountAmount()) + MONEY_UNIT);
-    }
-
-    private static void printWeekEndDiscount(DiscountRecord discountRecord) {
-        if (discountRecord.getWeekendDiscountAmount() != ZERO)
-            printMessage("주말 할인: -" + createFormattedAmount(discountRecord.getWeekendDiscountAmount()) + MONEY_UNIT);
-    }
-
-    private static void printWeekDayDiscount(DiscountRecord discountRecord) {
-        if (discountRecord.getWeekdayDiscountAmount() != ZERO)
-            printMessage("평일 할인: -" + createFormattedAmount(discountRecord.getWeekdayDiscountAmount()) + MONEY_UNIT);
-    }
-
-    private static void printXmasDdayDiscount(DiscountRecord discountRecord) {
-        if (discountRecord.getdDayDiscountAmount() != ZERO)
-            printMessage("크리크마스 디데이 할인: -" + createFormattedAmount(discountRecord.getdDayDiscountAmount()) + MONEY_UNIT);
-    }
 }
+

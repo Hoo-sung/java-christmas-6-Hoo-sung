@@ -3,18 +3,17 @@ package christmas.domain;
 
 import christmas.domain.manager.BonusEventManager;
 import christmas.domain.manager.DiscountManager;
+import christmas.domain.util.Util;
 
 import static christmas.system.Constant.*;
+import static christmas.system.IOMessage.*;
 
 public class DiscountRecord {
 
     private final int dDayDiscountAmount;
-
     private final int weekdayDiscountAmount;
     private final int weekendDiscountAmount;
-
     private final int specialDayDiscountAmount;
-
     private final int bonusEventBenefit;
 
     private DiscountRecord(Day day, Order order,
@@ -54,23 +53,25 @@ public class DiscountRecord {
         return dDayDiscountAmount + weekdayDiscountAmount + weekendDiscountAmount + specialDayDiscountAmount + bonusEventBenefit;
     }
 
-    public int getdDayDiscountAmount() {
-        return dDayDiscountAmount;
-    }
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("<혜택 내역>").append(System.lineSeparator());
+        if (getTotalBenefitAmount() == ZERO) {
+            stringBuilder.append(NONE).append(System.lineSeparator());
+            return stringBuilder.toString();
+        }
+        appendDiscountInfo(stringBuilder, "크리스마스 디데이 할인", dDayDiscountAmount);
+        appendDiscountInfo(stringBuilder, "평일 할인", weekdayDiscountAmount);
+        appendDiscountInfo(stringBuilder, "주말 할인", weekendDiscountAmount);
+        appendDiscountInfo(stringBuilder, "특별 할인", specialDayDiscountAmount);
+        appendDiscountInfo(stringBuilder, "증정 이벤트", bonusEventBenefit);
 
-    public int getWeekendDiscountAmount() {
-        return weekendDiscountAmount;
+        return stringBuilder.toString();
     }
-
-    public int getWeekdayDiscountAmount() {
-        return weekdayDiscountAmount;
-    }
-
-    public int getSpecialDayDiscountAmount() {
-        return specialDayDiscountAmount;
-    }
-
-    public int getBonusEventBenefit() {
-        return bonusEventBenefit;
+    private void appendDiscountInfo(StringBuilder stringBuilder, String label, int amount) {
+        if (amount != ZERO) {
+            stringBuilder.append(label).append(": -").append(Util.createFormattedAmount(amount)).append(MONEY_UNIT).append(System.lineSeparator());
+        }
     }
 }
