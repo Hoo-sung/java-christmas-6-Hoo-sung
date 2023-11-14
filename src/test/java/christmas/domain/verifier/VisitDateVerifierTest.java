@@ -11,6 +11,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class VisitDateVerifierTest {
 
     private final VisitDateVerifierSubTest visitDateVerifierTest = new VisitDateVerifierSubTest();
+
     @ParameterizedTest
     @DisplayName("checkNumeric 메소드 테스트")
     @ValueSource(strings = {
@@ -38,7 +39,6 @@ class VisitDateVerifierTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(INVALID_DATE_MESSAGE);
     }
-
 
 
 }

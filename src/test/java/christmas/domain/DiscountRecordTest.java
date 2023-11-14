@@ -57,7 +57,7 @@ class DiscountRecordTest {
         @ParameterizedTest
         @DisplayName("총 혜택금액을 잘 반환하는지 메소드 테스트")
         @MethodSource("getTestData")
-        void 총혜택_금역을_잘_반환하는지_테스트(Day day, Order order,int expectedTotalBenefitAmount) {
+        void 총혜택_금역을_잘_반환하는지_테스트(Day day, Order order, int expectedTotalBenefitAmount) {
 
             DiscountRecord discountRecord = DiscountRecord.create(day, order, discountManager, bonusEventManager);
             Assertions.assertThat(discountRecord.getTotalBenefitAmount()).isEqualTo(expectedTotalBenefitAmount);
@@ -77,7 +77,12 @@ class DiscountRecordTest {
     private static Day createDay(int day) {
         return new Day(day);
     }
-    private static Order createOrder(String orderInput) { return Util.createOrderFromInput(orderInput);};
+
+    private static Order createOrder(String orderInput) {
+        return Util.createOrderFromInput(orderInput);
+    }
+
+    ;
 
 
 }

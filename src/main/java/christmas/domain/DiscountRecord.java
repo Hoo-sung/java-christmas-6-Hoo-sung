@@ -39,11 +39,12 @@ public class DiscountRecord {
             return emptyDiscountRecord();
         return new DiscountRecord(day, order, discountManager, bonusEventManager);
     }
+
     private static DiscountRecord emptyDiscountRecord() {
         return new DiscountRecord();
     }
 
-    public  int getTotalWithDiscount(Order order) {
+    public int getTotalWithDiscount(Order order) {
         int discountTotal = dDayDiscountAmount + weekdayDiscountAmount
                 + weekendDiscountAmount + specialDayDiscountAmount;
         return order.getTotalOrderAmount() - discountTotal;
@@ -69,6 +70,7 @@ public class DiscountRecord {
 
         return stringBuilder.toString();
     }
+
     private void appendDiscountInfo(StringBuilder stringBuilder, String label, int amount) {
         if (amount != ZERO) {
             stringBuilder.append(label).append(": -").append(Util.createFormattedAmount(amount)).append(MONEY_UNIT).append(System.lineSeparator());

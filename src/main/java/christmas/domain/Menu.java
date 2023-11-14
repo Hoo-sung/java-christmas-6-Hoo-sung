@@ -32,9 +32,9 @@ public enum Menu {
         this.menuItem = menuItem;
     }
 
-    static{
-        for(Menu menu: Menu.values()){
-            MENU_MAP.put(menu.getMenuItem().getName(),menu);
+    static {
+        for (Menu menu : Menu.values()) {
+            MENU_MAP.put(menu.getMenuItem().getName(), menu);
         }
     }
 

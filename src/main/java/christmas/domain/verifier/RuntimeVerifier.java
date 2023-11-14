@@ -1,6 +1,5 @@
 package christmas.domain.verifier;
 
-import christmas.domain.MenuType;
 import christmas.domain.Order;
 import christmas.domain.OrderItem;
 

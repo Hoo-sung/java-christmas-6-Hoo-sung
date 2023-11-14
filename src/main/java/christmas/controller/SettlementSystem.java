@@ -24,7 +24,7 @@ public class SettlementSystem {
         printBonusMenu(order);
         printDiscountRecord(discountRecord);
         printTotalDiscountAmount(discountRecord);
-        printExpectedPayment(order,discountRecord);
+        printExpectedPayment(order, discountRecord);
         printEventBadge(createBadge(discountRecord));
     }
 }

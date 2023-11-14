@@ -31,6 +31,7 @@ public class OrderMenuVerifierSubTest {
             validateOrderExistence(order);
         }
     }
+
     public void checkDistinctMenu(String input) {
         Set<String> uniqueMenuItems = new HashSet<>();
         String[] orders = input.split(",");
@@ -52,6 +53,7 @@ public class OrderMenuVerifierSubTest {
             throw new IllegalArgumentException(INVALID_ORDER_MESSAGE);
         }
     }
+
     private void validateOrderExistence(String order) {
         String[] orderInfo = order.split("-");
         if (Menu.getMenuItemByName(orderInfo[0]).isEmpty()) {
@@ -65,6 +67,7 @@ public class OrderMenuVerifierSubTest {
             throw new IllegalArgumentException(INVALID_ORDER_MESSAGE);
         }
     }
+
     private void validateOrderQuantity(String order) {
         String[] orderInfo = order.split("-");
         try {

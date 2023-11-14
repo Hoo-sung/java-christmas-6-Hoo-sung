@@ -34,8 +34,8 @@ public enum BonusMenu {
     }
 
     @Override
-    public String toString(){
-        return getName() + " " + Util.createFormattedAmount(getQuantity())+ QUANTITY_UNIT;
+    public String toString() {
+        return getName() + " " + Util.createFormattedAmount(getQuantity()) + QUANTITY_UNIT;
     }
 
     public static String getAllMenuDetails() {

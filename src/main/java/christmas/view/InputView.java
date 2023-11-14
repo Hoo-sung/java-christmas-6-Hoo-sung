@@ -32,13 +32,13 @@ public final class InputView {
         }
     }
 
-    public static Order readOrder(){
-        while(true){
-            try{
+    public static Order readOrder() {
+        while (true) {
+            try {
                 String input = Console.readLine();
                 orderMenuVerifier.check(input);
                 return createOrderFromInput(input);
-            }catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException e) {
                 printMessage(e.getMessage());
             }
         }

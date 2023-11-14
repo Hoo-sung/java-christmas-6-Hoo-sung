@@ -16,7 +16,7 @@ public class MockDiscountRecord {
     private final int bonusEventBenefit;
 
     private MockDiscountRecord(Day day, Order order,
-                           DiscountManager discountManager, BonusEventManager bonusEventManager) {
+                               DiscountManager discountManager, BonusEventManager bonusEventManager) {
         this.dDayDiscountAmount = discountManager.calculateDDayDiscount(day);
         this.weekdayDiscountAmount = discountManager.calculateWeekDayDiscount(day, order);
         this.weekendDiscountAmount = discountManager.calculateWeekendDiscount(day, order);
@@ -33,14 +33,16 @@ public class MockDiscountRecord {
     }
 
     public static MockDiscountRecord create(Day day, Order order,
-                                        DiscountManager discountManager, BonusEventManager bonusEventManager) {
+                                            DiscountManager discountManager, BonusEventManager bonusEventManager) {
         if (order.getTotalOrderAmount() < EVENT_THRESHOLD_AMOUNT)
             return emptyDiscountRecord();
         return new MockDiscountRecord(day, order, discountManager, bonusEventManager);
     }
+
     private static MockDiscountRecord emptyDiscountRecord() {
         return new MockDiscountRecord();
     }
+
     public int getdDayDiscountAmount() {
         return dDayDiscountAmount;
     }

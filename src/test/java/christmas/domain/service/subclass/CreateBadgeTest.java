@@ -4,11 +4,11 @@ import christmas.domain.EventBadge;
 
 public class CreateBadgeTest {
 
-    private  final int SANTA_THRESHOLD = 20000;
-    private  final int TREE_THRESHOLD = 10000;
-    private  final int STAR_THRESHOLD = 5000;
+    private final int SANTA_THRESHOLD = 20000;
+    private final int TREE_THRESHOLD = 10000;
+    private final int STAR_THRESHOLD = 5000;
 
-    public  EventBadge createBadge(int totalBenefitAmount) {
+    public EventBadge createBadge(int totalBenefitAmount) {
         if (totalBenefitAmount >= SANTA_THRESHOLD)
             return EventBadge.SANTA;
         else if (totalBenefitAmount >= TREE_THRESHOLD)
