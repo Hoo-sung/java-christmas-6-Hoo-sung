@@ -34,7 +34,7 @@ class BonusItemTest {
                 "아이스크림, 5000,3,3",
                 "시저샐러드, 8000, 1,1",
         })
-        void 증정_메뉴이름이_잘_반환되는지_테스트(String name, int price, int quantity, int expected) {
+        void 증정_메뉴수량이_잘_반환되는지_테스트(String name, int price, int quantity, int expected) {
             BonusItem bonusItem = new BonusItem(name, price, quantity);
             assertThat(bonusItem.getQuantity()).isEqualTo(expected);
         }
@@ -49,7 +49,7 @@ class BonusItemTest {
                 "아이스크림, 5000, 3, 15000",
                 "시저샐러드, 8000, 2, 16000",
         })
-        void 증정_메뉴이름이_잘_반환되는지_테스트(String name, int price, int quantity, int expected) {
+        void 증정_메뉴_한품목의_총_가격을_잘_반환하는지_테스트(String name, int price, int quantity, int expected) {
             BonusItem bonusItem = new BonusItem(name, price, quantity);
             assertThat(bonusItem.getTotalPrice()).isEqualTo(expected);
         }

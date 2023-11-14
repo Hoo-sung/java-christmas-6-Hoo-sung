@@ -8,8 +8,6 @@ import christmas.domain.verifier.Verifier;
 import christmas.domain.verifier.VisitDateVerifier;
 
 import static christmas.domain.util.Util.*;
-import static christmas.system.IOMessage.ORDER_PROMPT_MESSAGE;
-import static christmas.system.IOMessage.VISIT_DATE_PROMPT_MESSAGE;
 import static christmas.view.OutputView.*;
 
 public final class InputView {
