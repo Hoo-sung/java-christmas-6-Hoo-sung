@@ -1,6 +1,6 @@
 package christmas.view;
 
-import christmas.domain.*;
+import christmas.domain.entity.*;
 
 import static christmas.domain.util.Util.*;
 import static christmas.system.Constant.BONUS_MINIMUM_THRESHOLD;

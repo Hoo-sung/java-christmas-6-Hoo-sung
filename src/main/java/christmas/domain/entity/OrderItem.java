@@ -1,4 +1,7 @@
-package christmas.domain;
+package christmas.domain.entity;
+
+import christmas.domain.entity.MenuItem;
+import christmas.domain.entity.MenuType;
 
 public class OrderItem {
 

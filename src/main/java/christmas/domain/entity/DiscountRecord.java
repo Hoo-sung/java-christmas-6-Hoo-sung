@@ -1,4 +1,4 @@
-package christmas.domain;
+package christmas.domain.entity;
 
 
 import christmas.domain.manager.BonusEventManager;

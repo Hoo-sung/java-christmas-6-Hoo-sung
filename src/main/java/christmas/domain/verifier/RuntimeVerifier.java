@@ -1,9 +1,9 @@
 package christmas.domain.verifier;
 
-import christmas.domain.Order;
-import christmas.domain.OrderItem;
+import christmas.domain.entity.Order;
+import christmas.domain.entity.OrderItem;
 
-import static christmas.domain.MenuType.*;
+import static christmas.domain.entity.MenuType.*;
 import static christmas.system.ExceptionMessage.*;
 
 

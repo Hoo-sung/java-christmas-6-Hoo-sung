@@ -1,7 +1,7 @@
 package christmas.domain.verifier;
 
 
-import christmas.domain.Menu;
+import christmas.domain.entity.Menu;
 
 import java.util.HashSet;
 import java.util.Set;

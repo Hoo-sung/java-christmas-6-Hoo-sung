@@ -1,7 +1,7 @@
 package christmas.domain.util;
 
-import christmas.domain.Order;
-import christmas.domain.OrderItem;
+import christmas.domain.entity.Order;
+import christmas.domain.entity.OrderItem;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.params.ParameterizedTest;

@@ -1,4 +1,4 @@
-package christmas.domain;
+package christmas.domain.entity;
 
 public class BonusItem {
     private final String name;

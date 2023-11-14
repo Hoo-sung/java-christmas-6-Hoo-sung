@@ -1,11 +1,11 @@
 package christmas.domain.util;
 
-import christmas.domain.Order;
-import christmas.domain.OrderItem;
+import christmas.domain.entity.Order;
+import christmas.domain.entity.OrderItem;
 
 import java.text.DecimalFormat;
 
-import static christmas.domain.Menu.*;
+import static christmas.domain.entity.Menu.*;
 
 public final class Util {
 

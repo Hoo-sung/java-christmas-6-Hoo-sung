@@ -1,7 +1,7 @@
 package christmas.domain.manager;
 
-import christmas.domain.Day;
-import christmas.domain.Order;
+import christmas.domain.entity.Day;
+import christmas.domain.entity.Order;
 import christmas.domain.util.Util;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

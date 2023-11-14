@@ -1,8 +1,8 @@
-package christmas.domain;
+package christmas.domain.entity;
 
 import christmas.domain.manager.BonusEventManager;
 import christmas.domain.manager.DiscountManager;
-import christmas.domain.subclass.MockDiscountRecord;
+import christmas.domain.entity.subclass.MockDiscountRecord;
 import christmas.domain.util.Util;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

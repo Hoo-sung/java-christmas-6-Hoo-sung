@@ -1,7 +1,7 @@
-package christmas.domain.subclass;
+package christmas.domain.entity.subclass;
 
-import christmas.domain.Day;
-import christmas.domain.Order;
+import christmas.domain.entity.Day;
+import christmas.domain.entity.Order;
 import christmas.domain.manager.BonusEventManager;
 import christmas.domain.manager.DiscountManager;
 

@@ -1,7 +1,7 @@
 package christmas.domain.service;
 
-import christmas.domain.DiscountRecord;
-import christmas.domain.EventBadge;
+import christmas.domain.entity.DiscountRecord;
+import christmas.domain.entity.EventBadge;
 
 public final class EventBadgeGenerator {
 

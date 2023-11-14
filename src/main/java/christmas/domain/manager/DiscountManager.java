@@ -1,9 +1,10 @@
 package christmas.domain.manager;
 
 
-import christmas.domain.*;
+import christmas.domain.entity.Day;
+import christmas.domain.entity.Order;
 
-import static christmas.domain.MenuType.*;
+import static christmas.domain.entity.MenuType.*;
 import static christmas.system.Constant.ZERO;
 
 public class DiscountManager {

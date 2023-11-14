@@ -1,6 +1,6 @@
 package christmas.domain.verifier;
 
-import christmas.domain.Order;
+import christmas.domain.entity.Order;
 import christmas.domain.util.Util;
 import christmas.domain.verifier.subclass.RuntimeVerifierSubTest;
 import christmas.system.ExceptionMessage;

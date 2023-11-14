@@ -1,5 +1,9 @@
-package christmas.domain;
+package christmas.domain.entity;
 
+import christmas.domain.entity.MenuItem;
+import christmas.domain.entity.MenuType;
+import christmas.domain.entity.Order;
+import christmas.domain.entity.OrderItem;
 import christmas.domain.util.Util;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;

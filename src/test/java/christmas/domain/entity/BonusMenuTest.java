@@ -1,10 +1,10 @@
-package christmas.domain;
+package christmas.domain.entity;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import static christmas.domain.BonusMenu.*;
+import static christmas.domain.entity.BonusMenu.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class BonusMenuTest {

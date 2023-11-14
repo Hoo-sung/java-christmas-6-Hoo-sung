@@ -1,6 +1,6 @@
 package christmas.domain.manager.subclass;
 
-import christmas.domain.BonusMenu;
+import christmas.domain.entity.BonusMenu;
 
 import static christmas.system.Constant.BONUS_MINIMUM_THRESHOLD;
 import static christmas.system.Constant.ZERO;

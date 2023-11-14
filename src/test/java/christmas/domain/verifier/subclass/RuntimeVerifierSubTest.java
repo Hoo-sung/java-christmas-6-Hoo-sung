@@ -1,8 +1,8 @@
 package christmas.domain.verifier.subclass;
 
-import christmas.domain.MenuType;
-import christmas.domain.Order;
-import christmas.domain.OrderItem;
+import christmas.domain.entity.MenuType;
+import christmas.domain.entity.Order;
+import christmas.domain.entity.OrderItem;
 
 import static christmas.system.ExceptionMessage.BEVERAGE_ONLY_ORDER_MESSAGE;
 import static christmas.system.ExceptionMessage.MAX_ORDER_QUANTITY_EXCEEDED_MESSAGE;

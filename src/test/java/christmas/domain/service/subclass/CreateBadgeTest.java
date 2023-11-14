@@ -1,6 +1,6 @@
 package christmas.domain.service.subclass;
 
-import christmas.domain.EventBadge;
+import christmas.domain.entity.EventBadge;
 
 public class CreateBadgeTest {
 

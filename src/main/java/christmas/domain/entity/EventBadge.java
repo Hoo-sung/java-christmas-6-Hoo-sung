@@ -1,4 +1,4 @@
-package christmas.domain;
+package christmas.domain.entity;
 
 public enum EventBadge {
 

@@ -1,10 +1,10 @@
-package christmas.domain;
+package christmas.domain.entity;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import static christmas.domain.MenuType.*;
+import static christmas.domain.entity.MenuType.*;
 
 public enum Menu {
 

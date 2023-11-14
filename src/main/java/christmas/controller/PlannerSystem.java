@@ -1,7 +1,7 @@
 package christmas.controller;
 
-import christmas.domain.Day;
-import christmas.domain.Order;
+import christmas.domain.entity.Day;
+import christmas.domain.entity.Order;
 import christmas.domain.verifier.RuntimeVerifier;
 import christmas.domain.verifier.Verifier;
 import christmas.view.InputView;

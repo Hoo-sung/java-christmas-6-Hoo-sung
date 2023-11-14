@@ -1,8 +1,8 @@
 package christmas.view;
 
 import camp.nextstep.edu.missionutils.Console;
-import christmas.domain.Day;
-import christmas.domain.Order;
+import christmas.domain.entity.Day;
+import christmas.domain.entity.Order;
 import christmas.domain.verifier.OrderMenuVerifier;
 import christmas.domain.verifier.Verifier;
 import christmas.domain.verifier.VisitDateVerifier;
