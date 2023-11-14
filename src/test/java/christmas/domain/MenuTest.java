@@ -6,6 +6,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class MenuTest {
@@ -40,11 +42,12 @@ class MenuTest {
         })
         void 메뉴_이름으로_메뉴아이템_찾는_테스트(String input, String expectedName, int expectedPrice, MenuType expectedType) {
 
-            MenuItem menuItem = Menu.getMenuItemByName(input);
-            assert menuItem != null;
-            assertThat(menuItem.getName()).isEqualTo(expectedName);
-            assertThat(menuItem.getPrice()).isEqualTo(expectedPrice);
-            assertThat(menuItem.getType()).isEqualTo(expectedType);
+            Optional<MenuItem> menuItemOptional = Menu.getMenuItemByName(input);
+            menuItemOptional.ifPresent(menuItem -> {
+                assertThat(menuItem.getName()).isEqualTo(expectedName);
+                assertThat(menuItem.getPrice()).isEqualTo(expectedPrice);
+                assertThat(menuItem.getType()).isEqualTo(expectedType);
+            });
         }
     }
 

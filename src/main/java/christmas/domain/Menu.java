@@ -1,5 +1,9 @@
 package christmas.domain;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+
 import static christmas.domain.MenuType.*;
 
 public enum Menu {
@@ -21,22 +25,26 @@ public enum Menu {
     RED_WINE(new MenuItem("레드와인", 60_000, BEVERAGE)),
     CHAMPAGNE(new MenuItem("샴페인", 25_000, BEVERAGE));
 
+    private static final Map<String, Menu> MENU_MAP = new HashMap<>();
     private final MenuItem menuItem;
 
     Menu(MenuItem menuItem) {
         this.menuItem = menuItem;
     }
 
+    static{
+        for(Menu menu: Menu.values()){
+            MENU_MAP.put(menu.getMenuItem().getName(),menu);
+        }
+    }
+
+    public static Optional<MenuItem> getMenuItemByName(String menuName) {
+        return Optional.ofNullable(MENU_MAP.get(menuName))
+                .map(Menu::getMenuItem);
+    }
+
     public MenuItem getMenuItem() {
         return menuItem;
     }
 
-    public static MenuItem getMenuItemByName(String menuName) {
-        for (Menu menu : Menu.values()) {
-            if (menu.getMenuItem().getName().equals(menuName)) {
-                return menu.getMenuItem();
-            }
-        }
-        return null;
-    }
 }

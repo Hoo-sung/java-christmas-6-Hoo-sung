@@ -54,7 +54,7 @@ public class OrderMenuVerifierSubTest {
     }
     private void validateOrderExistence(String order) {
         String[] orderInfo = order.split("-");
-        if (Menu.getMenuItemByName(orderInfo[0]) == null) {
+        if (Menu.getMenuItemByName(orderInfo[0]).isEmpty()) {
             throw new IllegalArgumentException(INVALID_ORDER_MESSAGE);
         }
     }
