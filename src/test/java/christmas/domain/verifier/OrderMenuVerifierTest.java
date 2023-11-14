@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class OrderMenuVerifierTest {
 
-    private final OrderMenuVerifierSubTest orderMenuVerifierTest = new OrderMenuVerifierSubTest();
+    private final MockOrderMenuVerifier mockOrderMenuVerifier = new MockOrderMenuVerifier();
 
     @ParameterizedTest
     @DisplayName("checkMenuFormat 메소드 테스트")
@@ -21,7 +21,7 @@ class OrderMenuVerifierTest {
             "타파스-1,제로콜라-2 ",
     })
     void 메뉴형식에_맞는_입력이_아닌경우(String input) {
-        assertThatThrownBy(() -> orderMenuVerifierTest.checkMenuFormat(input))
+        assertThatThrownBy(() -> mockOrderMenuVerifier.checkMenuFormat(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ExceptionMessage.INVALID_ORDER_MESSAGE);
     }
@@ -35,7 +35,7 @@ class OrderMenuVerifierTest {
             "타빠스-1,제로콜라-2 "
     })
     void 메뉴판에_없는_입력인_경우(String input) {
-        assertThatThrownBy(() -> orderMenuVerifierTest.checkMenuExistence(input))
+        assertThatThrownBy(() -> mockOrderMenuVerifier.checkMenuExistence(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ExceptionMessage.INVALID_ORDER_MESSAGE);
     }
@@ -49,7 +49,7 @@ class OrderMenuVerifierTest {
             "레드와인-1,제로콜라-2,레드와인-4",
     })
     void 중복된_메뉴_입력이_주어진_경우(String input) {
-        assertThatThrownBy(() -> orderMenuVerifierTest.checkDistinctMenu(input))
+        assertThatThrownBy(() -> mockOrderMenuVerifier.checkDistinctMenu(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ExceptionMessage.INVALID_ORDER_MESSAGE);
     }
@@ -63,7 +63,7 @@ class OrderMenuVerifierTest {
             "레드와인-0,시저샐러드-2,초코케이크-4",
     })
     void 메뉴의_개수가_1이상의_숫자가_아닌경우(String input) {
-        assertThatThrownBy(() -> orderMenuVerifierTest.checkMenuQuantity(input))
+        assertThatThrownBy(() -> mockOrderMenuVerifier.checkMenuQuantity(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ExceptionMessage.INVALID_ORDER_MESSAGE);
     }

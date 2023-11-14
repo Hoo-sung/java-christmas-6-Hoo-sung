@@ -7,7 +7,7 @@ import christmas.domain.entity.OrderItem;
 import static christmas.system.ExceptionMessage.BEVERAGE_ONLY_ORDER_MESSAGE;
 import static christmas.system.ExceptionMessage.MAX_ORDER_QUANTITY_EXCEEDED_MESSAGE;
 
-public class RuntimeVerifierSubTest {
+public class MockRuntimeVerifier {
 
     public void checkOrderQuantity(Order order) {
         int totalQuantity = order.getOrderItems().stream()

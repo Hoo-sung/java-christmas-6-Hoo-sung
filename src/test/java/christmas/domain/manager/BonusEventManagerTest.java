@@ -1,6 +1,6 @@
 package christmas.domain.manager;
 
-import christmas.domain.manager.subclass.MakeBonusEventDiscountTest;
+import christmas.domain.manager.subclass.BonusEventBenefitCalculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -18,8 +18,8 @@ class BonusEventManagerTest {
             "11111:0"
     }, delimiter = ':')
     void 증정_이벤트_총_혜택금액_테스트(int originalTotalAmount, int expected) {
-        MakeBonusEventDiscountTest makeBonusEventDiscountTest = new MakeBonusEventDiscountTest();
-        int bonusEventBenefit = makeBonusEventDiscountTest.makeBonusEventBenefit(originalTotalAmount);
+        BonusEventBenefitCalculator bonusEventBenefitCalculator = new BonusEventBenefitCalculator();
+        int bonusEventBenefit = bonusEventBenefitCalculator.makeBonusEventBenefit(originalTotalAmount);
         assertThat(bonusEventBenefit).isEqualTo(expected);
     }
 

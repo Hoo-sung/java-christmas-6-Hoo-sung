@@ -9,12 +9,12 @@ import java.util.regex.Pattern;
 
 import static christmas.system.ExceptionMessage.INVALID_ORDER_MESSAGE;
 
-public class OrderMenuVerifierSubTest {
+public class MockOrderMenuVerifier {
 
 
     private final Pattern pattern;
 
-    public OrderMenuVerifierSubTest() {
+    public MockOrderMenuVerifier() {
         this.pattern = Pattern.compile("[가-힣]+-\\d+(,[가-힣]+-\\d+)*");
     }
 

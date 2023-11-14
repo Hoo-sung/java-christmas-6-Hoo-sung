@@ -4,7 +4,7 @@ import java.math.BigInteger;
 
 import static christmas.system.ExceptionMessage.INVALID_DATE_MESSAGE;
 
-public class VisitDateVerifierSubTest {
+public class MockVisitDateVerifier {
 
     public void checkNumeric(String input) {
         try {

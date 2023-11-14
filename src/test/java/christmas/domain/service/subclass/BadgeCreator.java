@@ -2,7 +2,7 @@ package christmas.domain.service.subclass;
 
 import christmas.domain.entity.EventBadge;
 
-public class CreateBadgeTest {
+public class BadgeCreator {
 
     private final int SANTA_THRESHOLD = 20000;
     private final int TREE_THRESHOLD = 10000;

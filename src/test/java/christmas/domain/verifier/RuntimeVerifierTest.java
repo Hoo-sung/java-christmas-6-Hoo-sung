@@ -2,7 +2,7 @@ package christmas.domain.verifier;
 
 import christmas.domain.entity.Order;
 import christmas.domain.util.Util;
-import christmas.domain.verifier.subclass.RuntimeVerifierSubTest;
+import christmas.domain.verifier.subclass.MockRuntimeVerifier;
 import christmas.system.ExceptionMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class RuntimeVerifierTest {
 
-    private final RuntimeVerifierSubTest runtimeVerifierTest = new RuntimeVerifierSubTest();
+    private final MockRuntimeVerifier mockRuntimeVerifier = new MockRuntimeVerifier();
 
 
     @ParameterizedTest
@@ -24,7 +24,7 @@ class RuntimeVerifierTest {
     })
     void 주문한_메뉴의_개수가_20개를_초과한_경우(String input) {
         Order order = Util.createOrderFromInput(input);
-        assertThatThrownBy(() -> runtimeVerifierTest.checkOrderQuantity(order))
+        assertThatThrownBy(() -> mockRuntimeVerifier.checkOrderQuantity(order))
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessageContaining(ExceptionMessage.MAX_ORDER_QUANTITY_EXCEEDED_MESSAGE);
     }
@@ -38,7 +38,7 @@ class RuntimeVerifierTest {
     })
     void 음료만_주문한_경우(String input) {
         Order order = Util.createOrderFromInput(input);
-        assertThatThrownBy(() -> runtimeVerifierTest.checkBeverageOnly(order))
+        assertThatThrownBy(() -> mockRuntimeVerifier.checkBeverageOnly(order))
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessageContaining(ExceptionMessage.BEVERAGE_ONLY_ORDER_MESSAGE);
     }

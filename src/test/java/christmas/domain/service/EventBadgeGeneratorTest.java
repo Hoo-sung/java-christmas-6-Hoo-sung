@@ -1,6 +1,6 @@
 package christmas.domain.service;
 
-import christmas.domain.service.subclass.CreateBadgeTest;
+import christmas.domain.service.subclass.BadgeCreator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -21,8 +21,8 @@ class EventBadgeGeneratorTest {
             "75432:산타"
     }, delimiter = ':')
     void 총_혜택_금액에_따른_이번트_배지_테스트(int totalBenefitAmount, String expected) {
-        CreateBadgeTest createBadgeTest = new CreateBadgeTest();
-        assertThat(createBadgeTest.createBadge(totalBenefitAmount).getName()).isEqualTo(expected);
+        BadgeCreator badgeCreator = new BadgeCreator();
+        assertThat(badgeCreator.createBadge(totalBenefitAmount).getName()).isEqualTo(expected);
     }
 
 
