@@ -25,7 +25,7 @@ class DiscountManagerTest {
     })
     void 디데이_할인_금액_테스트(int input, int expected) {
         Day day = new Day(input);
-        assertThat(discountManager.getDDayDiscount(day)).isEqualTo(expected);
+        assertThat(discountManager.calculateDDayDiscount(day)).isEqualTo(expected);
     }
 
 
@@ -39,7 +39,7 @@ class DiscountManagerTest {
     void 평일_할인_금액_테스트(int dayInput, String orderInput, int expected) {
         Day day = new Day(dayInput);
         Order order = Util.createOrderFromInput(orderInput);
-        assertThat(discountManager.getWeekDayDiscount(day, order)).isEqualTo(expected);
+        assertThat(discountManager.calculateWeekDayDiscount(day, order)).isEqualTo(expected);
     }
 
 
@@ -53,7 +53,7 @@ class DiscountManagerTest {
     void 주말_할인_금액_테스트(int dayInput, String orderInput, int expected) {
         Day day = new Day(dayInput);
         Order order = Util.createOrderFromInput(orderInput);
-        assertThat(discountManager.getWeekendDiscount(day, order)).isEqualTo(expected);
+        assertThat(discountManager.calculateWeekendDiscount(day, order)).isEqualTo(expected);
     }
 
 
@@ -67,7 +67,7 @@ class DiscountManagerTest {
     }, delimiter = ':')
     void 특별_할인_금액_테스트(int dayInput, int expected) {
         Day day = new Day(dayInput);
-        assertThat(discountManager.getStarDayDiscount(day)).isEqualTo(expected);
+        assertThat(discountManager.calculateSpecialDayDiscount(day)).isEqualTo(expected);
     }
 
 }

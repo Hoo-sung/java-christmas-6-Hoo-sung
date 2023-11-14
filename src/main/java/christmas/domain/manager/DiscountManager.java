@@ -15,43 +15,43 @@ public class DiscountManager {
     public DiscountManager() {
     }
 
-    public int getDDayDiscount(Day day) {
+    public int calculateDDayDiscount(Day day) {
         if (day.isChristmasSeason())
-            return calculateDDayDiscount(day);
+            return calculateDDayAmount(day);
         return ZERO;
     }
 
-    public int getWeekDayDiscount(Day day, Order order) {
+    public int calculateWeekDayDiscount(Day day, Order order) {
         if (day.isWeekday())
-            return calculateWeekDayDiscount(order);
+            return calculateWeekDayAmount(order);
         return ZERO;
     }
 
-    public int getWeekendDiscount(Day day, Order order) {
+    public int calculateWeekendDiscount(Day day, Order order) {
         if (day.isWeekend())
-            return calculateWeekendDiscount(order);
+            return calculateWeekendAmount(order);
         return ZERO;
     }
 
-    public int getStarDayDiscount(Day day) {
+    public int calculateSpecialDayDiscount(Day day) {
         int STAR_DISCOUNT = 1000;
         if (day.isSpecialDay())
             return STAR_DISCOUNT;
         return ZERO;
     }
 
-    private int calculateDDayDiscount(Day day) {
+    private int calculateDDayAmount(Day day) {
         return INITIAL_DISCOUNT_AMOUNT + DAILY_DISCOUNT_INCREASE * (day.getDay() - 1);
     }
 
-    private int calculateWeekDayDiscount(Order order) {
+    private int calculateWeekDayAmount(Order order) {
         return order.getOrderItems().stream()
                 .filter(orderItem -> orderItem.getMenuType() == DESSERT)
                 .mapToInt(orderItem -> DISCOUNT_AMOUNT * orderItem.getQuantity())
                 .sum();
     }
 
-    private int calculateWeekendDiscount(Order order) {
+    private int calculateWeekendAmount(Order order) {
         return order.getOrderItems().stream()
                 .filter(orderItem -> orderItem.getMenuType() == MAIN)
                 .mapToInt(orderItem -> DISCOUNT_AMOUNT * orderItem.getQuantity())

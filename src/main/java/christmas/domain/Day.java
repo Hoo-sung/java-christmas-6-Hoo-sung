@@ -1,8 +1,5 @@
 package christmas.domain;
 
-import christmas.system.Constant;
-
-import static christmas.system.Constant.*;
 import static christmas.system.Constant.CHRISTMAS;
 
 public class Day {
