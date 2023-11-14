@@ -1,5 +1,6 @@
 package christmas.domain.manager;
 
+import christmas.domain.manager.subclass.MakeBonusEventDiscountTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -7,8 +8,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class BonusEventManagerTest {
-
-    private final BonusEventManager bonusEventManager = new BonusEventManager();
 
     @ParameterizedTest
     @DisplayName("makeBonusEventDiscount 메소드 테스트")
@@ -19,7 +18,8 @@ class BonusEventManagerTest {
             "11111:0"
     }, delimiter = ':')
     void 증정_이벤트_총_혜택금액_테스트(int originalTotalAmount, int expected) {
-        int bonusEventBenefit = bonusEventManager.makeBonusEventBenefit(originalTotalAmount);
+        MakeBonusEventDiscountTest makeBonusEventDiscountTest = new MakeBonusEventDiscountTest();
+        int bonusEventBenefit = makeBonusEventDiscountTest.makeBonusEventBenefit(originalTotalAmount);
         assertThat(bonusEventBenefit).isEqualTo(expected);
     }
 
