@@ -44,13 +44,13 @@ public class DiscountRecord {
         return new DiscountRecord();
     }
 
-    public int getTotalWithDiscount(Order order) {
+    public int calculateTotalWithDiscount(Order order) {
         int discountTotal = dDayDiscountAmount + weekdayDiscountAmount
                 + weekendDiscountAmount + specialDayDiscountAmount;
         return order.getTotalOrderAmount() - discountTotal;
     }
 
-    public int getTotalBenefitAmount() {
+    public int calculateTotalBenefitAmount() {
         return dDayDiscountAmount + weekdayDiscountAmount + weekendDiscountAmount + specialDayDiscountAmount + bonusEventBenefit;
     }
 
@@ -58,7 +58,7 @@ public class DiscountRecord {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("<혜택 내역>").append(System.lineSeparator());
-        if (getTotalBenefitAmount() == ZERO) {
+        if (calculateTotalBenefitAmount() == ZERO) {
             stringBuilder.append(NONE).append(System.lineSeparator());
             return stringBuilder.toString();
         }

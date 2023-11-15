@@ -60,7 +60,7 @@ class DiscountRecordTest {
         void 총혜택_금역을_잘_반환하는지_테스트(Day day, Order order, int expectedTotalBenefitAmount) {
 
             DiscountRecord discountRecord = DiscountRecord.create(day, order, discountManager, bonusEventManager);
-            Assertions.assertThat(discountRecord.getTotalBenefitAmount()).isEqualTo(expectedTotalBenefitAmount);
+            Assertions.assertThat(discountRecord.calculateTotalBenefitAmount()).isEqualTo(expectedTotalBenefitAmount);
         }
 
         private static Stream<Arguments> getTestData() {

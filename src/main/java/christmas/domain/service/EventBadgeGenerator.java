@@ -10,7 +10,7 @@ public final class EventBadgeGenerator {
     private static final int STAR_THRESHOLD = 5000;
 
     public static EventBadge createBadge(DiscountRecord discountRecord) {
-        int totalBenefitAmount = discountRecord.getTotalBenefitAmount();
+        int totalBenefitAmount = discountRecord.calculateTotalBenefitAmount();
         if (totalBenefitAmount >= SANTA_THRESHOLD)
             return EventBadge.SANTA;
         else if (totalBenefitAmount >= TREE_THRESHOLD)

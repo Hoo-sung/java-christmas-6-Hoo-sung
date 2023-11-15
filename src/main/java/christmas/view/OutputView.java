@@ -54,7 +54,7 @@ public final class OutputView {
 
     public static void printTotalDiscountAmount(DiscountRecord discountRecord) {
         printMessage("<총혜택 금액>");
-        int totalDiscountAmount = discountRecord.getTotalBenefitAmount();
+        int totalDiscountAmount = discountRecord.calculateTotalBenefitAmount();
         if (totalDiscountAmount == ZERO) {
             printMessage(ZERO + MONEY_UNIT);
             printEmptyLine();
@@ -65,7 +65,7 @@ public final class OutputView {
     }
 
     public static void printExpectedPayment(Order order, DiscountRecord discountRecord) {
-        int expectedPayment = discountRecord.getTotalWithDiscount(order);
+        int expectedPayment = discountRecord.calculateTotalWithDiscount(order);
         printMessage("<할인 후 예상 결제 금액>");
         printMessage(createFormattedAmount(expectedPayment) + MONEY_UNIT);
         printEmptyLine();
