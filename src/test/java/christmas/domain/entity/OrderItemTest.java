@@ -69,7 +69,7 @@ class OrderItemTest {
         void 주문한_메뉴의_총가격이_잘_반환되는지_테스트(String name, int quantity, int expected) {
             Menu menu = Menu.getMenuItemByName(name);
             OrderItem orderItem = new OrderItem(menu, quantity);
-            assertThat(orderItem.getTotalItemAmount()).isEqualTo(expected);
+            assertThat(orderItem.calculateTotalItemAmount()).isEqualTo(expected);
         }
     }
 

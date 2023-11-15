@@ -10,7 +10,7 @@ public class OrderItem {
         this.quantity = quantity;
     }
 
-    public int getTotalItemAmount() {
+    public int calculateTotalItemAmount() {
         return menu.getMenuPrice() * quantity;
     }
 

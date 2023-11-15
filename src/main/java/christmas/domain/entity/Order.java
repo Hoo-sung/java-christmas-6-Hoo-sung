@@ -12,7 +12,7 @@ public class Order {
 
     public int calculateTotalOrderAmount() {
         return orderItems.stream()
-                .mapToInt(OrderItem::getTotalItemAmount)
+                .mapToInt(OrderItem::calculateTotalItemAmount)
                 .sum();
     }
 
