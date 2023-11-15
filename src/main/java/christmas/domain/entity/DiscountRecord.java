@@ -35,7 +35,7 @@ public class DiscountRecord {
 
     public static DiscountRecord create(Day day, Order order,
                                         DiscountManager discountManager, BonusEventManager bonusEventManager) {
-        if (order.getTotalOrderAmount() < EVENT_THRESHOLD_AMOUNT)
+        if (order.calculateTotalOrderAmount() < EVENT_THRESHOLD_AMOUNT)
             return emptyDiscountRecord();
         return new DiscountRecord(day, order, discountManager, bonusEventManager);
     }
@@ -47,7 +47,7 @@ public class DiscountRecord {
     public int calculateTotalWithDiscount(Order order) {
         int discountTotal = dDayDiscountAmount + weekdayDiscountAmount
                 + weekendDiscountAmount + specialDayDiscountAmount;
-        return order.getTotalOrderAmount() - discountTotal;
+        return order.calculateTotalOrderAmount() - discountTotal;
     }
 
     public int calculateTotalBenefitAmount() {

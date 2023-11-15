@@ -34,12 +34,12 @@ public final class OutputView {
 
     public static void printOriginalTotalAmount(Order order) {
         printMessage("<할인 전 총주문 금액>");
-        printMessage(createFormattedAmount(order.getTotalOrderAmount()) + MONEY_UNIT);
+        printMessage(createFormattedAmount(order.calculateTotalOrderAmount()) + MONEY_UNIT);
         printEmptyLine();
     }
 
     public static void printBonusMenu(Order order) {
-        if (order.getTotalOrderAmount() < BONUS_MINIMUM_THRESHOLD) {
+        if (order.calculateTotalOrderAmount() < BONUS_MINIMUM_THRESHOLD) {
             printMessage("<증정 메뉴>");
             printMessage(NONE);
             printEmptyLine();

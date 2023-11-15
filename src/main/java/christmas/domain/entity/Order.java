@@ -10,7 +10,7 @@ public class Order {
 
     private final List<OrderItem> orderItems = new ArrayList<>();
 
-    public int getTotalOrderAmount() {
+    public int calculateTotalOrderAmount() {
         return orderItems.stream()
                 .mapToInt(OrderItem::getTotalItemAmount)
                 .sum();
