@@ -45,7 +45,7 @@ public final class OutputView {
             printEmptyLine();
             return;
         }
-        printMessage(BonusMenu.getAllMenuDetails());
+        printMessage(BonusMenu.generateAllMenuDetails());
     }
 
     public static void printDiscountRecord(DiscountRecord discountRecord) {

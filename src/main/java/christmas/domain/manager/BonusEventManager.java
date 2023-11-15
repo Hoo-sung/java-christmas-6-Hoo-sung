@@ -15,6 +15,6 @@ public class BonusEventManager {
         int originalTotalAmount = order.getTotalOrderAmount();
         if (originalTotalAmount < BONUS_MINIMUM_THRESHOLD)
             return ZERO;
-        return BonusMenu.getTotalPriceForAllMenus();
+        return BonusMenu.calculateTotalPriceForAllMenus();
     }
 }

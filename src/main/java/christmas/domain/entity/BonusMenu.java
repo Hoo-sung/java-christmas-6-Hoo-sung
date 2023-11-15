@@ -17,26 +17,13 @@ public enum BonusMenu {
         this.quantity = quantity;
     }
 
-    public static int getTotalPriceForAllMenus() {
+    public static int calculateTotalPriceForAllMenus() {
         return Arrays.stream(BonusMenu.values())
                 .mapToInt(BonusMenu::getTotalPrice)
                 .sum();
     }
 
-    public String getName() {
-        return menu.getMenuName();
-    }
-
-    public int getTotalPrice() {
-        return menu.getMenuPrice() * quantity;
-    }
-
-    @Override
-    public String toString() {
-        return getName() + " " + Util.createFormattedAmount(quantity) + QUANTITY_UNIT;
-    }
-
-    public static String getAllMenuDetails() {
+    public static String generateAllMenuDetails() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("<증정 메뉴>").append(System.lineSeparator());
         for (BonusMenu bonusMenu : BonusMenu.values()) {
@@ -44,4 +31,18 @@ public enum BonusMenu {
         }
         return stringBuilder.toString();
     }
+
+    @Override
+    public String toString() {
+        return getName() + " " + Util.createFormattedAmount(quantity) + QUANTITY_UNIT;
+    }
+
+    private String getName() {
+        return menu.getMenuName();
+    }
+
+    private int getTotalPrice() {
+        return menu.getMenuPrice() * quantity;
+    }
+
 }

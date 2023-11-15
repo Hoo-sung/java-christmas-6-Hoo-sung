@@ -10,6 +10,6 @@ public class BonusEventBenefitCalculator {
     public int makeBonusEventBenefit(int originalTotalAmount) {
         if (originalTotalAmount < BONUS_MINIMUM_THRESHOLD)
             return ZERO;
-        return BonusMenu.getTotalPriceForAllMenus();
+        return BonusMenu.calculateTotalPriceForAllMenus();
     }
 }
