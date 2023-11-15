@@ -135,6 +135,7 @@
 > - 음료만 주문한 경우<br>
   
 ---
-
+### - 최종 클래스 다이어그램
+<img src="image/xmasFinalDiagram.png">
 
 
