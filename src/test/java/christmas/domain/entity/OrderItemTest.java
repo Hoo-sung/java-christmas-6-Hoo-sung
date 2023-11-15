@@ -1,8 +1,5 @@
 package christmas.domain.entity;
 
-import christmas.domain.entity.MenuItem;
-import christmas.domain.entity.MenuType;
-import christmas.domain.entity.OrderItem;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,13 +14,13 @@ class OrderItemTest {
         @ParameterizedTest
         @DisplayName("getName 메소드 테스트")
         @CsvSource(value = {
-                "샴페인, 25000, BEVERAGE, 4, 샴페인",
-                "아이스크림, 5000, DESSERT, 3, 아이스크림",
-                "시저샐러드, 8000, APPETIZER, 7, 시저샐러드",
+                "샴페인, 4, 샴페인",
+                "아이스크림, 3, 아이스크림",
+                "시저샐러드, 7, 시저샐러드",
         })
-        void 주문한_메뉴이름이_잘_반환되는지_테스트(String name, int price, MenuType menuType, int quantity, String expected) {
-            MenuItem menuItem = new MenuItem(name, price, menuType);
-            OrderItem orderItem = new OrderItem(menuItem, quantity);
+        void 주문한_메뉴이름이_잘_반환되는지_테스트(String name, int quantity, String expected) {
+            Menu menu = Menu.getMenuItemByName(name);
+            OrderItem orderItem = new OrderItem(menu, quantity);
             assertThat(orderItem.getName()).isEqualTo(expected);
         }
     }
@@ -33,13 +30,13 @@ class OrderItemTest {
         @ParameterizedTest
         @DisplayName("getQuantity 메소드 테스트")
         @CsvSource(value = {
-                "샴페인, 25000, BEVERAGE, 4, 4",
-                "아이스크림, 5000, DESSERT, 3, 3",
-                "시저샐러드, 8000, APPETIZER, 7, 7",
+                "샴페인, 4, 4",
+                "아이스크림, 3, 3",
+                "시저샐러드, 7, 7",
         })
-        void 주문한_메뉴_개수가_잘_반환되는지_테스트(String name, int price, MenuType menuType, int quantity, int expected) {
-            MenuItem menuItem = new MenuItem(name, price, menuType);
-            OrderItem orderItem = new OrderItem(menuItem, quantity);
+        void 주문한_메뉴_개수가_잘_반환되는지_테스트(String name, int quantity, int expected) {
+            Menu menu = Menu.getMenuItemByName(name);
+            OrderItem orderItem = new OrderItem(menu, quantity);
             assertThat(orderItem.getQuantity()).isEqualTo(expected);
         }
     }
@@ -49,13 +46,13 @@ class OrderItemTest {
         @ParameterizedTest
         @DisplayName("getMenuType 메소드 테스트")
         @CsvSource(value = {
-                "샴페인, 25000, BEVERAGE, 4, BEVERAGE",
-                "아이스크림, 5000, DESSERT, 3, DESSERT",
-                "시저샐러드, 8000, APPETIZER, 7, APPETIZER",
+                "샴페인, 4, BEVERAGE",
+                "아이스크림, 3, DESSERT",
+                "시저샐러드, 7, APPETIZER",
         })
-        void 주문한_메뉴_타입이_잘_반환되는지_테스트(String name, int price, MenuType menuType, int quantity, MenuType expected) {
-            MenuItem menuItem = new MenuItem(name, price, menuType);
-            OrderItem orderItem = new OrderItem(menuItem, quantity);
+        void 주문한_메뉴_타입이_잘_반환되는지_테스트(String name, int quantity, MenuType expected) {
+            Menu menu = Menu.getMenuItemByName(name);
+            OrderItem orderItem = new OrderItem(menu, quantity);
             assertThat(orderItem.getMenuType()).isEqualTo(expected);
         }
     }
@@ -65,13 +62,13 @@ class OrderItemTest {
         @ParameterizedTest
         @DisplayName("getTotalItemAmount 메소드 테스트")
         @CsvSource(value = {
-                "샴페인, 25000, BEVERAGE, 4, 100000",
-                "아이스크림, 5000, DESSERT, 3, 15000",
-                "시저샐러드, 8000, APPETIZER, 7, 56000",
+                "샴페인, 4, 100000",
+                "아이스크림, 3, 15000",
+                "시저샐러드, 7, 56000",
         })
-        void 주문한_메뉴의_총가격이_잘_반환되는지_테스트(String name, int price, MenuType menuType, int quantity, int expected) {
-            MenuItem menuItem = new MenuItem(name, price, menuType);
-            OrderItem orderItem = new OrderItem(menuItem, quantity);
+        void 주문한_메뉴의_총가격이_잘_반환되는지_테스트(String name, int quantity, int expected) {
+            Menu menu = Menu.getMenuItemByName(name);
+            OrderItem orderItem = new OrderItem(menu, quantity);
             assertThat(orderItem.getTotalItemAmount()).isEqualTo(expected);
         }
     }

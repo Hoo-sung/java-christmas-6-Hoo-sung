@@ -11,7 +11,6 @@ public class BonusEventManager {
 
     public BonusEventManager() {
     }
-
     public int makeBonusEventBenefit(Order order) {
         int originalTotalAmount = order.getTotalOrderAmount();
         if (originalTotalAmount < BONUS_MINIMUM_THRESHOLD)

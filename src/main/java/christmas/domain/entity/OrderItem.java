@@ -1,28 +1,25 @@
 package christmas.domain.entity;
 
-import christmas.domain.entity.MenuItem;
-import christmas.domain.entity.MenuType;
-
 public class OrderItem {
 
-    private final MenuItem menuItem;
+    private final Menu menu;
     private final int quantity;
 
-    public OrderItem(MenuItem menuItem, int quantity) {
-        this.menuItem = menuItem;
+    public OrderItem(Menu menu, int quantity) {
+        this.menu = menu;
         this.quantity = quantity;
     }
 
     public int getTotalItemAmount() {
-        return menuItem.getPrice() * quantity;
+        return menu.getMenuPrice() * quantity;
     }
 
     public MenuType getMenuType() {
-        return menuItem.getType();
+        return menu.getMenuType();
     }
 
     public String getName() {
-        return menuItem.getName();
+        return menu.getMenuName();
     }
 
     public int getQuantity() {

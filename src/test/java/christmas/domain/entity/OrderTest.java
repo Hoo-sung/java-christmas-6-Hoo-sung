@@ -1,9 +1,5 @@
 package christmas.domain.entity;
 
-import christmas.domain.entity.MenuItem;
-import christmas.domain.entity.MenuType;
-import christmas.domain.entity.Order;
-import christmas.domain.entity.OrderItem;
 import christmas.domain.util.Util;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -24,14 +20,13 @@ class OrderTest {
         @ParameterizedTest
         @DisplayName("getOrderItems 메소드 테스트")
         @CsvSource(value = {
-                "샴페인, 25000, BEVERAGE, 4",
-                "아이스크림, 5000, DESSERT, 3",
-                "시저샐러드, 8000, APPETIZER, 7",
+                "샴페인, 4",
+                "아이스크림, 3",
+                "시저샐러드, 7",
         })
-        void 주문내역을_잘_반환하는지_테스트(String name, int price, MenuType menuType, int quantity) {
-
-            MenuItem menuItem = new MenuItem(name, price, menuType);
-            OrderItem orderItem = new OrderItem(menuItem, quantity);
+        void 주문내역을_잘_반환하는지_테스트(String name, int quantity) {
+            Menu menu = Menu.getMenuItemByName(name);
+            OrderItem orderItem = new OrderItem(menu, quantity);
             Order order = new Order();
             order.addOrderItem(orderItem);
 
