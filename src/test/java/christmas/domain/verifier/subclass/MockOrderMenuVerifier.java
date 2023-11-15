@@ -56,7 +56,7 @@ public class MockOrderMenuVerifier {
 
     private void validateOrderExistence(String order) {
         String[] orderInfo = order.split("-");
-        if (Menu.getMenuItemByName(orderInfo[0]).isEmpty()) {
+        if (Menu.getMenuItemByName(orderInfo[0]) == null) {
             throw new IllegalArgumentException(INVALID_ORDER_MESSAGE);
         }
     }

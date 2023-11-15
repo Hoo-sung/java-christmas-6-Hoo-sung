@@ -1,18 +1,13 @@
 package christmas.domain.entity;
 
-import christmas.domain.entity.Menu;
-import christmas.domain.entity.MenuItem;
-import christmas.domain.entity.MenuType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 
-import java.util.Optional;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class MenuTest {
 
@@ -46,12 +41,13 @@ class MenuTest {
         })
         void 메뉴_이름으로_메뉴아이템_찾을_수_있는_정상_테스트(String input, String expectedName, int expectedPrice, MenuType expectedType) {
 
-            Optional<MenuItem> menuItemOptional = Menu.getMenuItemByName(input);
-            menuItemOptional.ifPresent(menuItem -> {
-                assertThat(menuItem.getName()).isEqualTo(expectedName);
-                assertThat(menuItem.getPrice()).isEqualTo(expectedPrice);
-                assertThat(menuItem.getType()).isEqualTo(expectedType);
-            });
+            MenuItem menuItem = Menu.getMenuItemByName(input);
+            assertAll("MenuItem",
+                    () -> assertThat(menuItem.getName()).isEqualTo(expectedName),
+                    () -> assertThat(menuItem.getPrice()).isEqualTo(expectedPrice),
+                    () -> assertThat(menuItem.getType()).isEqualTo(expectedType)
+            );
+
         }
 
         @ParameterizedTest
@@ -62,8 +58,8 @@ class MenuTest {
                 "시쪄샐러드",
         })
         void 메뉴판에_존재하지_않는_메뉴이름인_경우(String input) {
-            Optional<MenuItem> menuItemOptional = Menu.getMenuItemByName(input);
-            assertTrue(menuItemOptional.isEmpty());
+            MenuItem menuItem = Menu.getMenuItemByName(input);
+            assertNull(menuItem);
         }
     }
 

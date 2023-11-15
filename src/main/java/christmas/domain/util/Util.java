@@ -17,7 +17,7 @@ public final class Util {
             String[] orderItemSpec = orderItem.split("-");
             String menu = orderItemSpec[0];
             int quantity = Integer.parseInt(orderItemSpec[1]);
-            order.addOrderItem(new OrderItem(getMenuItemByName(menu).get(), quantity));
+            order.addOrderItem(new OrderItem(getMenuItemByName(menu), quantity));
         }
         return order;
     }

@@ -38,9 +38,10 @@ public enum Menu {
         }
     }
 
-    public static Optional<MenuItem> getMenuItemByName(String menuName) {
+    public static MenuItem getMenuItemByName(String menuName) {
         return Optional.ofNullable(MENU_MAP.get(menuName))
-                .map(Menu::getMenuItem);
+                .map(Menu::getMenuItem)
+                .orElse(null);
     }
 
     public MenuItem getMenuItem() {
