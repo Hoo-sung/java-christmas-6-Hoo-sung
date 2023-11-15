@@ -7,12 +7,14 @@ import java.util.Arrays;
 import static christmas.system.IOMessage.QUANTITY_UNIT;
 
 public enum BonusMenu {
-    CHAMPAGNE(new BonusItem("샴페인", 25_000, 1));
+    CHAMPAGNE(Menu.CHAMPAGNE, 1);
 
-    private final BonusItem bonusMenuItem;
+    private final Menu menu;
+    private final int quantity;
 
-    BonusMenu(BonusItem bonusMenuItem) {
-        this.bonusMenuItem = bonusMenuItem;
+    BonusMenu(Menu menu, int quantity) {
+        this.menu = menu;
+        this.quantity = quantity;
     }
 
     public static int getTotalPriceForAllMenus() {
@@ -22,20 +24,20 @@ public enum BonusMenu {
     }
 
     public String getName() {
-        return bonusMenuItem.getName();
+        return menu.getMenuName();
     }
 
     public int getTotalPrice() {
-        return bonusMenuItem.getTotalPrice();
+        return menu.getMenuPrice() * quantity;
     }
 
     public int getQuantity() {
-        return bonusMenuItem.getQuantity();
+        return quantity;
     }
 
     @Override
     public String toString() {
-        return getName() + " " + Util.createFormattedAmount(getQuantity()) + QUANTITY_UNIT;
+        return getName() + " " + Util.createFormattedAmount(quantity) + QUANTITY_UNIT;
     }
 
     public static String getAllMenuDetails() {
