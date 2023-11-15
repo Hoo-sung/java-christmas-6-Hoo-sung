@@ -32,7 +32,7 @@ public final class InputView {
         }
     }
 
-    public static Order readOrder() {
+    public static Order tryReadOrder() {
         while (true) {
             try {
                 String input = Console.readLine();

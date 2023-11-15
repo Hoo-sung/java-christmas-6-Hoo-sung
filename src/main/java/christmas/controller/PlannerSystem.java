@@ -48,7 +48,7 @@ public class PlannerSystem {
         Order order;
         while (true) {
             try {
-                order = InputView.readOrder();
+                order = InputView.tryReadOrder();
                 runtimeVerifier.check(order);
                 return order;
             } catch (IllegalStateException e) {
