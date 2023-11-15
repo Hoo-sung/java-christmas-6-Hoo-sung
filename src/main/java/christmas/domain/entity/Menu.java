@@ -19,14 +19,12 @@ public enum Menu {
     CHOCOLATE_CAKE("초코케이크", 15_000, DESSERT),
     ICE_CREAM("아이스크림", 5_000, DESSERT),
 
-
     ZERO_COLA("제로콜라", 3_000, BEVERAGE),
     RED_WINE("레드와인", 60_000, BEVERAGE),
     CHAMPAGNE("샴페인", 25_000, BEVERAGE);
 
     private static final Map<String, Menu> MENU_MAP = new HashMap<>();
     private final String menuName;
-
     private final int price;
     private final MenuType menuType;
 
@@ -42,6 +40,14 @@ public enum Menu {
         }
     }
 
+    public static Menu getMenuItemByName(String menuName) {
+        return MENU_MAP.get(menuName);
+    }
+
+    public String getMenuName() {
+        return menuName;
+    }
+
     public int getMenuPrice() {
         return price;
     }
@@ -50,11 +56,4 @@ public enum Menu {
         return menuType;
     }
 
-    public String getMenuName() {
-        return menuName;
-    }
-
-    public static Menu getMenuItemByName(String menuName) {
-        return MENU_MAP.get(menuName);
-    }
 }
