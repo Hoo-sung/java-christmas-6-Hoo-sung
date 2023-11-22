@@ -19,14 +19,16 @@ public class RuntimeVerifier implements Verifier<Order> {
         int totalQuantity = order.getOrderItems().stream()
                 .mapToInt(OrderItem::getQuantity)
                 .sum();
-        if (totalQuantity > 20)
+        if (totalQuantity > 20) {
             throw new IllegalStateException(MAX_ORDER_QUANTITY_EXCEEDED_MESSAGE);
+        }
     }
 
     private void checkBeverageOnly(Order order) {
         for (OrderItem orderItem : order.getOrderItems()) {
-            if (orderItem.getMenuType() != BEVERAGE)
+            if (orderItem.getMenuType() != BEVERAGE) {
                 return;
+            }
         }
         throw new IllegalStateException(BEVERAGE_ONLY_ORDER_MESSAGE);
     }

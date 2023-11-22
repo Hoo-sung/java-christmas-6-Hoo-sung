@@ -8,8 +8,9 @@ import static christmas.system.Constant.ZERO;
 public class BonusEventBenefitCalculator {
 
     public int makeBonusEventBenefit(int originalTotalAmount) {
-        if (originalTotalAmount < BONUS_MINIMUM_THRESHOLD)
+        if (originalTotalAmount < BONUS_MINIMUM_THRESHOLD) {
             return ZERO;
+        }
         return BonusMenu.calculateTotalPriceForAllMenus();
     }
 }

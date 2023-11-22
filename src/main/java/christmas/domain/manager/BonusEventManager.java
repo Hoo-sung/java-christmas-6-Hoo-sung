@@ -11,10 +11,12 @@ public class BonusEventManager {
 
     public BonusEventManager() {
     }
+
     public int makeBonusEventBenefit(Order order) {
         int originalTotalAmount = order.calculateTotalOrderAmount();
-        if (originalTotalAmount < BONUS_MINIMUM_THRESHOLD)
+        if (originalTotalAmount < BONUS_MINIMUM_THRESHOLD) {
             return ZERO;
+        }
         return BonusMenu.calculateTotalPriceForAllMenus();
     }
 }

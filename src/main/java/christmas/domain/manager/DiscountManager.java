@@ -17,27 +17,31 @@ public class DiscountManager {
     }
 
     public int calculateDDayDiscount(Day day) {
-        if (day.isChristmasSeason())
+        if (day.isChristmasSeason()) {
             return calculateDDayAmount(day);
+        }
         return ZERO;
     }
 
     public int calculateWeekDayDiscount(Day day, Order order) {
-        if (day.isWeekday())
+        if (day.isWeekday()) {
             return calculateWeekDayAmount(order);
+        }
         return ZERO;
     }
 
     public int calculateWeekendDiscount(Day day, Order order) {
-        if (day.isWeekend())
+        if (day.isWeekend()) {
             return calculateWeekendAmount(order);
+        }
         return ZERO;
     }
 
     public int calculateSpecialDayDiscount(Day day) {
         int STAR_DISCOUNT = 1000;
-        if (day.isSpecialDay())
+        if (day.isSpecialDay()) {
             return STAR_DISCOUNT;
+        }
         return ZERO;
     }
 

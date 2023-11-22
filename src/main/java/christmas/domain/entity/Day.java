@@ -17,50 +17,58 @@ public class Day {
     }
 
     public boolean isChristmasSeason() {
-        if (day >= FIRSTDATE && day <= CHRISTMAS)
+        if (day >= FIRSTDATE && day <= CHRISTMAS) {
             return true;
+        }
         return false;
     }
 
     public boolean isWeekday() {
-        if (!(isFriday() || isSaturday()))
+        if (!(isFriday() || isSaturday())) {
             return true;
+        }
         return false;
     }
 
     public boolean isWeekend() {
-        if (isFriday() || isSaturday())
+        if (isFriday() || isSaturday()) {
             return true;
+        }
         return false;
     }
 
     public boolean isSpecialDay() {
-        if (isSunday() || isChristmas())
+        if (isSunday() || isChristmas()) {
             return true;
+        }
         return false;
     }
 
     private boolean isFriday() {
-        if (day % WEEK_LENGTH == 1)
+        if (day % WEEK_LENGTH == 1) {
             return true;
+        }
         return false;
     }
 
     private boolean isSaturday() {
-        if (day % WEEK_LENGTH == 2)
+        if (day % WEEK_LENGTH == 2) {
             return true;
+        }
         return false;
     }
 
     private boolean isSunday() {
-        if (day % WEEK_LENGTH == 3)
+        if (day % WEEK_LENGTH == 3) {
             return true;
+        }
         return false;
     }
 
     private boolean isChristmas() {
-        if (day == CHRISTMAS)
+        if (day == CHRISTMAS) {
             return true;
+        }
         return false;
     }
 }

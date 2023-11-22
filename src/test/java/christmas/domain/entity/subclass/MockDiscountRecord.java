@@ -34,8 +34,9 @@ public class MockDiscountRecord {
 
     public static MockDiscountRecord create(Day day, Order order,
                                             DiscountManager discountManager, BonusEventManager bonusEventManager) {
-        if (order.calculateTotalOrderAmount() < EVENT_THRESHOLD_AMOUNT)
+        if (order.calculateTotalOrderAmount() < EVENT_THRESHOLD_AMOUNT) {
             return emptyDiscountRecord();
+        }
         return new MockDiscountRecord(day, order, discountManager, bonusEventManager);
     }
 
