@@ -1,4 +1,4 @@
-package christmas.domain.service.subclass;
+package christmas.domain.entity.subclass;
 
 import christmas.domain.entity.EventBadge;
 

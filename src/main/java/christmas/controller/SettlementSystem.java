@@ -6,7 +6,7 @@ import christmas.domain.entity.Order;
 import christmas.domain.manager.BonusEventManager;
 import christmas.domain.manager.DiscountManager;
 
-import static christmas.domain.service.EventBadgeGenerator.*;
+import static christmas.domain.entity.EventBadge.createBadge;
 import static christmas.view.OutputView.*;
 
 public class SettlementSystem {
