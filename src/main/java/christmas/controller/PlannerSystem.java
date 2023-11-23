@@ -28,16 +28,11 @@ public class PlannerSystem {
         this.order = readOrder(InputView::tryReadOrder, runtimeVerifier);
         this.settlementSystem = new SettlementSystem(day, order);
     }
-
     public void run() {
         renderResult();
     }
 
     private Order readOrder(Supplier<Order> orderSupplier, Verifier<Order> verifier) {
-        return repeatUntilValid(orderSupplier, verifier);
-    }
-
-    private Order repeatUntilValid(Supplier<Order> orderSupplier, Verifier<Order> verifier) {
         while (true) {
             try {
                 Order order = orderSupplier.get();
