@@ -4,6 +4,7 @@ import christmas.domain.util.Util;
 
 import java.util.Arrays;
 
+import static christmas.system.IOMessage.EMPTY_STRING;
 import static christmas.system.IOMessage.QUANTITY_UNIT;
 
 public enum BonusMenu {
@@ -25,7 +26,6 @@ public enum BonusMenu {
 
     public static String generateAllMenuDetails() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("<증정 메뉴>").append(System.lineSeparator());
         for (BonusMenu bonusMenu : BonusMenu.values()) {
             stringBuilder.append(bonusMenu.toString()).append(System.lineSeparator());
         }
@@ -34,7 +34,7 @@ public enum BonusMenu {
 
     @Override
     public String toString() {
-        return getName() + " " + Util.createFormattedAmount(quantity) + QUANTITY_UNIT;
+        return getName() + EMPTY_STRING + Util.createFormattedAmount(quantity) + QUANTITY_UNIT;
     }
 
     private String getName() {

@@ -58,23 +58,22 @@ public class DiscountRecord {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("<혜택 내역>").append(System.lineSeparator());
         if (calculateTotalBenefitAmount() == ZERO) {
             stringBuilder.append(NONE).append(System.lineSeparator());
             return stringBuilder.toString();
         }
-        appendDiscountInfo(stringBuilder, "크리스마스 디데이 할인", dDayDiscountAmount);
-        appendDiscountInfo(stringBuilder, "평일 할인", weekdayDiscountAmount);
-        appendDiscountInfo(stringBuilder, "주말 할인", weekendDiscountAmount);
-        appendDiscountInfo(stringBuilder, "특별 할인", specialDayDiscountAmount);
-        appendDiscountInfo(stringBuilder, "증정 이벤트", bonusEventBenefit);
+        appendDiscountInfo(stringBuilder, XMAS_DDAY_DISCOUNT, dDayDiscountAmount);
+        appendDiscountInfo(stringBuilder, WEEKDAY_DISCOUNT, weekdayDiscountAmount);
+        appendDiscountInfo(stringBuilder, WEEKEND_DISCOUNT, weekendDiscountAmount);
+        appendDiscountInfo(stringBuilder, SPECIAL_DISCOUNT, specialDayDiscountAmount);
+        appendDiscountInfo(stringBuilder, BONUS_EVENT, bonusEventBenefit);
 
         return stringBuilder.toString();
     }
 
     private void appendDiscountInfo(StringBuilder stringBuilder, String label, int amount) {
         if (amount != ZERO) {
-            stringBuilder.append(label).append(": -").append(Util.createFormattedAmount(amount)).append(MONEY_UNIT).append(System.lineSeparator());
+            stringBuilder.append(label).append(MESSAGE_DELIMITER).append(Util.createFormattedAmount(amount)).append(MONEY_UNIT).append(System.lineSeparator());
         }
     }
 }

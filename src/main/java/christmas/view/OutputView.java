@@ -29,6 +29,7 @@ public final class OutputView {
     }
 
     public static void printOrderList(Order order) {
+        printMessage("<주문 메뉴>");
         printMessage(order.toString());
     }
 
@@ -45,10 +46,12 @@ public final class OutputView {
             printEmptyLine();
             return;
         }
+        printMessage("<증정 메뉴>");
         printMessage(BonusMenu.generateAllMenuDetails());
     }
 
     public static void printDiscountRecord(DiscountRecord discountRecord) {
+        printMessage("<혜택 내역>");
         printMessage(discountRecord.toString());
     }
 

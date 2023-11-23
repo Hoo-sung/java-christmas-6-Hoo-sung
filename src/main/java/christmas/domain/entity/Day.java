@@ -4,8 +4,8 @@ import static christmas.system.Constant.CHRISTMAS;
 
 public class Day {
 
-    private final int WEEK_LENGTH = 7;
-    private final int FIRSTDATE = 1;
+    private static final int WEEK_LENGTH = 7;
+    private static final int FIRSTDATE = 1;
     private final int day;
 
     public Day(int day) {

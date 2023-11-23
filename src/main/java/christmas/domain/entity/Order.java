@@ -1,5 +1,7 @@
 package christmas.domain.entity;
 
+import christmas.system.IOMessage;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -27,10 +29,9 @@ public class Order {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("<주문 메뉴>").append(System.lineSeparator());
         for (OrderItem orderItem : orderItems) {
             stringBuilder.append(orderItem.getName())
-                    .append(" ")
+                    .append(IOMessage.EMPTY_STRING)
                     .append(orderItem.getQuantity())
                     .append(QUANTITY_UNIT)
                     .append(System.lineSeparator());
