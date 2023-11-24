@@ -3,18 +3,12 @@ package christmas.view;
 import camp.nextstep.edu.missionutils.Console;
 import christmas.domain.entity.Day;
 import christmas.domain.entity.Order;
-import christmas.domain.verifier.OrderMenuVerifier;
-import christmas.domain.verifier.Verifier;
-import christmas.domain.verifier.VisitDateVerifier;
 
-import static christmas.domain.util.Util.*;
+import static christmas.domain.verifier.OrderMenuVerifier.ORDER_MENU_VERIFIER;
+import static christmas.domain.verifier.VisitDateVerifier.VISIT_DATE_VERIFIER;
 import static christmas.view.OutputView.*;
 
 public final class InputView {
-
-    private static final Verifier<String> visitDateVerifier = new VisitDateVerifier();
-    private static final Verifier<String> orderMenuVerifier = new OrderMenuVerifier();
-
 
     private InputView() {
 
@@ -24,7 +18,7 @@ public final class InputView {
         while (true) {
             try {
                 String input = Console.readLine();
-                visitDateVerifier.check(input);
+                VISIT_DATE_VERIFIER.validate(input);
                 return new Day(Integer.parseInt(input));
             } catch (IllegalArgumentException e) {
                 printMessage(e.getMessage());
@@ -36,8 +30,8 @@ public final class InputView {
         while (true) {
             try {
                 String input = Console.readLine();
-                orderMenuVerifier.check(input);
-                return createOrderFromInput(input);
+                ORDER_MENU_VERIFIER.validate(input);
+                return Order.create(input);
             } catch (IllegalArgumentException e) {
                 printMessage(e.getMessage());
             }

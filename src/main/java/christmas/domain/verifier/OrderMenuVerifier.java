@@ -2,7 +2,6 @@ package christmas.domain.verifier;
 
 
 import christmas.domain.entity.Menu;
-
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -12,35 +11,40 @@ import static christmas.system.ExceptionMessage.*;
 
 public class OrderMenuVerifier implements Verifier<String> {
 
+    public static final OrderMenuVerifier ORDER_MENU_VERIFIER = new OrderMenuVerifier();
+
     private final Pattern pattern;
 
-    public OrderMenuVerifier() {
+    private OrderMenuVerifier() {
         this.pattern = Pattern.compile("[가-힣]+-\\d+(,[가-힣]+-\\d+)*");
     }
 
     @Override
-    public void check(String input) {
-        checkMenuFormat(input);
-        checkMenuExistence(input);
-        checkDistinctMenu(input);
-        checkMenuQuantity(input);
+    public void validate(final String input) {
+        validateMenuFormat(input);
     }
 
-    private void checkMenuFormat(String input) {
+    public void validateInputInDomain(final String input) {
+        validateMenuExistence(input);
+        validateDistinctMenu(input);
+        validateMenuQuantity(input);
+    }
+
+    private void validateMenuFormat(final String input) {
         String[] orders = input.split(",");
         for (String order : orders) {
             validateOrderFormat(order);
         }
     }
 
-    private void checkMenuExistence(String input) {
+    private void validateMenuExistence(final String input) {
         String[] orders = input.split(",");
         for (String order : orders) {
             validateOrderExistence(order);
         }
     }
 
-    private void checkDistinctMenu(String input) {
+    private void validateDistinctMenu(final String input) {
         Set<String> uniqueMenuItems = new HashSet<>();
         String[] orders = input.split(",");
         for (String order : orders) {
@@ -48,43 +52,43 @@ public class OrderMenuVerifier implements Verifier<String> {
         }
     }
 
-    private void checkMenuQuantity(String input) {
+    private void validateMenuQuantity(final String input) {
         String[] orders = input.split(",");
         for (String order : orders) {
             validateOrderQuantity(order);
         }
     }
 
-    private void validateOrderFormat(String order) {
+    private void validateOrderFormat(final String order) {
         Matcher matcher = pattern.matcher(order);
         if (!matcher.matches()) {
-            throw new IllegalArgumentException(INVALID_ORDER_MESSAGE);
+            Verifier.throwIllegalArgumentError(INVALID_ORDER_MESSAGE);
         }
     }
 
-    private void validateOrderExistence(String order) {
+    private void validateOrderExistence(final String order) {
         String[] orderInfo = order.split("-");
         if (Menu.getMenuItemByName(orderInfo[0]) == null) {
-            throw new IllegalArgumentException(INVALID_ORDER_MESSAGE);
+            Verifier.throwIllegalArgumentError(INVALID_ORDER_MESSAGE);
         }
     }
 
-    private void validateDistinctMenu(String order, Set<String> uniqueMenuItems) {
+    private void validateDistinctMenu(final String order, Set<String> uniqueMenuItems) {
         String[] orderInfo = order.split("-");
         if (!uniqueMenuItems.add(orderInfo[0])) {
-            throw new IllegalArgumentException(INVALID_ORDER_MESSAGE);
+            Verifier.throwIllegalArgumentError(INVALID_ORDER_MESSAGE);
         }
     }
 
-    private void validateOrderQuantity(String order) {
+    private void validateOrderQuantity(final String order) {
         String[] orderInfo = order.split("-");
         try {
             int quantity = Integer.parseInt(orderInfo[1]);
             if (quantity < 1) {
-                throw new IllegalArgumentException(INVALID_ORDER_MESSAGE);
+                Verifier.throwIllegalArgumentError(INVALID_ORDER_MESSAGE);
             }
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(INVALID_ORDER_MESSAGE);
+            Verifier.throwIllegalArgumentError(INVALID_ORDER_MESSAGE);
         }
     }
 

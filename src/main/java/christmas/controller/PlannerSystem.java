@@ -2,12 +2,10 @@ package christmas.controller;
 
 import christmas.domain.entity.Day;
 import christmas.domain.entity.Order;
-import christmas.domain.verifier.RuntimeVerifier;
-import christmas.domain.verifier.Verifier;
 import christmas.view.InputView;
-
 import java.util.function.Supplier;
 
+import static christmas.domain.verifier.RuntimeVerifier.RUNTIME_VERIFIER;
 import static christmas.system.IOMessage.ORDER_PROMPT_MESSAGE;
 import static christmas.system.IOMessage.VISIT_DATE_PROMPT_MESSAGE;
 import static christmas.view.InputView.*;
@@ -24,19 +22,18 @@ public class PlannerSystem {
         this.day = readDay();
         printEventNotice();
         printMessage(ORDER_PROMPT_MESSAGE);
-        Verifier<Order> runtimeVerifier = new RuntimeVerifier();
-        this.order = readOrder(InputView::tryReadOrder, runtimeVerifier);
+        this.order = readOrder(InputView::tryReadOrder);
         this.settlementSystem = new SettlementSystem(day, order);
     }
     public void run() {
         renderResult();
     }
 
-    private Order readOrder(Supplier<Order> orderSupplier, Verifier<Order> verifier) {
+    private Order readOrder(Supplier<Order> orderSupplier) {
         while (true) {
             try {
                 Order order = orderSupplier.get();
-                verifier.check(order);
+                RUNTIME_VERIFIER.validate(order);
                 return order;
             } catch (IllegalStateException e) {
                 printMessage(e.getMessage());

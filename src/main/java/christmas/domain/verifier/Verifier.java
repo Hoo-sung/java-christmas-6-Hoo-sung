@@ -1,9 +1,14 @@
 package christmas.domain.verifier;
 
 public interface Verifier<T> {
-    public  void check(T input);
 
-    static void throwError(String errorMessage) {
+    abstract public void validate(T input);
+
+    static void throwIllegalArgumentError(String errorMessage) {
         throw new IllegalArgumentException(errorMessage);
+    }
+
+    static void throwIllegalStateError(String errorMessage) {
+        throw new IllegalStateException(errorMessage);
     }
 }

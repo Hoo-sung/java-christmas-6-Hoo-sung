@@ -6,7 +6,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,7 +27,7 @@ class UtilTest {
         void 입력한_주문정보를_바탕으로_주문객체를_잘_반환하는지_테스트(String input, String menu) {
             String[] menuItems = menu.split(",");
 
-            Order order = Util.createOrderFromInput(input);
+            Order order = Order.create(input);
             List<String> actualMenu = order.getOrderItems().stream()
                     .map(OrderItem::getName)
                     .collect(Collectors.toList());

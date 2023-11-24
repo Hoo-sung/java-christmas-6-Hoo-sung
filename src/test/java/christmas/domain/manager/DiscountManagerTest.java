@@ -2,7 +2,6 @@ package christmas.domain.manager;
 
 import christmas.domain.entity.Day;
 import christmas.domain.entity.Order;
-import christmas.domain.util.Util;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -38,7 +37,7 @@ class DiscountManagerTest {
     }, delimiter = ':')
     void 평일_할인_금액_테스트(int dayInput, String orderInput, int expected) {
         Day day = new Day(dayInput);
-        Order order = Util.createOrderFromInput(orderInput);
+        Order order = Order.create(orderInput);
         assertThat(discountManager.calculateWeekDayDiscount(day, order)).isEqualTo(expected);
     }
 
@@ -52,7 +51,7 @@ class DiscountManagerTest {
     }, delimiter = ':')
     void 주말_할인_금액_테스트(int dayInput, String orderInput, int expected) {
         Day day = new Day(dayInput);
-        Order order = Util.createOrderFromInput(orderInput);
+        Order order = Order.create(orderInput);
         assertThat(discountManager.calculateWeekendDiscount(day, order)).isEqualTo(expected);
     }
 

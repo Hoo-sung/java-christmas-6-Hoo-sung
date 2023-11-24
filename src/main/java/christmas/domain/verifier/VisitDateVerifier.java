@@ -1,29 +1,38 @@
 package christmas.domain.verifier;
 
-import java.math.BigInteger;
-
+import static christmas.system.Constant.FIRST_DAY_OF_MONTH;
+import static christmas.system.Constant.LAST_DAY_OF_MONTH;
 import static christmas.system.ExceptionMessage.*;
 
 public class VisitDateVerifier implements Verifier<String> {
 
-    @Override
-    public void check(String input) {
-        checkNumeric(input);
-        checkRange(input);
+    public static final VisitDateVerifier VISIT_DATE_VERIFIER = new VisitDateVerifier();
+
+    private VisitDateVerifier() {
+
     }
 
-    private void checkNumeric(String input) {
+    @Override
+    public void validate(final String input) {
+        validateNumeric(input);
+    }
+
+    public void validateInputInDomain(final int input) {
+        validateRange(input);
+    }
+
+
+    private void validateNumeric(final String input) {
         try {
-            new BigInteger(input);
+            Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(INVALID_DATE_MESSAGE);
+            Verifier.throwIllegalArgumentError(INVALID_DATE_MESSAGE);
         }
     }
 
-    private void checkRange(String input) {
-        BigInteger inputnum = new BigInteger(input);
-        if (inputnum.compareTo(BigInteger.ONE) < 0 || inputnum.compareTo(BigInteger.valueOf(31)) > 0) {
-            throw new IllegalArgumentException(INVALID_DATE_MESSAGE);
+    private void validateRange(final int input) {
+        if (input < FIRST_DAY_OF_MONTH || input > LAST_DAY_OF_MONTH) {
+            Verifier.throwIllegalArgumentError(INVALID_DATE_MESSAGE);
         }
     }
 }

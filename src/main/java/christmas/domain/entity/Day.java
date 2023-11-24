@@ -1,14 +1,16 @@
 package christmas.domain.entity;
 
+import static christmas.domain.verifier.VisitDateVerifier.VISIT_DATE_VERIFIER;
 import static christmas.system.Constant.CHRISTMAS;
+import static christmas.system.Constant.FIRST_DAY_OF_MONTH;
 
 public class Day {
 
     private static final int WEEK_LENGTH = 7;
-    private static final int FIRSTDATE = 1;
     private final int day;
 
     public Day(int day) {
+        VISIT_DATE_VERIFIER.validateInputInDomain(day);
         this.day = day;
     }
 
@@ -17,7 +19,7 @@ public class Day {
     }
 
     public boolean isChristmasSeason() {
-        if (day >= FIRSTDATE && day <= CHRISTMAS) {
+        if (day >= FIRST_DAY_OF_MONTH && day <= CHRISTMAS) {
             return true;
         }
         return false;

@@ -3,18 +3,18 @@ package christmas.domain.entity;
 import christmas.domain.manager.BonusEventManager;
 import christmas.domain.manager.DiscountManager;
 import christmas.domain.entity.subclass.MockDiscountRecord;
-import christmas.domain.util.Util;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.stream.Stream;
+
 
 
 class DiscountRecordTest {
@@ -79,7 +79,7 @@ class DiscountRecordTest {
     }
 
     private static Order createOrder(String orderInput) {
-        return Util.createOrderFromInput(orderInput);
+        return Order.create(orderInput);
     }
 
     ;

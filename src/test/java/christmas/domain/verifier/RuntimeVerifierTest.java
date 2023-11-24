@@ -1,7 +1,6 @@
 package christmas.domain.verifier;
 
 import christmas.domain.entity.Order;
-import christmas.domain.util.Util;
 import christmas.domain.verifier.subclass.MockRuntimeVerifier;
 import christmas.system.ExceptionMessage;
 import org.junit.jupiter.api.DisplayName;
@@ -23,7 +22,7 @@ class RuntimeVerifierTest {
             "시저샐러드-7,바비큐립-8,아이스크림-9",
     })
     void 주문한_메뉴의_개수가_20개를_초과한_경우(String input) {
-        Order order = Util.createOrderFromInput(input);
+        Order order = Order.create(input);
         assertThatThrownBy(() -> mockRuntimeVerifier.checkOrderQuantity(order))
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessageContaining(ExceptionMessage.MAX_ORDER_QUANTITY_EXCEEDED_MESSAGE);
@@ -37,7 +36,7 @@ class RuntimeVerifierTest {
             "제로콜라-3",
     })
     void 음료만_주문한_경우(String input) {
-        Order order = Util.createOrderFromInput(input);
+        Order order = Order.create(input);
         assertThatThrownBy(() -> mockRuntimeVerifier.checkBeverageOnly(order))
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessageContaining(ExceptionMessage.BEVERAGE_ONLY_ORDER_MESSAGE);

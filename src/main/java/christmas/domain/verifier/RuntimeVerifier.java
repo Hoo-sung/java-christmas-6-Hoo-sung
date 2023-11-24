@@ -9,29 +9,33 @@ import static christmas.system.ExceptionMessage.*;
 
 public class RuntimeVerifier implements Verifier<Order> {
 
-    @Override
-    public void check(Order order) {
-        checkOrderQuantity(order);
-        checkBeverageOnly(order);
+    private static final int MAX_QUANTITY = 20;
+    public static final RuntimeVerifier RUNTIME_VERIFIER = new RuntimeVerifier();
+
+    private RuntimeVerifier() {
     }
 
-    private void checkOrderQuantity(Order order) {
+    @Override
+    public void validate(Order order) {
+        validateOrderQuantity(order);
+        validateBeverageOnly(order);
+    }
+
+    private void validateOrderQuantity(Order order) {
         int totalQuantity = order.getOrderItems().stream()
                 .mapToInt(OrderItem::getQuantity)
                 .sum();
-        if (totalQuantity > 20) {
-            throw new IllegalStateException(MAX_ORDER_QUANTITY_EXCEEDED_MESSAGE);
+        if (totalQuantity > MAX_QUANTITY) {
+            Verifier.throwIllegalStateError(MAX_ORDER_QUANTITY_EXCEEDED_MESSAGE);
         }
     }
 
-    private void checkBeverageOnly(Order order) {
+    private void validateBeverageOnly(Order order) {
         for (OrderItem orderItem : order.getOrderItems()) {
             if (orderItem.getMenuType() != BEVERAGE) {
                 return;
             }
         }
-        throw new IllegalStateException(BEVERAGE_ONLY_ORDER_MESSAGE);
+        Verifier.throwIllegalStateError(BEVERAGE_ONLY_ORDER_MESSAGE);
     }
-
-
 }
