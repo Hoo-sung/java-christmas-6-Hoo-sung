@@ -32,6 +32,7 @@ public class Order {
                 count += orderItem.getQuantity();
             }
         }
+        return count;
     }
 
     public List<OrderItem> getOrderItems() {
