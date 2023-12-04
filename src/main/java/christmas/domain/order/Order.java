@@ -1,4 +1,6 @@
-package christmas.domain;
+package christmas.domain.order;
+
+import christmas.domain.MenuType;
 
 import java.util.Collections;
 import java.util.List;
@@ -9,6 +11,7 @@ public class Order {
     private final OrderDay day;
 
     public Order(List<OrderItem> orderItems, OrderDay day) {
+        //validate order
         this.orderItems = orderItems;
         this.day = day;
     }

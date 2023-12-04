@@ -1,6 +1,7 @@
-package christmas.domain;
+package christmas.domain.order;
 
-import static christmas.domain.Menu.getMenuItemByName;
+import christmas.domain.Menu;
+import christmas.domain.MenuType;
 
 public class OrderItem {
 

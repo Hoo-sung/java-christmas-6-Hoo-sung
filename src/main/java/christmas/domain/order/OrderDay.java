@@ -1,4 +1,4 @@
-package christmas.domain;
+package christmas.domain.order;
 
 import static christmas.system.Constant.CHRISTMAS;
 import static christmas.system.Constant.FIRST_DAY_OF_MONTH;
@@ -6,9 +6,13 @@ import static christmas.system.Constant.FIRST_DAY_OF_MONTH;
 public class OrderDay {
 
     private static final int WEEK_LENGTH = 7;
+
+    private static final int MIN_DAY = 1;
+    private static final int MAX_DAY = 31;
     private final int day;
 
     public OrderDay(int day) {
+        validate(day);
         this.day = day;
     }
 
@@ -70,6 +74,12 @@ public class OrderDay {
             return true;
         }
         return false;
+    }
+
+    private void validate(int day){
+        if (day <MIN_DAY || day > MAX_DAY){
+            throw new IllegalArgumentException("숫자 범위 예외");
+        }
     }
 
 }
