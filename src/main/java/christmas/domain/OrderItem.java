@@ -12,14 +12,23 @@ public class OrderItem {
         this.quantity = quantity;
     }
 
-    public static OrderItem populateOrderItemFromInput(String input){
-        String[] orderItemSpec = input.split("-");
-        String menu = orderItemSpec[0];
-        int quantity = Integer.parseInt(orderItemSpec[1]);
-        return new OrderItem(getMenuItemByName(menu), quantity);
+    public boolean isSameMenuType(MenuType menuType) {
+        return menu.getMenuType() == menuType;
     }
 
-    public int calculateTotalItemAmount(){
+    public String getMenuName() {
+        return menu.getName();
+    }
+
+    public int getPrice() {
+        return menu.getPrice() * quantity;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public int calculateTotalItemAmount() {
         return menu.getPrice() * quantity;
     }
 
