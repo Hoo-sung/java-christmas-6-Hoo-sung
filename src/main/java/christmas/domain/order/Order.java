@@ -24,6 +24,10 @@ public class Order {
         return sum;
     }
 
+    public OrderDay getOrderDay(){
+        return day;
+    }
+
     public int getDay() {
         return day.getDay();
     }

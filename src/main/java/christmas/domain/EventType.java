@@ -48,6 +48,7 @@ public enum EventType {
         if (day.isSpecialDay()) {
             applicableEventTypes.add(EventType.SPECIAL);
         }
+        return applicableEventTypes;
     }
 
     public int calculateDiscount(int calculateArgument) {
