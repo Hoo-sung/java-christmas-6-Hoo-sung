@@ -1,5 +1,9 @@
 package christmas.domain;
 
+import christmas.domain.order.OrderDay;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Function;
 
 public enum EventType {
@@ -29,7 +33,24 @@ public enum EventType {
         this.calculator = calculator;
     }
 
-    public int calculateDiscount(int calculateArgument){
+    public static List<EventType> getApplicableEventTypes(OrderDay day) {
+        List<EventType> applicableEventTypes = new ArrayList<>();
+
+        if (day.isChristmasSeason()) {
+            applicableEventTypes.add(EventType.CHRISTMAS);
+        }
+        if (day.isWeekday()) {
+            applicableEventTypes.add(EventType.WEEKDAY);
+        }
+        if (day.isWeekend()) {
+            applicableEventTypes.add(EventType.WEEKEND);
+        }
+        if (day.isSpecialDay()) {
+            applicableEventTypes.add(EventType.SPECIAL);
+        }
+    }
+
+    public int calculateDiscount(int calculateArgument) {
         return calculator.apply(calculateArgument);
     }
 
