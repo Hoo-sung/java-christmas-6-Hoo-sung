@@ -12,7 +12,7 @@ import christmas.service.order.OrderService;
 
 import java.util.Optional;
 
-public class ChristmasController {
+public class PlannerSystem {
 
     private final OrderService orderService;
 
@@ -20,7 +20,7 @@ public class ChristmasController {
 
     private final BadgeService badgeService;
 
-    public ChristmasController(OrderService orderService, EventService eventService, BadgeService badgeService) {
+    public PlannerSystem(OrderService orderService, EventService eventService, BadgeService badgeService) {
         this.orderService = orderService;
         this.eventService = eventService;
         this.badgeService = badgeService;
