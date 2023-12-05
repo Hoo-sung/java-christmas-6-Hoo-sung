@@ -10,26 +10,31 @@ import christmas.service.order.OrderService;
 
 public class ApplicationConfiguration {
 
-    public FrontController frontController(){
+    public FrontController frontController() {
         return new FrontController(plannerSystem());
     }
-    public PlannerSystem plannerSystem(){
-        return new PlannerSystem(orderService(),eventService(),badgeService());
+
+    public PlannerSystem plannerSystem() {
+        return new PlannerSystem(orderService(), eventService(), badgeService());
     }
 
-    public OrderService orderService(){
+    public OrderService orderService() {
         return new OrderService();
     }
-    public EventService eventService(){
+
+    public EventService eventService() {
         return new EventService(discountEventService(), giftEventService());
     }
-    public DiscountEventService discountEventService(){
+
+    public DiscountEventService discountEventService() {
         return new DiscountEventService();
     }
-    public FreeGiftEventService giftEventService(){
+
+    public FreeGiftEventService giftEventService() {
         return new FreeGiftEventService();
     }
-    public BadgeService badgeService(){
+
+    public BadgeService badgeService() {
         return new BadgeService();
     }
 
