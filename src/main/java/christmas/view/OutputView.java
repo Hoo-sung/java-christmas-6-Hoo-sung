@@ -6,6 +6,8 @@ import christmas.domain.event.FreeGift;
 import christmas.domain.order.Order;
 import christmas.domain.order.OrderDay;
 
+import java.util.Optional;
+
 import static christmas.system.Constant.ZERO;
 import static christmas.system.IOMessage.MONEY_UNIT;
 import static christmas.system.IOMessage.NONE;
@@ -29,8 +31,8 @@ public final class OutputView {
         printEmptyLine();
     }
 
-    public void printResultStartMessage(OrderDay day) {
-        printMessage("12월 " + day.getDay() + "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
+    public void printPreviewEventMessage(int day) {
+        printMessage("12월 " + day + "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
         printEmptyLine();
     }
 

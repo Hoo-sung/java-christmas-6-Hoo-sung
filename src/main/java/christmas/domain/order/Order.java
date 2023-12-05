@@ -1,11 +1,13 @@
 package christmas.domain.order;
 
 import christmas.domain.MenuType;
+import christmas.system.IOMessage;
 
 import java.util.Collections;
 import java.util.List;
 
 import static christmas.domain.order.OrderValidator.ORDER_VALIDATOR;
+import static christmas.system.IOMessage.QUANTITY_UNIT;
 
 public class Order {
 
@@ -46,5 +48,18 @@ public class Order {
 
     public List<OrderItem> getOrderItems() {
         return Collections.unmodifiableList(orderItems);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (OrderItem orderItem : orderItems) {
+            stringBuilder.append(orderItem.getMenuName())
+                    .append(IOMessage.EMPTY_STRING)
+                    .append(orderItem.getQuantity())
+                    .append(QUANTITY_UNIT)
+                    .append(System.lineSeparator());
+        }
+        return stringBuilder.toString();
     }
 }

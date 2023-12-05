@@ -20,17 +20,17 @@ public class EventService {
         this.freeGiftEventService = freeGiftEventService;
     }
 
-    public Optional<DiscountRecord> applyDiscountEvent(final Order order) {
+    public DiscountRecord applyDiscountEvent(final Order order) {
         if (order.getTotalOrderPrice() >= APPLICABLE_MIN_TOTAL_PRICE) {
-            return Optional.of(discountEventService.calculateDiscountEvent(order));
+            return discountEventService.calculateDiscountEvent(order);
         }
-        return Optional.empty();
+        return null;
     }
 
-    public Optional<FreeGift> applyFreeGiftEvent(final Order order) {
+    public FreeGift applyFreeGiftEvent(final Order order) {
         if (order.getTotalOrderPrice() >= APPLICABLE_MIN_TOTAL_PRICE) {
             return freeGiftEventService.calculateGiftEvent(order.getTotalOrderPrice());
         }
-        return Optional.empty();
+        return null;
     }
 }

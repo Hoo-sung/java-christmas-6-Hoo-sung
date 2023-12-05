@@ -34,15 +34,18 @@ public class PlannerSystem {
         return orderService.createOrder(orderRequest);
     }
 
-    public Optional<DiscountRecord> discountEvent(final Order order){
+    public DiscountRecord discountEvent(final Order order){
         return eventService.applyDiscountEvent(order);
     }
 
-    public Optional<FreeGift> giftEvent(final Order order){
+    public FreeGift giftEvent(final Order order){
         return eventService.applyFreeGiftEvent(order);
     }
 
-    public Optional<EventBadge> badge(final int totalDiscountAmount){
-        return badgeService.applyBadge(totalDiscountAmount);
+    public EventBadge badge(final DiscountRecord discountRecord){
+        if(discountRecord == null){
+            return null;
+        }
+        return badgeService.applyBadge(discountRecord.getTotalDiscountAmount());
     }
 }
