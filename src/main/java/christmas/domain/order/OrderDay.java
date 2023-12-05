@@ -2,6 +2,7 @@ package christmas.domain.order;
 
 import static christmas.system.Constant.CHRISTMAS;
 import static christmas.system.Constant.FIRST_DAY_OF_MONTH;
+import static christmas.system.ExceptionMessage.INVALID_DATE_MESSAGE;
 
 public class OrderDay {
 
@@ -80,7 +81,7 @@ public class OrderDay {
 
     private void validate(int day){
         if (day <MIN_DAY || day > MAX_DAY){
-            throw new IllegalArgumentException("숫자 범위 예외");
+            throw new IllegalArgumentException(INVALID_DATE_MESSAGE);
         }
     }
 

@@ -3,6 +3,9 @@ package christmas.domain.order;
 import christmas.domain.Menu;
 import christmas.domain.MenuType;
 
+import static christmas.system.ExceptionMessage.INVALID_ORDER_MESSAGE;
+import static christmas.system.ExceptionMessage.MAX_ORDER_QUANTITY_EXCEEDED_MESSAGE;
+
 public class OrderItem {
     /**
      * OrderItem domain에서의 검증
@@ -28,12 +31,13 @@ public class OrderItem {
     }
 
     private Menu validateExistMenu(String menuName) {
-        return Menu.findMenuItemByName(menuName).orElseThrow(IllegalArgumentException::new);
+        return Menu.findMenuItemByName(menuName)
+                .orElseThrow(() -> new IllegalArgumentException(INVALID_ORDER_MESSAGE));
     }
 
     private void validateQuantity(int quantity) {
-        if (isOutOfRange(quantity)){
-            throw new IllegalArgumentException();
+        if (isOutOfRange(quantity)) {
+            throw new IllegalArgumentException(INVALID_ORDER_MESSAGE);
         }
     }
 
