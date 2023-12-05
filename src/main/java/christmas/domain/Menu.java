@@ -3,6 +3,7 @@ package christmas.domain;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import static christmas.domain.MenuType.*;
 
@@ -40,9 +41,8 @@ public enum Menu {
             MENU_MAP.put(menu.name, menu);
         }
     }
-
-    public static Menu getMenuItemByName(String name){
-        return MENU_MAP.get(name);
+    public static Optional<Menu> findMenuItemByName(String name){
+        return Optional.of(MENU_MAP.get(name));
     }
 
     public String getName() {

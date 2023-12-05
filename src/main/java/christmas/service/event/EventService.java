@@ -11,9 +11,9 @@ import java.util.Optional;
 public class EventService {
     private static final int APPLICABLE_MIN_TOTAL_PRICE = 10000;
 
-    private DiscountEventService discountEventService;
+    private final DiscountEventService discountEventService;
 
-    private FreeGiftEventService freeGiftEventService;
+    private final FreeGiftEventService freeGiftEventService;
 
     public EventService(DiscountEventService discountEventService, FreeGiftEventService freeGiftEventService) {
         this.discountEventService = discountEventService;

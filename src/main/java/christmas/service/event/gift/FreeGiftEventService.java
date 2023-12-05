@@ -1,7 +1,6 @@
 package christmas.service.event.gift;
 
 import christmas.domain.Menu;
-import christmas.domain.MenuType;
 import christmas.domain.event.FreeGift;
 
 import java.util.Optional;

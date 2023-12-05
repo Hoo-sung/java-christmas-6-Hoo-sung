@@ -10,10 +10,10 @@ public class Order {
     private final List<OrderItem> orderItems;
     private final OrderDay day;
 
-    public Order(List<OrderItem> orderItems, OrderDay day) {
+    public Order(List<OrderItem> orderItems, int day) {
         //validate order
         this.orderItems = orderItems;
-        this.day = day;
+        this.day = new OrderDay(day);
     }
 
     public int getTotalOrderPrice() {

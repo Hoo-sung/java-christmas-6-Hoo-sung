@@ -5,8 +5,10 @@ import static christmas.system.Constant.FIRST_DAY_OF_MONTH;
 
 public class OrderDay {
 
+    /**
+     * OrderDay 도메인은 1부터 31 사이인지 검증하는 역할
+     */
     private static final int WEEK_LENGTH = 7;
-
     private static final int MIN_DAY = 1;
     private static final int MAX_DAY = 31;
     private final int day;
