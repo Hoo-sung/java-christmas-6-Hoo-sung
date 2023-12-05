@@ -5,13 +5,15 @@ import christmas.domain.MenuType;
 import java.util.Collections;
 import java.util.List;
 
+import static christmas.domain.order.OrderValidator.ORDER_VALIDATOR;
+
 public class Order {
 
     private final List<OrderItem> orderItems;
     private final OrderDay day;
 
     public Order(List<OrderItem> orderItems, int day) {
-        //validate order
+        ORDER_VALIDATOR.validate(orderItems);
         this.orderItems = orderItems;
         this.day = new OrderDay(day);
     }
