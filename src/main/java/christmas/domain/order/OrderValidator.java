@@ -62,7 +62,7 @@ public class OrderValidator {
     }
 
     private void validateOnlyDrinkMenu(List<OrderItem> orderMenus) {
-        if (!isAllMenuBeverage(orderMenus)) {
+        if (isAllMenuBeverage(orderMenus)) {
             throw new IllegalStateException(BEVERAGE_ONLY_ORDER_MESSAGE);
         }
     }
@@ -74,6 +74,6 @@ public class OrderValidator {
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .map(Menu::getMenuType)
-                .allMatch(menyType -> menyType.equals(MenuType.BEVERAGE));
+                .allMatch(menuType -> menuType.equals(MenuType.BEVERAGE));
     }
 }

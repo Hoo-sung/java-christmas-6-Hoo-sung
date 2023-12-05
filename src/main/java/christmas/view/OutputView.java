@@ -4,9 +4,7 @@ import christmas.domain.EventBadge;
 import christmas.domain.event.DiscountRecord;
 import christmas.domain.event.FreeGift;
 import christmas.domain.order.Order;
-import christmas.domain.order.OrderDay;
-
-import java.util.Optional;
+import christmas.system.IOMessage;
 
 import static christmas.system.Constant.ZERO;
 import static christmas.system.IOMessage.MONEY_UNIT;
@@ -54,35 +52,63 @@ public final class OutputView {
             printEmptyLine();
             return;
         }
-        printMessage(freeGift.getGiftName());
+        printMessage(freeGift.getGiftName() + IOMessage.EMPTY_STRING + freeGift.getQuantity() + IOMessage.QUANTITY_UNIT);
+        printEmptyLine();
     }
 
-    public void printDiscountRecord(DiscountRecord discountRecord) {
+    public void printDiscountRecord(DiscountRecord discountRecord, FreeGift freeGift) {
         printMessage("<혜택 내역>");
-        printMessage(discountRecord.toString());
+        if (discountRecord == null && freeGift == null) {
+            printMessage(NONE);
+            printEmptyLine();
+            return;
+        }
+        if (discountRecord != null) {
+            printMessage(discountRecord.toString());
+        }
+        if (freeGift != null) {
+            printMessage(freeGift.toString());
+        }
+
     }
 
-    public void printTotalDiscountAmount(DiscountRecord discountRecord) {
+    public void printTotalBenefitAmount(DiscountRecord discountRecord, FreeGift freeGift) {
         printMessage("<총혜택 금액>");
-        int totalDiscountAmount = discountRecord.getTotalDiscountAmount();
-        if (totalDiscountAmount == ZERO) {
+        int totalBenefitAmount = 0;
+        if (discountRecord != null) {
+            totalBenefitAmount += discountRecord.getTotalDiscountAmount();
+        }
+        if (freeGift != null) {
+            totalBenefitAmount += freeGift.calculateBenefitPrice();
+        }
+        if (totalBenefitAmount == ZERO) {
             printMessage(ZERO + MONEY_UNIT);
             printEmptyLine();
             return;
         }
-        printMessage("-" + createFormattedAmount(totalDiscountAmount) + MONEY_UNIT);
+        printMessage("-" + createFormattedAmount(totalBenefitAmount) + MONEY_UNIT);
         printEmptyLine();
     }
 
-    public void printExpectedPayment(DiscountRecord discountRecord) {
-        int expectedPayment = discountRecord.getTotalDiscountAmount();
+    public void printExpectedPayment(Order order, DiscountRecord discountRecord) {
         printMessage("<할인 후 예상 결제 금액>");
-        printMessage(createFormattedAmount(expectedPayment) + MONEY_UNIT);
+        if (discountRecord == null) {
+            printMessage(createFormattedAmount(order.getTotalOrderPrice()) + MONEY_UNIT);
+            printEmptyLine();
+            return;
+        }
+        int totalDiscountAmount = discountRecord.getTotalDiscountAmount();
+        printMessage(createFormattedAmount(order.getTotalOrderPrice() - totalDiscountAmount) + MONEY_UNIT);
         printEmptyLine();
+
     }
 
     public void printEventBadge(EventBadge badge) {
         printMessage("<12월 이벤트 배지>");
+        if(badge == null){
+            printMessage(NONE);
+            return;
+        }
         printMessage(badge.getName());
     }
 

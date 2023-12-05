@@ -26,26 +26,30 @@ public class PlannerSystem {
         this.badgeService = badgeService;
     }
 
-    public OrderDay createOrderDay(final int date){
+    public OrderDay createOrderDay(final int date) {
         return new OrderDay(date);
     }
 
-    public Order createOrder(final OrderRequest orderRequest){
+    public Order createOrder(final OrderRequest orderRequest) {
         return orderService.createOrder(orderRequest);
     }
 
-    public DiscountRecord discountEvent(final Order order){
+    public DiscountRecord discountEvent(final Order order) {
         return eventService.applyDiscountEvent(order);
     }
 
-    public FreeGift giftEvent(final Order order){
+    public FreeGift giftEvent(final Order order) {
         return eventService.applyFreeGiftEvent(order);
     }
 
-    public EventBadge badge(final DiscountRecord discountRecord){
-        if(discountRecord == null){
-            return null;
+    public EventBadge badge(final DiscountRecord discountRecord, FreeGift freeGift) {
+        int totalBenefitAmount = 0;
+        if (discountRecord != null) {
+            totalBenefitAmount += discountRecord.getTotalDiscountAmount();
         }
-        return badgeService.applyBadge(discountRecord.getTotalDiscountAmount());
+        if (freeGift != null) {
+            totalBenefitAmount += freeGift.calculateBenefitPrice();
+        }
+        return badgeService.applyBadge(totalBenefitAmount);
     }
 }

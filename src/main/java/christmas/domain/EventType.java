@@ -33,6 +33,10 @@ public enum EventType {
         this.calculator = calculator;
     }
 
+    public String getEventName() {
+        return eventName;
+    }
+
     public static List<EventType> getApplicableEventTypes(OrderDay day) {
         List<EventType> applicableEventTypes = new ArrayList<>();
 

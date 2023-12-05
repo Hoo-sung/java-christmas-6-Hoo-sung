@@ -57,16 +57,16 @@ public class FrontController {
    private void processChristmasPromotion(final Order order){
        DiscountRecord discountRecord = plannerSystem.discountEvent(order);
        FreeGift freeGift = plannerSystem.giftEvent(order);
-       EventBadge badge = plannerSystem.badge(discountRecord);
-       renderingResult(discountRecord,freeGift,badge);
+       EventBadge badge = plannerSystem.badge(discountRecord,freeGift);
+       renderingResult(order,discountRecord,freeGift,badge);
 
    }
 
-   private void renderingResult(DiscountRecord discountRecord, FreeGift freeGift, EventBadge eventBadge){
+   private void renderingResult(Order order,DiscountRecord discountRecord, FreeGift freeGift, EventBadge eventBadge){
        OUTPUT_VIEW.printBonusMenu(freeGift);
-       OUTPUT_VIEW.printDiscountRecord(discountRecord);
-       OUTPUT_VIEW.printTotalDiscountAmount(discountRecord);
-       OUTPUT_VIEW.printExpectedPayment(discountRecord);
+       OUTPUT_VIEW.printDiscountRecord(discountRecord,freeGift);
+       OUTPUT_VIEW.printTotalBenefitAmount(discountRecord,freeGift);
+       OUTPUT_VIEW.printExpectedPayment(order,discountRecord);
        OUTPUT_VIEW.printEventBadge(eventBadge);
    }
 
