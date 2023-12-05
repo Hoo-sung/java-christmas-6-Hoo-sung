@@ -6,9 +6,15 @@ import christmas.domain.event.FreeGift;
 import christmas.domain.order.Order;
 import christmas.domain.order.OrderDay;
 import christmas.dto.request.OrderRequest;
+import christmas.dto.response.BadgeResponse;
+import christmas.dto.response.DiscountResponse;
+import christmas.dto.response.FreeGiftResponse;
 import christmas.service.badge.BadgeService;
 import christmas.service.event.EventService;
 import christmas.service.order.OrderService;
+import christmas.util.Mapper.BadgeResponseMapper;
+import christmas.util.Mapper.DiscountResponseMapper;
+import christmas.util.Mapper.FreeGiftResponseMapper;
 
 import java.util.Optional;
 
@@ -34,22 +40,25 @@ public class PlannerSystem {
         return orderService.createOrder(orderRequest);
     }
 
-    public DiscountRecord discountEvent(final Order order) {
-        return eventService.applyDiscountEvent(order);
+    public DiscountResponse discountEvent(final Order order) {
+        final Optional<DiscountRecord> discountRecord = eventService.applyDiscountEvent(order);
+
+        return discountRecord.map(DiscountResponseMapper::of)
+                .orElseGet(DiscountResponseMapper::of);
     }
 
-    public FreeGift giftEvent(final Order order) {
-        return eventService.applyFreeGiftEvent(order);
+    public FreeGiftResponse giftEvent(final Order order) {
+        final Optional<FreeGift> freeGift = eventService.applyFreeGiftEvent(order);
+
+        return freeGift.map(FreeGiftResponseMapper::of)
+                .orElseGet(FreeGiftResponseMapper::of);
     }
 
-    public EventBadge badge(final DiscountRecord discountRecord, FreeGift freeGift) {
-        int totalBenefitAmount = 0;
-        if (discountRecord != null) {
-            totalBenefitAmount += discountRecord.getTotalDiscountAmount();
-        }
-        if (freeGift != null) {
-            totalBenefitAmount += freeGift.calculateBenefitPrice();
-        }
-        return badgeService.applyBadge(totalBenefitAmount);
+    public BadgeResponse badge(final int totalDiscountAmount, final int freeGift) {
+        final Optional<EventBadge> eventBadge = badgeService.applyBadge(totalDiscountAmount + freeGift);
+
+        return eventBadge.map(BadgeResponseMapper::of)
+                .orElseGet(BadgeResponseMapper::of);
     }
+
 }

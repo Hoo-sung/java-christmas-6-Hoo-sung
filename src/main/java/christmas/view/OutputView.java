@@ -1,123 +1,117 @@
 package christmas.view;
 
-import christmas.domain.EventBadge;
-import christmas.domain.event.DiscountRecord;
-import christmas.domain.event.FreeGift;
-import christmas.domain.order.Order;
-import christmas.system.IOMessage;
+import christmas.dto.response.*;
 
-import static christmas.system.Constant.ZERO;
-import static christmas.system.IOMessage.MONEY_UNIT;
-import static christmas.system.IOMessage.NONE;
-import static christmas.util.Formatting.createFormattedAmount;
+import java.text.DecimalFormat;
+import java.util.Map;
+
+
 
 public final class OutputView {
 
     public static OutputView OUTPUT_VIEW = new OutputView();
 
+    private static final DecimalFormat PRICE_FORMAT = new DecimalFormat("###,###원\n");
+    private static final String NOTHING = "없음";
+    private static final String START_MESSAGE = "안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.";
+    private static final String PREVIEW_MESSAGE = "12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n";
+
+    private static final String ORDER_MENU_MESSAGE = "\n<주문 메뉴>";
+    private static final String ORDER_MENU_RESULT_FORM = "%s %d개\n";
+
+    private static final String TOTAL_ORDER_AMOUNT_MESSAGE = "\n<할인 전 총주문 금액>";
+
+    private static final String FREE_GIFT_MESSAGE = "\n<증정 메뉴>";
+    private static final String FREE_GIFT_RESULT_FORM = "%s %d개\n";
+    private static final String FREE_GIFT = "증정 이벤트";
+    private static final String BENEFIT_MESSAGE = "\n<혜택 내역>";
+    private static final String BENEFIT_RESULT_FORM = "%s: %s";
+
+    private static final String TOTAL_BENEFIT_PRICE_MESSAGE = "\n<총혜택 금액>";
+
+    private static final String EXPECTED_PAYMENT_MESSAGE = "\n<할인 후 예상 결제 금액>";
+    private static final String BADGE_MESSAGE = "\n<12월 이벤트 배지>";
+
     private OutputView() {
 
     }
-
-    public void printEventNotice() {
-        printEmptyLine();
-        printMessage("고객님께 안내드릴 이벤트 주의 사항!!!");
-        printMessage("1. 총주문 금액 10,000원 이상부터 이벤트가 적용됩니다.");
-        printMessage("2. 음료만 주문 시, 주문할 수 없습니다.");
-        printMessage("3. 메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다.");
-        printMessage("(e.g. 시저샐러드-1, 티본스테이크-1, 크리스마스파스타-1, 제로콜라-3, 아이스크림-1의 총개수는 7개 입니다.!)");
-        printEmptyLine();
+    public void printStartMessage() {
+        System.out.println(START_MESSAGE);
     }
 
-    public void printPreviewEventMessage(int day) {
-        printMessage("12월 " + day + "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
-        printEmptyLine();
+    public void printPreviewEventMessage(int date) {
+        System.out.printf(PREVIEW_MESSAGE, date);
     }
 
-    public void printOrderList(Order order) {
-        printMessage("<주문 메뉴>");
-        printMessage(order.toString());
+    public void printOrderMenus(OrderResponse orderResponse) {
+        System.out.println(ORDER_MENU_MESSAGE);
+        for (OrderItemResponse orderItemResponse : orderResponse.getOrderItemResponses()) {
+            System.out.printf(ORDER_MENU_RESULT_FORM, orderItemResponse.getMenuName(), orderItemResponse.getQuantity());
+        }
     }
 
-    public void printOriginalTotalAmount(Order order) {
-        printMessage("<할인 전 총주문 금액>");
-        printMessage(createFormattedAmount(order.getTotalOrderPrice()) + MONEY_UNIT);
-        printEmptyLine();
+    public void printOriginalTotalAmount(OrderResponse orderResponse) {
+        System.out.println(TOTAL_ORDER_AMOUNT_MESSAGE);
+        System.out.printf(PRICE_FORMAT.format(orderResponse.getTotalPrice()));
     }
 
-    public void printBonusMenu(FreeGift freeGift) {
-        printMessage("<증정 메뉴>");
-        if (freeGift == null) {
-            printMessage(NONE);
-            printEmptyLine();
+    public void printFreeGiftResult(FreeGiftResponse freeGiftResponse) {
+        System.out.println(FREE_GIFT_MESSAGE);
+        if (freeGiftResponse.isEmpty()) {
+            System.out.println(NOTHING);
             return;
         }
-        printMessage(freeGift.getGiftName() + IOMessage.EMPTY_STRING + freeGift.getQuantity() + IOMessage.QUANTITY_UNIT);
-        printEmptyLine();
+        System.out.printf(FREE_GIFT_RESULT_FORM, freeGiftResponse.getName(), freeGiftResponse.getBenefitPrice());
     }
 
-    public void printDiscountRecord(DiscountRecord discountRecord, FreeGift freeGift) {
-        printMessage("<혜택 내역>");
-        if (discountRecord == null && freeGift == null) {
-            printMessage(NONE);
-            printEmptyLine();
+    public void printBenefitResult(DiscountResponse discountResponse, FreeGiftResponse freeGiftResponse) {
+        System.out.println(BENEFIT_MESSAGE);
+        if (discountResponse.isEmpty() && freeGiftResponse.isEmpty()) {
+            System.out.println(NOTHING);
             return;
         }
-        if (discountRecord != null) {
-            printMessage(discountRecord.toString());
-        }
-        if (freeGift != null) {
-            printMessage(freeGift.toString());
-        }
-
+        printDiscountBenefit(discountResponse);
+        printFreeGiftBenefit(freeGiftResponse);
     }
 
-    public void printTotalBenefitAmount(DiscountRecord discountRecord, FreeGift freeGift) {
-        printMessage("<총혜택 금액>");
-        int totalBenefitAmount = 0;
-        if (discountRecord != null) {
-            totalBenefitAmount += discountRecord.getTotalDiscountAmount();
-        }
-        if (freeGift != null) {
-            totalBenefitAmount += freeGift.calculateBenefitPrice();
-        }
-        if (totalBenefitAmount == ZERO) {
-            printMessage(ZERO + MONEY_UNIT);
-            printEmptyLine();
+    private void printDiscountBenefit(DiscountResponse discountResponse) {
+        if (discountResponse.isEmpty()) {
             return;
         }
-        printMessage("-" + createFormattedAmount(totalBenefitAmount) + MONEY_UNIT);
-        printEmptyLine();
+        for (Map.Entry<String, Integer> eventNameAndDiscount : discountResponse.getEventNameAndDiscount().entrySet()) {
+            System.out.printf(BENEFIT_RESULT_FORM, eventNameAndDiscount.getKey(),
+                    PRICE_FORMAT.format(eventNameAndDiscount.getValue()));
+        }
     }
 
-    public void printExpectedPayment(Order order, DiscountRecord discountRecord) {
-        printMessage("<할인 후 예상 결제 금액>");
-        if (discountRecord == null) {
-            printMessage(createFormattedAmount(order.getTotalOrderPrice()) + MONEY_UNIT);
-            printEmptyLine();
+    private void printFreeGiftBenefit(FreeGiftResponse freeGiftResponse) {
+        if (freeGiftResponse.isEmpty()) {
             return;
         }
-        int totalDiscountAmount = discountRecord.getTotalDiscountAmount();
-        printMessage(createFormattedAmount(order.getTotalOrderPrice() - totalDiscountAmount) + MONEY_UNIT);
-        printEmptyLine();
-
+        System.out.printf(BENEFIT_RESULT_FORM, FREE_GIFT,
+                PRICE_FORMAT.format(freeGiftResponse.getBenefitPrice()));
     }
 
-    public void printEventBadge(EventBadge badge) {
-        printMessage("<12월 이벤트 배지>");
-        if(badge == null){
-            printMessage(NONE);
+    public void printTotalBenefitAmount(DiscountResponse discountResponse, FreeGiftResponse freeGiftResponse) {
+        System.out.println(TOTAL_BENEFIT_PRICE_MESSAGE);
+        int totalBenefitPrice = discountResponse.getTotalDiscountAmount() + freeGiftResponse.getBenefitPrice();
+        System.out.printf(PRICE_FORMAT.format(totalBenefitPrice));
+    }
+
+    public void printExpectedPayment(OrderResponse orderResponse, DiscountResponse discountResponse) {
+        System.out.println(EXPECTED_PAYMENT_MESSAGE);
+        int expectedPayment = orderResponse.getTotalPrice() + discountResponse.getTotalDiscountAmount();
+        System.out.printf(PRICE_FORMAT.format(expectedPayment));
+    }
+
+    public void printEventBadge(BadgeResponse badgeResponse) {
+        System.out.println(BADGE_MESSAGE);
+        if (badgeResponse.isEmpty()) {
+            System.out.println(NOTHING);
             return;
         }
-        printMessage(badge.getName());
+        System.out.print(badgeResponse.getBadgeName());
     }
 
-    public void printMessage(String message) {
-        System.out.println(message);
-    }
-
-    public void printEmptyLine() {
-        System.out.println();
-    }
 
 }

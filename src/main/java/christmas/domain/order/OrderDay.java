@@ -1,7 +1,6 @@
 package christmas.domain.order;
 
-import static christmas.system.Constant.CHRISTMAS;
-import static christmas.system.Constant.FIRST_DAY_OF_MONTH;
+
 import static christmas.system.ExceptionMessage.INVALID_DATE_MESSAGE;
 
 public class OrderDay {
@@ -12,6 +11,7 @@ public class OrderDay {
     private static final int WEEK_LENGTH = 7;
     private static final int MIN_DAY = 1;
     private static final int MAX_DAY = 31;
+    private static final int CHRISTMAS = 25;
     private final int day;
 
     public OrderDay(int day) {
@@ -24,7 +24,7 @@ public class OrderDay {
     }
 
     public boolean isChristmasSeason() {
-        if (day >= FIRST_DAY_OF_MONTH && day <= CHRISTMAS) {
+        if (day >= MIN_DAY && day <= CHRISTMAS) {
             return true;
         }
         return false;

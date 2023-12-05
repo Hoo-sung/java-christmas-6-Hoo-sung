@@ -1,4 +1,4 @@
-package christmas.util;
+package christmas.util.Mapper;
 
 import christmas.dto.request.OrderItemRequest;
 import christmas.dto.request.OrderRequest;

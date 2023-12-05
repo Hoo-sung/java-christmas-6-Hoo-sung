@@ -1,13 +1,14 @@
 package christmas.controller;
 
-import christmas.domain.EventBadge;
-import christmas.domain.event.DiscountRecord;
-import christmas.domain.event.FreeGift;
 import christmas.domain.order.Order;
 import christmas.domain.order.OrderDay;
 import christmas.dto.request.OrderRequest;
-import christmas.system.IOMessage;
-import christmas.util.OrderRequestMapper;
+import christmas.dto.response.BadgeResponse;
+import christmas.dto.response.DiscountResponse;
+import christmas.dto.response.FreeGiftResponse;
+import christmas.dto.response.OrderResponse;
+import christmas.util.Mapper.OrderRequestMapper;
+import christmas.util.Mapper.OrderResponseMapper;
 
 
 import static christmas.view.InputView.INPUT_VIEW;
@@ -25,13 +26,14 @@ public class FrontController {
         startChristmasPromotion();
         final OrderDay orderDay = daySetting();
         final Order order = OrderSetting(orderDay.getDay());
+        final OrderResponse orderResponse = OrderResponseMapper.of(order);
 
-        renderingPreview(orderDay,order);
-        processChristmasPromotion(order);
+        renderingPreview(orderDay,orderResponse);
+        processChristmasPromotion(order,orderResponse);
     }
 
     private void startChristmasPromotion(){
-        OUTPUT_VIEW.printMessage(IOMessage.START_MESSAGE);
+        OUTPUT_VIEW.printStartMessage();
     }
 
    private OrderDay daySetting(){
@@ -48,26 +50,27 @@ public class FrontController {
         });
    }
 
-   private void renderingPreview(final OrderDay orderDay,final Order order){
+   private void renderingPreview(final OrderDay orderDay,final OrderResponse orderResponse){
         OUTPUT_VIEW.printPreviewEventMessage(orderDay.getDay());
-        OUTPUT_VIEW.printOrderList(order);
-        OUTPUT_VIEW.printOriginalTotalAmount(order);
+        OUTPUT_VIEW.printOrderMenus(orderResponse);
+        OUTPUT_VIEW.printOriginalTotalAmount(orderResponse);
    }
 
-   private void processChristmasPromotion(final Order order){
-       DiscountRecord discountRecord = plannerSystem.discountEvent(order);
-       FreeGift freeGift = plannerSystem.giftEvent(order);
-       EventBadge badge = plannerSystem.badge(discountRecord,freeGift);
-       renderingResult(order,discountRecord,freeGift,badge);
+   private void processChristmasPromotion(final Order order,final OrderResponse orderResponse){
+       final DiscountResponse discountResponse = plannerSystem.discountEvent(order);
+       final FreeGiftResponse freeGiftResponse = plannerSystem.giftEvent(order);
+       final BadgeResponse badgeResponse = plannerSystem.badge(discountResponse.getTotalDiscountAmount(), freeGiftResponse.getBenefitPrice());
+       renderingResult(orderResponse,freeGiftResponse,discountResponse,badgeResponse);
 
    }
 
-   private void renderingResult(Order order,DiscountRecord discountRecord, FreeGift freeGift, EventBadge eventBadge){
-       OUTPUT_VIEW.printBonusMenu(freeGift);
-       OUTPUT_VIEW.printDiscountRecord(discountRecord,freeGift);
-       OUTPUT_VIEW.printTotalBenefitAmount(discountRecord,freeGift);
-       OUTPUT_VIEW.printExpectedPayment(order,discountRecord);
-       OUTPUT_VIEW.printEventBadge(eventBadge);
+   private void renderingResult(final OrderResponse orderResponse,final FreeGiftResponse freeGiftResponse,
+                                final DiscountResponse discountResponse, final BadgeResponse badgeResponse){
+       OUTPUT_VIEW.printFreeGiftResult(freeGiftResponse);
+       OUTPUT_VIEW.printBenefitResult(discountResponse,freeGiftResponse);
+       OUTPUT_VIEW.printTotalBenefitAmount(discountResponse,freeGiftResponse);
+       OUTPUT_VIEW.printExpectedPayment(orderResponse,discountResponse);
+       OUTPUT_VIEW.printEventBadge(badgeResponse);
    }
 
 

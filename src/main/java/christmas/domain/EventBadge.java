@@ -1,6 +1,8 @@
 package christmas.domain;
 
 
+import java.util.Optional;
+
 public enum EventBadge {
 
     STAR("별", 5000),
@@ -15,17 +17,17 @@ public enum EventBadge {
         this.threshold = threshold;
     }
 
-    public static EventBadge createBadge(int totalBenefitAmount) {
+    public static Optional<EventBadge> createBadge(int totalBenefitAmount) {
         if (totalBenefitAmount >= SANTA.threshold) {
-            return SANTA;
+            return Optional.of(SANTA);
         }
         if (totalBenefitAmount >= TREE.threshold) {
-            return TREE;
+            return Optional.of(TREE);
         }
         if (totalBenefitAmount >= STAR.threshold) {
-            return STAR;
+            return Optional.of(STAR);
         }
-        return null;
+        return Optional.empty();
     }
 
     public String getName() {
